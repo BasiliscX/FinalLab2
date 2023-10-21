@@ -24,5 +24,33 @@ cout<<"                         |___/";
 rlutil::setColor(15);
 }
 
+int facturacion(){
+    int x,y;
+    char eleccion;
+    x=53;
+    y=32;
+    gotoxy(x,y);
+    rlutil::setColor(8);
+    cout<<(int_fast8_t)26;
+    x++;
+    y=30;
+    boxAnimation(x,y,1,13,4);
+    rlutil::setColor(15);
+    x++;
+    gotoxy(x,++y);
+    textAnimation("\'p\' - Pagos");
+    gotoxy(x,++y);
+    textAnimation("\'v\' - Ventas");
+    gotoxy(x,++y);
+    textAnimation("Eleccion: ");
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    switch(eleccion){
+        case 'p': return -1;
+        case 'v': return -2;
+        default : break;
+    }
+    return 0;
+}
 
 #endif // RECURSOS_H_INCLUDED

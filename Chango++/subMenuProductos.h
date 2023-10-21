@@ -3,7 +3,7 @@
 
 void menuProductos(){
     bool menu=true;
-    int eleccion;
+    char eleccion;
 
     while(menu){
     rlutil::cls();
@@ -15,15 +15,15 @@ void menuProductos(){
     y=20;
     textBoxAnimation(x,y,"MENU DE PRODUCTOS",2,0);
 
-    x=26;
-    y=25;
+    x=21;
+    y=27;
     rlutil::setColor(8);
-    boxAnimation(x,y,1,26,14);
+    boxAnimation(x,y,1,35,12);
     rlutil::setColor(15);
     x+=1;
 
         rlutil::hidecursor();
-        y=26;
+        y=28;
         rlutil::locate(x,y);
         textAnimation("1 - Agregar producto");
         y+=2;
@@ -37,18 +37,17 @@ void menuProductos(){
         textAnimation("4 - Modificar datos de un producto");
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("5 - volver al menu proncipal");
+        textAnimation("0 - volver al menu proncipal");
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
-            case 1 : menuProductos(); break;
-            case 2 : break;
-            case 3 : break;
-            case 4 : break;
-            case 5 : break;
+            case '1' : menuProductos(); break;
+            case '2' : break;
+            case '3' : break;
+            case '4' : break;
             default: menu=false; break;
         }
     }

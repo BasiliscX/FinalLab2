@@ -4,12 +4,16 @@ using namespace std;
 #include"rlutilPlusPlus.h"
 #include"recursos.h"
 #include"subMenuProductos.h"
+#include"subMenuProveedores.h"
+#include"subMenuClientes.h"
+#include"subMenuVentas.h"
+#include"subMenuPagos.h"
 
 int main(){
 rlutil::setConsoleTitle("Chango++");
 system("mode con cols=80 lines=45");
     bool menu=true;
-    int eleccion;
+    char eleccion;
 
     while(menu){
     rlutil::cls();
@@ -50,11 +54,17 @@ system("mode con cols=80 lines=45");
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
-            case 1 : menuProductos(); break;
-            case 2 : break;
-            case 3 : break;
-            case 4 : break;
-            case 5 : break;
+            case '1' : menuProductos(); break;
+            case '2' : menuProveedores(); break;
+            case '3' : menuClientes(); break;
+            case '4' :
+                switch(facturacion()){
+                    case -1: menuPagos();break;
+                    case -2: menuVentas(); break;
+                    default: break;
+                }
+                break;
+            case '5' : break;
             default: menu=false; break;
         }
     }
