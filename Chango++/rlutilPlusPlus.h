@@ -6,13 +6,16 @@ void boxAnimation(int,int,int,int,int,int);
 void textBoxAnimation(int,int,const char*,int,int);
 
 void textAnimation(const char*text="TEXT",int velocity=1){
+    rlutil::hidecursor();
     int t=strlen(text);
     for(int i=0;i<t;i++){
         cout<<text[i];
         rlutil::msleep(velocity);
     }
+    rlutil::showcursor();
 }
 void boxAnimation(int x, int y, int tipe=1, int width=20, int height=10, int velocity=10){
+    rlutil::hidecursor();
     int i;
         switch(tipe){
     case 1:
@@ -69,15 +72,18 @@ void boxAnimation(int x, int y, int tipe=1, int width=20, int height=10, int vel
         for(i=0;i<=width;i++){std::cout<<(char)bottomHorizontalLine3;rlutil::msleep(velocity);}
     break;
     }
+    rlutil::showcursor();
 }
 void textBoxAnimation(int x, int y, const char*text="text",int tipe=2,int velocity=1){
     int t=strlen(text);
+    rlutil::hidecursor();
     rlutil::setColor(8);
     boxAnimation(x,y,tipe,(t+1),2,velocity);
     rlutil::setColor(15);
     t+=2;
     rlutil::locate(++x,++y);
     textAnimation(text);
+    rlutil::showcursor();
 }
 
 #endif // RLUTILPLUSPLUS_H_INCLUDED

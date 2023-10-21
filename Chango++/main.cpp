@@ -12,6 +12,7 @@ using namespace std;
 int main(){
 rlutil::setConsoleTitle("Chango++");
 system("mode con cols=80 lines=45");
+    int x,y;
     bool menu=true;
     char eleccion;
 
@@ -19,8 +20,8 @@ system("mode con cols=80 lines=45");
     rlutil::cls();
     rlutil::setColor(8);
     boxAnimation(1,1,3,79,44,0);
+    boxAnimation(2,2,1,77,42,0);
     changoPP(15,7);
-    int x,y;
     x=31;
     y=20;
     textBoxAnimation(x,y,"MENU PRINCIPAL",2,0);

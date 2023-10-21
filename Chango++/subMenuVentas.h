@@ -9,6 +9,7 @@ void menuVentas(){
     rlutil::cls();
     rlutil::setColor(8);
     boxAnimation(1,1,3,79,44,0);
+    boxAnimation(2,2,1,77,42,0);
     changoPP(15,7);
     int x,y;
     x=30;

@@ -8,8 +8,9 @@ void menuPagos(){
     while(menu){
     rlutil::cls();
     rlutil::setColor(8);
-    boxAnimation(1,1,3,79,44,0);
-    changoPP(15,7);
+    boxAnimation(1,1,3,79,44,0);//recuadro grueso
+    boxAnimation(2,2,1,77,42,0);//recuadro fino
+    changoPP(15,7);//logo
     int x,y;
     x=30;
     y=20;
@@ -18,7 +19,7 @@ void menuPagos(){
     x=21;
     y=27;
     rlutil::setColor(8);
-    boxAnimation(x,y,1,35,12);
+    boxAnimation(x,y,1,35,12);//recuadro de eleccion
     rlutil::setColor(15);
     x+=1;
 
