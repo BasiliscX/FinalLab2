@@ -3,6 +3,7 @@ using namespace std;
 #include"rlutil.h"
 #include"rlutilPlusPlus.h"
 #include"recursos.h"
+#include"clasesDatos.h"
 #include"subMenuProductos.h"
 #include"subMenuProveedores.h"
 #include"subMenuClientes.h"
@@ -12,7 +13,7 @@ using namespace std;
 int main(){
 rlutil::setConsoleTitle("Chango++");
 system("mode con cols=80 lines=45");
-    int x,y;
+    int x,y, velocidad=0;
     bool menu=true;
     char eleccion;
 
@@ -29,29 +30,29 @@ system("mode con cols=80 lines=45");
     x=26;
     y=25;
     rlutil::setColor(8);
-    boxAnimation(x,y,1,26,14);
+    boxAnimation(x,y,1,26,14,velocidad);
     rlutil::setColor(15);
     x+=1;
 
         rlutil::hidecursor();
         y=26;
         rlutil::locate(x,y);
-        textAnimation("1 - Menu de productos");
+        textAnimation("1 - Menu de productos",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Menu de proveedores");
+        textAnimation("2 - Menu de proveedores",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("3 - Menu de clientes");
+        textAnimation("3 - Menu de clientes",velocidad);
         y+=2;        rlutil::locate(x,y);
-        textAnimation("4 - Menu de facturacion");
+        textAnimation("4 - Menu de facturacion",velocidad);
         y+=2;
-        rlutil::locate(x,y);        textAnimation("5 - Menu de configuracion");
+        rlutil::locate(x,y);        textAnimation("5 - Menu de configuracion",velocidad);
         y+=2;        rlutil::locate(x,y);
-        textAnimation("0 - Salir");
+        textAnimation("0 - Salir",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("\tEleccion: ");
+        textAnimation("\tEleccion: ",velocidad);
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
