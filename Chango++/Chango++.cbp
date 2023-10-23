@@ -32,7 +32,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="clasesDatos.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="recursos.h" />
+		<Unit filename="rlutilPlusPlus.h" />
+		<Unit filename="subMenuClientes.h" />
+		<Unit filename="subMenuFacturacion.h" />
+		<Unit filename="subMenuPagos.h" />
+		<Unit filename="subMenuProductos.h" />
+		<Unit filename="subMenuProveedores.h" />
+		<Unit filename="subMenuVentas.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

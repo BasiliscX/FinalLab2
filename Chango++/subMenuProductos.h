@@ -1,8 +1,8 @@
 #ifndef SUBMENUPRODUCTOS_H_INCLUDED
 #define SUBMENUPRODUCTOS_H_INCLUDED
 
-bool agregarProducto();
 void menuProductos();
+bool agregarProducto();
 
 void menuProductos(){
     bool menu=true;
