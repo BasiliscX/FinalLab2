@@ -8,9 +8,10 @@ class Articulo{
 private:
     char codigo[4];
     int tipo;
-    int ID_proveedor;//tengo que consultar si existe el proveedor
+    int ID_proveedor;//siempre consultar si existe el proveedor
     char nombre[30];
     float precio;
+    int cantidad;
     bool estado;
 public:
     Articulo(const char*, const char*,float, bool);
@@ -30,6 +31,10 @@ public:
         if(p>0){ precio=p; }
         else { precio=-1; }
     }
+    void setCantidad(int c){
+        if(c>0){ cantidad=c; }
+        else{ cantidad=-1; }
+    }
     void setEstado(bool e){ estado=e; }
     const char*getCodigo(){return codigo;}
     int getTipo(){ return tipo; }
@@ -48,7 +53,7 @@ Articulo::Articulo(const char*cod="AAAA", const char*nom="Articulo", float pre=9
 bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     char c[4];
     char tipo;
-    int t;
+    int t, can;
     int ID_p;
     char n[30];
     float p;
@@ -113,10 +118,12 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     cin>>n;
     cout<<"\n\t\t\tprecio  ";
     cout<<" "<<(int_fast8_t)26<<" ";    cin>>p;
+    cout<<"\n\t\t\tCantidad";
+    cout<<" "<<(int_fast8_t)26<<" ";    cin>>can;
     {
         char eleccion;
         int x=62;
-        int y=30;
+        int y=32;
         rlutil::setColor(8);
         gotoxy(x,y);
         cout<<(char)180;
@@ -151,6 +158,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     setID_proveedor(ID_p);
     setNombre(n);
     setPrecio(p);
+    setCantidad(can);
     setEstado(true);
     rlutil::hidecursor();
     cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";

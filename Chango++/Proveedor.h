@@ -1,23 +1,21 @@
 #ifndef PROVEEDOR_H_INCLUDED
 #define PROVEEDOR_H_INCLUDED
 
-/*
-id (int -autonumérico-)
-datosProveedor (DatosPersona)
-producto[] (Productos)
-*/
 class Proveedor{
 private:
     static int contador;
     int ID;
     DatosPersona datosProveedor;
+    bool estado;
 public:
-    bool Cargar(int);
+    bool Cargar(const char*);
     void Mostrar();
     int getID(){ return ID; };
+    void setEstado(bool e){ estado=e; }
+    bool getEstado(){ return estado; }
 };
 int Proveedor::contador=0;
-bool Proveedor::Cargar(int CUIT){
+bool Proveedor::Cargar(const char*CUIT){
     datosProveedor.Cargar(CUIT);
     ID=++contador;
     {
@@ -47,6 +45,7 @@ bool Proveedor::Cargar(int CUIT){
             ID=--contador;
             return false;
         }
+        else{ setEstado(true); }
         rlutil::setColor(8);
         gotoxy(--x,++y);
         cout<<(char)195;

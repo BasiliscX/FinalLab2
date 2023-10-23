@@ -1,7 +1,11 @@
 #ifndef RECURSOS_H_INCLUDED
 #define RECURSOS_H_INCLUDED
 
+#include <cctype>
+
 void changoPP(int,int);
+int facturacion();
+bool soloDigitos();
 
 void changoPP(int x,int y){
 rlutil::setColor(14);
@@ -51,6 +55,15 @@ int facturacion(){
         default : break;
     }
     return 0;
+}
+
+bool soloDigitos(const char*cadena){
+    for (int i=0;cadena[i]!='\0';i++){
+        if (!isdigit(cadena[i])){
+            return false;
+        }
+    }
+    return true;
 }
 
 #endif // RECURSOS_H_INCLUDED

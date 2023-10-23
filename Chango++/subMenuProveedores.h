@@ -80,7 +80,7 @@ bool agregarProveedor(){
     boxAnimation(x,y,1,38,11,0);
     gotoxy(++x,++y);
 
-    int CUIT;
+    char CUIT[12];
     rlutil::setColor(15);
     cout<<"\n\t\t\tNro de CUIT";
     rlutil::setColor(8);
@@ -88,16 +88,21 @@ bool agregarProveedor(){
     rlutil::setColor(15);
     cout<<"  "<<(int_fast8_t)26<<" ";
     cin>>CUIT;
-    /**
-        se debe buscar en Proveedores.dat los CUIT de proveedor
-        y verificar que el ingresado sea inexistente.
-        si existe, entonces c=-1
-    */
-    if(CUIT==-1){
+    if(!soloDigitos(CUIT)){
         cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
         rlutil::anykey();
         return false;
     }
+    /**
+        se debe buscar en Proveedores.dat los CUIT de proveedor
+        y verificar que el ingresado sea inexistente.
+        si existe, entonces c=-1
+    if(c==-1){
+        cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
+        rlutil::anykey();
+        return false;
+    }
+    */
     Proveedor proveedor;
     if(proveedor.Cargar(CUIT)){
         /**

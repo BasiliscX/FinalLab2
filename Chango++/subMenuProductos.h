@@ -77,7 +77,7 @@ bool agregarProducto(){
     x++;
     y++;
     rlutil::setColor(8);
-    boxAnimation(x,y,1,38,19,0);
+    boxAnimation(x,y,1,38,21,0);
     gotoxy(++x,++y);
 
     char c[4];
