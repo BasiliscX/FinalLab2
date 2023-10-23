@@ -77,28 +77,52 @@ bool agregarProveedor(){
     x++;
     y++;
     rlutil::setColor(8);
-    boxAnimation(x,y,1,38,19,0);
+    boxAnimation(x,y,1,38,11,0);
     gotoxy(++x,++y);
 
-    int c;
+    int CUIT;
     rlutil::setColor(15);
     cout<<"\n\t\t\tNro de CUIT";
     rlutil::setColor(8);
     cout<<" (Numerico, sin \'-\')\n\t\t\t\t";
     rlutil::setColor(15);
-    cout<<" "<<(int_fast8_t)26<<" ";
-    cin>>c;
+    cout<<"  "<<(int_fast8_t)26<<" ";
+    cin>>CUIT;
     /**
         se debe buscar en Proveedores.dat los CUIT de proveedor
         y verificar que el ingresado sea inexistente.
         si existe, entonces c=-1
     */
-    if(c==-1){
+    if(CUIT==-1){
         cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
         rlutil::anykey();
         return false;
     }
-//    producto.Cargar(c,vP);
+    Proveedor proveedor;
+    if(proveedor.Cargar(CUIT)){
+        /**
+            Se graba en Proveedores.dat
+        */
+        int x=26;
+        int y=28;
+        rlutil::hidecursor();
+        rlutil::setColor(8);
+        boxAnimation(x,y,1,33,2,1);
+        rlutil::setColor(15);
+        gotoxy(++x,++y);
+        cout<<"ID generado para el proveedor: "<<proveedor.getID();
+        rlutil::setColor(8);
+        gotoxy(--x,++y);
+        cout<<(char)195;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        gotoxy(x,++y);
+        cout<<(char)192<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        rlutil::hidecursor();
+        cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
+        rlutil::anykey();
+    }
     return true;
 }
 

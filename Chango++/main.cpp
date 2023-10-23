@@ -37,10 +37,10 @@ system("mode con cols=80 lines=45");
         rlutil::hidecursor();
         y=26;
         rlutil::locate(x,y);
-        textAnimation("1 - Menu de productos",velocidad);
+        textAnimation("1 - Menu de proveedores",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Menu de proveedores",velocidad);
+        textAnimation("2 - Menu de productos",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("3 - Menu de clientes",velocidad);
@@ -56,8 +56,8 @@ system("mode con cols=80 lines=45");
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
-            case '1' : menuProductos(); break;
-            case '2' : menuProveedores(); break;
+            case '1' : menuProveedores(); break;
+            case '2' : menuProductos(); break;
             case '3' : menuClientes(); break;
             case '4' :
                 switch(facturacion()){
