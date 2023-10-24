@@ -49,7 +49,7 @@ Articulo::Articulo(const char*cod="AAAA", const char*nom="Articulo", float pre=9
     setPrecio(pre);
     setEstado(est);
 }
-
+/**borrar: const char*cod="null",*/
 bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     char c[4];
     char tipo;
@@ -58,7 +58,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     char n[30];
     float p;
     rlutil::setColor(15);
-    if(strcmp(cod,"null")==0){
+    if(strcmp(cod,"null")==0){/// A borrar
         cout<<"\n\t\t\tCodigo";
         rlutil::setColor(8);
         cout<<" (4 caracteres)\n\t\t\t\t";
@@ -67,7 +67,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
         cin>>c;
     }
 
-    int vPp[10]={1,12,32,4,11,23,33,12,3,5};
+    int vPp[10]={1,12,32,4,11,23,33,12,3,5};///Para pruebas
 
 
     cout<<"\n\t\t\tTipo de producto";

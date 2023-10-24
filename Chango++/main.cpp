@@ -52,7 +52,7 @@ system("mode con cols=80 lines=45");
         textAnimation("0 - Salir",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("\tEleccion: ",velocidad);
+        textAnimation("\tEleccion: ");
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){

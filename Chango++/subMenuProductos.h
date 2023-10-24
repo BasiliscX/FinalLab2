@@ -45,7 +45,7 @@ void menuProductos(){
         textAnimation("0 - volver al menu proncipal",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("\tEleccion: ",velocidad);
+        textAnimation("\tEleccion: ");
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){

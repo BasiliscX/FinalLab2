@@ -4,6 +4,7 @@
 void menuPagos(){
     bool menu=true;
     char eleccion;
+    int velocidad=0;
 
     while(menu){
     rlutil::cls();
@@ -26,19 +27,19 @@ void menuPagos(){
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
-        textAnimation("1 - Agregar (..)");
+        textAnimation("1 - Agregar (..)",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Listar (..)");
+        textAnimation("2 - Listar (..)",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("3 - Listar todos (..)");
+        textAnimation("3 - Listar todos (..)",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("4 - Modificar (..)");
+        textAnimation("4 - Modificar (..)",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("0 - volver al menu proncipal");
+        textAnimation("0 - volver al menu proncipal",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");

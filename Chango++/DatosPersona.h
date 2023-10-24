@@ -32,7 +32,7 @@ DatosPersona::DatosPersona(const char*n="-",const char*num="-",const char*t="-",
     setTelefono(t);
     setDireccion(d);
 }
-bool DatosPersona::Cargar(const char*num="-"){
+bool DatosPersona::Cargar(const char*num){
     char n[30];
     char t[30];
     char d[30];
