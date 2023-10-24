@@ -4,6 +4,7 @@
 void textAnimation(const char*,int);
 void boxAnimation(int,int,int,int,int,int);
 void textBoxAnimation(int,int,const char*,int,int);
+void cls(int,int,int);
 
 void textAnimation(const char*text="TEXT",int velocity=1){
     rlutil::hidecursor();
@@ -84,6 +85,10 @@ void textBoxAnimation(int x, int y, const char*text="text",int tipe=2,int veloci
     rlutil::locate(++x,++y);
     textAnimation(text);
     rlutil::showcursor();
+}
+void cls(int x,int y,int cls){
+    gotoxy(x,y);
+    for(int i=0;i<cls;i++) std::cout<<" ";
 }
 
 #endif // RLUTILPLUSPLUS_H_INCLUDED

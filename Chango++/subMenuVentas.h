@@ -86,7 +86,7 @@ bool agregarVenta(){
     gotoxy(++x,++y);
 
     char eleccion;
-    bool cliente=false;
+    Cliente cliente;
     char DNI[8];
     rlutil::setColor(15);
     cout<<"Es cliente? (S/N): ";
@@ -104,36 +104,108 @@ bool agregarVenta(){
             rlutil::anykey();
             return false;
         }
-        cliente=true;
+        /**
+            Necesito buscar en Clientes.dat si el ingreso en DNI matchea con los DNI cargados.
+            - Si no existe entonces return false.
+            - Si existe entonces guardo en objeto cliente.
+        */
     }
     else{
-        carteInicio(0);
+        gotoxy((x+10),(y+2));
+        cout<<"Cliente = -1";
     }
+    y+=4;
+    x=62;
+    {// Bloque de flecha apuntando cargar ventas
+        rlutil::setColor(8);
+        gotoxy(x,y);
+        cout<<(char)180;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        gotoxy(x,++y);
+        cout<<(char)217;
+        gotoxy(--x,y);
+        cout<<(char)196;
+        gotoxy(--x,y);
+        cout<<(int_fast8_t)17;
+        x-=36;
+        rlutil::setColor(15);
+    }
+
     rlutil::setColor(8);
-    boxAnimation(--x,--y,1,38,15,0);
+    boxAnimation(x,y,1,35,14,0);
     rlutil::setColor(15);
     gotoxy(++x,++y);
-    /**
-        Tengo que consultar en Articulos.dat:
-
-            Codigo | Nombre | Precio | Cantidad
-             aaaa   tomate     1200     300
-             bbbb   cebolla    1000     200
-
-        y guardar en memoria
-        y pasar a venta.Cargar()
-        o mejor pasar a un constructor:
-            Venta venta(Codigo,Nombre,Precio,Cantidad);
-
-        con los datos validados.
-    */
-    Venta venta;
-    venta.Cargar(cliente);
-
-    gotoxy(x,++y);
+    char codigo[4];
+    int cantidad;
+    cout<<"\n\t\t\tCodigo de articulo";
+    rlutil::setColor(8);
+    cout<<" (4 caracteres)\n\t\t\t\t";
     rlutil::setColor(15);
+    cout<<" "<<(int_fast8_t)26<<" ";
+    cin>>codigo;
+/**
+        Tengo que consultar en Articulos.dat si el codigo existe.
+
+            - Si existe, traigo a memoria:
+
+                    Codigo | Nombre | Precio | Cantidad
+                     aaaa    tomate    1200      300
+*/
+    cout<<"\n\t\t\tArticulo\n\t\t\t\t";
+    cout<<" "<<(int_fast8_t)26<<" "<</**articulo.getNombre();*/"Tomate";
+    cout<<"\n\t\t\tPrecio\n\t\t\t\t";
+    cout<<" "<<(int_fast8_t)26<<" "<</**articulo.getPrecio();*/"1.200";
+
+    cout<<"\n\n\t\t\tCantidad de articulo\t\t\t\t";
+    rlutil::setColor(8);
+    cout<<"\n\t\t\t - disponibles: "<</**articulo.getCantidad()*/300<<"\n\t\t\t\t";
+    rlutil::setColor(15);
+    cout<<" "<<(int_fast8_t)26<<" ";
+    cin>>cantidad;
+
+    /**
+        Tengo que verificar que la cantidad ingresada no exceda la existente
+
+            - Si excede entonces
+    */
+
+
+    /**
+        Tengo que tener un ciclo en el que cargue los Codigos y la cantidad
+        y que corte cuando presiono la tecla Esc
+    */
+
+        /**
+            Grabo en Ventas.dat las ventas que voy cargando.
+            Salgo de venta.Cargar(cliente) con la tecla Esc.
+        */
+
+    y+=13;
+    {// Bloque de flecha apuntando cargar ventas
+        x+=34;
+        rlutil::setColor(8);
+        gotoxy(x,y);
+        cout<<(char)180;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        gotoxy(x,++y);
+        cout<<(char)217;
+        gotoxy(--x,y);
+        cout<<(char)196;
+        gotoxy(--x,y);
+        cout<<(int_fast8_t)17;
+        x-=33;
+        boxAnimation(x,y,2,32,4,0);
+        boxAnimation((x+2),++y,1,28,2,0);
+    }
+    rlutil::setColor(15);
+    gotoxy((x+10),++y);
+
+    float total=0;
+    total+=/**  articulo.getPrecio()*cantidad;    */10;
+    cout<<"Total = "<<total;
     rlutil::hidecursor();
-    cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
     rlutil::anykey();
 
     /**
