@@ -4,7 +4,7 @@
 void menuVentas();
 void carteInicio(int);
 bool agregarVenta();
-
+bool cargarArticulos(int,int,float&);
 void menuVentas(){
     bool menu=true;
     char eleccion;
@@ -116,6 +116,16 @@ bool agregarVenta(){
     }
     y+=4;
     x=62;
+    float total=0;
+    while(cargarArticulos(x,y,total)){
+    /**
+        Aqui grabamos en Ventas.dat
+    */
+    }
+
+    return true;
+}
+bool cargarArticulos(int x,int y,float&total){
     {// Bloque de flecha apuntando cargar ventas
         rlutil::setColor(8);
         gotoxy(x,y);
@@ -129,14 +139,14 @@ bool agregarVenta(){
         gotoxy(--x,y);
         cout<<(int_fast8_t)17;
         x-=36;
-        rlutil::setColor(15);
     }
-
-    rlutil::setColor(8);
-    boxAnimation(x,y,1,35,14,0);
-    rlutil::setColor(15);
-    gotoxy(++x,++y);
-    char codigo[4];
+    {// Bloque de recuadro carga de articulo
+        rlutil::setColor(8);
+        boxAnimation(x,y,1,35,14,0);
+        rlutil::setColor(15);
+        gotoxy(++x,++y);
+    }
+    char codigo[5];
     int cantidad;
     cout<<"\n\t\t\tCodigo de articulo";
     rlutil::setColor(8);
@@ -151,6 +161,8 @@ bool agregarVenta(){
 
                     Codigo | Nombre | Precio | Cantidad
                      aaaa    tomate    1200      300
+
+            - Sino salgo.
 */
     cout<<"\n\t\t\tArticulo\n\t\t\t\t";
     cout<<" "<<(int_fast8_t)26<<" "<</**articulo.getNombre();*/"Tomate";
@@ -202,50 +214,21 @@ bool agregarVenta(){
     rlutil::setColor(15);
     gotoxy((x+10),++y);
 
-    float total=0;
     total+=/**  articulo.getPrecio()*cantidad;    */10;
     cout<<"Total = "<<total;
     rlutil::hidecursor();
-    rlutil::anykey();
-
-    /**
-        se debe buscar en Proveedores.dat los CUIT de proveedor
-        y verificar que el ingresado sea inexistente.
-        si existe, entonces c=-1
-    if(c==-1){
-        cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-        rlutil::anykey();
-        return false;
+    gotoxy(x,(y+4));
+    cout<<"Presione \'+\' para continuar";
+    if(getch()!='+'){ return false; }
+    {// borra partes de pantalla
+        cls(x,(y+4),27);
+        cls((x+11),(y-6),20);
+        cls((x),(y-7),30);
+        cls((x+11),(y-10),20);
+        cls((x+11),(y-12),20);
+        cls((x+11),(y-15),20);
     }
-    */
-
-        /**
-    Cliente cliente;
-    if(cliente.Cargar(DNI)){
-            Se graba en Proveedores.dat
-        int x=26;
-        int y=30;
-        rlutil::hidecursor();
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,33,2,1);
-        rlutil::setColor(15);
-        gotoxy(++x,++y);
-        cout<<"ID generado para el cliente: "<<cliente.getID();
-        rlutil::setColor(8);
-        gotoxy(--x,++y);
-        cout<<(char)195;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        rlutil::hidecursor();
-        cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
-        rlutil::anykey();
-    }
-        */
     return true;
 }
-
 
 #endif // SUBMENUVENTAS_H_INCLUDED
