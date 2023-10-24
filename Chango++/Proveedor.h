@@ -18,7 +18,7 @@ int Proveedor::contador=0;
 bool Proveedor::Cargar(const char*CUIT){
     datosProveedor.Cargar(CUIT);
     ID=++contador;
-    {
+    {// Animacion y recuadro de pregunta si los datos ingresados son correctos, si no lo son entonces salimos pero antes disminuimos el contador de ID
         char eleccion;
         int x=62;
         int y=22;

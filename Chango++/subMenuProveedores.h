@@ -8,25 +8,26 @@ void menuProveedores(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
+    int x,y;
 
     while(menu){
-    rlutil::cls();
-    rlutil::setColor(8);
-    boxAnimation(1,1,3,79,44,0);
-    boxAnimation(2,2,1,77,42,0);
-    changoPP(15,7);
-    int x,y;
-    x=28;
-    y=20;
-    textBoxAnimation(x,y,"MENU DE PROVEEDORES",2,0);
-
-    x=20;
-    y=27;
-    rlutil::setColor(8);
-    boxAnimation(x,y,1,36,12,velocidad);
-    rlutil::setColor(15);
-    x+=1;
-
+    {
+        rlutil::cls();
+        rlutil::setColor(8);
+        boxAnimation(1,1,3,79,44,0);
+        boxAnimation(2,2,1,77,42,0);
+        changoPP(15,7);
+        x=28;
+        y=20;
+        textBoxAnimation(x,y,"MENU DE PROVEEDORES",2,0);
+    }
+    {// Recuadro de menu seleccion
+        x=20;
+        y=27;
+        rlutil::setColor(8);
+        boxAnimation(x,y,1,36,12,velocidad);
+        rlutil::setColor(15);
+        x+=1;
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
@@ -46,6 +47,7 @@ void menuProveedores(){
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
+    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){

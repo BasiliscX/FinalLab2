@@ -37,7 +37,7 @@ bool Cliente::Cargar(const char*DNI){
     cin>>a;
     datosCliente.Cargar(DNI);
     ID=++contador;
-    {
+    {// Animacion y recuadro de pregunta si los datos ingresados son correctos, si no lo son entonces salimos pero antes disminuimos el contador de ID
         char eleccion;
         int x=62;
         int y=24;

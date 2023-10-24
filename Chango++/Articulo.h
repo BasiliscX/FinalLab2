@@ -58,17 +58,8 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     char n[30];
     float p;
     rlutil::setColor(15);
-    if(strcmp(cod,"null")==0){/// A borrar
-        cout<<"\n\t\t\tCodigo";
-        rlutil::setColor(8);
-        cout<<" (4 caracteres)\n\t\t\t\t";
-        rlutil::setColor(15);
-        cout<<" "<<(int_fast8_t)26<<" ";
-        cin>>c;
-    }
 
     int vPp[10]={1,12,32,4,11,23,33,12,3,5};///Para pruebas
-
 
     cout<<"\n\t\t\tTipo de producto";
     rlutil::setColor(8);
@@ -89,7 +80,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     cout<<"\n\t\t\tID de proveedor";
     rlutil::setColor(8);
     cout<<"\n\t\t\t - disponibles\n\t\t\t";
-    for(int i=0;i<tam;i++){
+    for(int i=0;i<tam;i++){// Recibo como parametro un array con los ID disponibles, y los imprimo para eleguir entre ellos
         if(vPp[i]>0){
             cout<<"|"<<vPp[i];
         }
@@ -99,7 +90,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     cout<<"\n\t\t\tEleccion";
     cout<<" "<<(int_fast8_t)26<<" ";
     cin>>ID_p;
-    {
+    {// Bloque en que evaluo si el ID de proveedor existe en el array
         bool existe=false;
         for(int i=0;i<tam;i++){
             if(ID_p==vPp[i]){
@@ -120,7 +111,7 @@ bool Articulo::Cargar(const char*cod="null",int vP[]={0},int tam=10){
     cout<<" "<<(int_fast8_t)26<<" ";    cin>>p;
     cout<<"\n\t\t\tCantidad";
     cout<<" "<<(int_fast8_t)26<<" ";    cin>>can;
-    {
+    {// Animacion y recuadro de pregunta si los datos ingresados son correctos, si no lo son entonces salimos
         char eleccion;
         int x=62;
         int y=32;
