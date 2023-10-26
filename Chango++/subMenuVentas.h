@@ -11,23 +11,24 @@ void menuVentas(){
     int velocidad=0;
 
     while(menu){
-    rlutil::cls();
-    rlutil::setColor(8);
-    boxAnimation(1,1,3,79,44,0);
-    boxAnimation(2,2,1,77,42,0);
-    changoPP(15,7);
-    int x,y;
-    x=31;
-    y=20;
-    textBoxAnimation(x,y,"MENU DE VENTAS",2,0);
-
-    x=24;
-    y=27;
-    rlutil::setColor(8);
-    boxAnimation(x,y,1,29,12,velocidad);
-    rlutil::setColor(15);
-    x+=1;
-
+    {// Recuadros y titulo
+        rlutil::cls();
+        rlutil::setColor(8);
+        boxAnimation(1,1,3,79,44,0);
+        boxAnimation(2,2,1,77,42,0);
+        changoPP(15,7);
+        int x,y;
+        x=31;
+        y=20;
+        textBoxAnimation(x,y,"MENU DE VENTAS",2,0);
+    }
+    {// Menu seleccion
+        x=24;
+        y=27;
+        rlutil::setColor(8);
+        boxAnimation(x,y,1,29,12,velocidad);
+        rlutil::setColor(15);
+        x+=1;
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
@@ -47,6 +48,7 @@ void menuVentas(){
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
+    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
@@ -58,7 +60,7 @@ void menuVentas(){
         }
     }
 }
-void carteInicio(int velocidad){
+void carteInicio(int velocidad){// Recuadros y titulo
     rlutil::cls();
     textBoxAnimation(30,4,"AGREGAR VENTA",1,velocidad);
     textBoxAnimation(13,8,"VENTA",1,velocidad);
@@ -76,56 +78,58 @@ bool agregarVenta(){
     int x,y;
     int velocidad=1;
     carteInicio(velocidad);
-    x=23;
-    y=10;
-    gotoxy(x,y);
-    x++;
-    y++;
-    rlutil::setColor(8);
-    boxAnimation(x,y,1,38,5,0);
-    gotoxy(++x,++y);
-
-    char eleccion;
-    Cliente cliente;
-    char DNI[8];
-    rlutil::setColor(15);
-    cout<<"Es cliente? (S/N): ";
-    cin>>eleccion;
-    eleccion=tolower(eleccion);
-    if(eleccion=='s'){
-        cout<<"\n\t\t\t\tDNI ";
+    {// Recuadro de cargar venta
+        x=23;
+        y=10;
+        gotoxy(x,y);
+        x++;
+        y++;
         rlutil::setColor(8);
-        cout<<"(Numerico, sin \'.\')\n\t\t\t\t\t";
+        boxAnimation(x,y,1,38,5,0);
+        gotoxy(++x,++y);
+    }
+    {/// REEMPLAZAR CON ventas.Cargar()!!
+        char eleccion;
+        Cliente cliente;
+        char DNI[8];
         rlutil::setColor(15);
-        cout<<(int_fast8_t)26<<" ";
-        cin>>DNI;
-        if(!soloDigitos(DNI)){
-            cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-            rlutil::anykey();
-            return false;
+        cout<<"Es cliente? (S/N): ";
+        cin>>eleccion;
+        eleccion=tolower(eleccion);
+        if(eleccion=='s'){
+            cout<<"\n\t\t\t\tDNI ";
+            rlutil::setColor(8);
+            cout<<"(Numerico, sin \'.\')\n\t\t\t\t\t";
+            rlutil::setColor(15);
+            cout<<(int_fast8_t)26<<" ";
+            cin>>DNI;
+            if(!soloDigitos(DNI)){
+                cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
+                rlutil::anykey();
+                return false;
+            }
+            /**
+                Necesito buscar en Clientes.dat si el ingreso en DNI matchea con los DNI cargados.
+                - Si no existe entonces return false.
+                - Si existe entonces guardo en objeto cliente.
+            */
         }
+        else{
+            gotoxy((x+10),(y+2));
+            cout<<"Cliente = -1";
+        }
+        y+=4;
+        x=62;
+        float total=0;
+        while(cargarArticulos(x,y,total)){
         /**
-            Necesito buscar en Clientes.dat si el ingreso en DNI matchea con los DNI cargados.
-            - Si no existe entonces return false.
-            - Si existe entonces guardo en objeto cliente.
+            Aqui grabamos en Ventas.dat
         */
+        }
     }
-    else{
-        gotoxy((x+10),(y+2));
-        cout<<"Cliente = -1";
-    }
-    y+=4;
-    x=62;
-    float total=0;
-    while(cargarArticulos(x,y,total)){
-    /**
-        Aqui grabamos en Ventas.dat
-    */
-    }
-
     return true;
 }
-bool cargarArticulos(int x,int y,float&total){
+bool cargarArticulos(int x,int y,float&total){/// REEMPLAZAR CON ventas.Cargar()!!!
     {// Bloque de flecha apuntando cargar ventas
         rlutil::setColor(8);
         gotoxy(x,y);

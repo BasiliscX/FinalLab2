@@ -7,23 +7,24 @@ void menuPagos(){
     int velocidad=0;
 
     while(menu){
-    rlutil::cls();
-    rlutil::setColor(8);
-    boxAnimation(1,1,3,79,44,0);//recuadro grueso
-    boxAnimation(2,2,1,77,42,0);//recuadro fino
-    changoPP(15,7);//logo
-    int x,y;
-    x=30;
-    y=20;
-    textBoxAnimation(x,y,"MENU DE PAGOS",2,0);
-
-    x=21;
-    y=27;
-    rlutil::setColor(8);
-    boxAnimation(x,y,1,35,12);//recuadro de eleccion
-    rlutil::setColor(15);
-    x+=1;
-
+    {// Recuadro y titulo
+        rlutil::cls();
+        rlutil::setColor(8);
+        boxAnimation(1,1,3,79,44,0);//recuadro grueso
+        boxAnimation(2,2,1,77,42,0);//recuadro fino
+        changoPP(15,7);//logo
+        int x,y;
+        x=30;
+        y=20;
+        textBoxAnimation(x,y,"MENU DE PAGOS",2,0);
+    }
+    {// Menu seleccion
+        x=21;
+        y=27;
+        rlutil::setColor(8);
+        boxAnimation(x,y,1,35,12);//recuadro de eleccion
+        rlutil::setColor(15);
+        x+=1;
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
@@ -43,10 +44,11 @@ void menuPagos(){
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
+    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
-            case '1' : menuProductos(); break;
+            case '1' : break;
             case '2' : break;
             case '3' : break;
             case '4' : break;
