@@ -9,26 +9,25 @@ void menuVentas(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
-    int x,y;
 
     while(menu){
-    {// Recuadro consola y titulo
-        rlutil::cls();
-        rlutil::setColor(8);
-        boxAnimation(1,1,3,79,44,0);
-        boxAnimation(2,2,1,77,42,0);
-        changoPP(15,7);
-        x=31;
-        y=20;
-        textBoxAnimation(x,y,"MENU DE VENTAS",2,0);
-    }
-    {// menu de seleccion
-        x=24;
-        y=27;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,29,12,velocidad);
-        rlutil::setColor(15);
-        x+=1;
+    rlutil::cls();
+    rlutil::setColor(8);
+    boxAnimation(1,1,3,79,44,0);
+    boxAnimation(2,2,1,77,42,0);
+    changoPP(15,7);
+    int x,y;
+    x=31;
+    y=20;
+    textBoxAnimation(x,y,"MENU DE VENTAS",2,0);
+
+    x=24;
+    y=27;
+    rlutil::setColor(8);
+    boxAnimation(x,y,1,29,12,velocidad);
+    rlutil::setColor(15);
+    x+=1;
+
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
@@ -48,7 +47,6 @@ void menuVentas(){
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
-    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
@@ -77,17 +75,15 @@ bool agregarVenta(){
     rlutil::cls();
     int x,y;
     int velocidad=1;
-    carteInicio(velocidad);// Impresion principal
-    {// Recuadro de carga cliente
-        x=23;
-        y=10;
-        gotoxy(x,y);
-        x++;
-        y++;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,38,5,0);
-        gotoxy(++x,++y);
-    }
+    carteInicio(velocidad);
+    x=23;
+    y=10;
+    gotoxy(x,y);
+    x++;
+    y++;
+    rlutil::setColor(8);
+    boxAnimation(x,y,1,38,5,0);
+    gotoxy(++x,++y);
 
     char eleccion;
     Cliente cliente;
@@ -96,14 +92,14 @@ bool agregarVenta(){
     cout<<"Es cliente? (S/N): ";
     cin>>eleccion;
     eleccion=tolower(eleccion);
-    if(eleccion=='s'){// Si es cliente se carga el DNI
+    if(eleccion=='s'){
         cout<<"\n\t\t\t\tDNI ";
         rlutil::setColor(8);
         cout<<"(Numerico, sin \'.\')\n\t\t\t\t\t";
         rlutil::setColor(15);
         cout<<(int_fast8_t)26<<" ";
         cin>>DNI;
-        if(!soloDigitos(DNI)){// Si el ingreso no es numerico entonces sale
+        if(!soloDigitos(DNI)){
             cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
             rlutil::anykey();
             return false;
@@ -114,19 +110,19 @@ bool agregarVenta(){
             - Si existe entonces guardo en objeto cliente.
         */
     }
-    else{// Si NO es cliente entonces:
-        /**  cliente.setDNI(-1);   */
+    else{
         gotoxy((x+10),(y+2));
         cout<<"Cliente = -1";
     }
     y+=4;
     x=62;
-    float total=0;// Aqui acumulamos el total de los articulos ingresados y la cantidad
-    while(cargarArticulos(x,y,total)){// Mientras cargemos articulos con '+' entonces seguiremos en el while
+    float total=0;
+    while(cargarArticulos(x,y,total)){
     /**
-
+        Aqui grabamos en Ventas.dat
     */
     }
+
     return true;
 }
 bool cargarArticulos(int x,int y,float&total){
@@ -183,13 +179,20 @@ bool cargarArticulos(int x,int y,float&total){
     /**
         Tengo que verificar que la cantidad ingresada no exceda la existente
 
-            - Si excede entonces salgo
+            - Si excede entonces
+    */
+
+
+    /**
+        Tengo que tener un ciclo en el que cargue los Codigos y la cantidad
+        y que corte cuando presiono la tecla Esc
     */
 
         /**
             Grabo en Ventas.dat las ventas que voy cargando.
-            Salgo de venta.Cargar(cliente) con cualquier tecla que no sea '+'.
+            Salgo de venta.Cargar(cliente) con la tecla Esc.
         */
+
     y+=13;
     {// Bloque de flecha apuntando cargar ventas
         x+=34;
@@ -217,7 +220,7 @@ bool cargarArticulos(int x,int y,float&total){
     gotoxy(x,(y+4));
     cout<<"Presione \'+\' para continuar";
     if(getch()!='+'){ return false; }
-    {// borra los anteriores ingresos:
+    {// borra partes de pantalla
         cls(x,(y+4),27);
         cls((x+11),(y-6),20);
         cls((x),(y-7),30);

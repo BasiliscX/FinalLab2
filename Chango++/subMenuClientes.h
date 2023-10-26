@@ -8,26 +8,25 @@ void menuClientes(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
-    int x,y;
 
     while(menu){
-    {
-        rlutil::cls();
-        rlutil::setColor(8);
-        boxAnimation(1,1,3,79,44,0);
-        boxAnimation(2,2,1,77,42,0);
-        changoPP(15,7);
-        x=30;
-        y=20;
-        textBoxAnimation(x,y,"MENU DE CLIENTES",2,0);
-    }
-    {// Menu de seleccion
-        x=21;
-        y=27;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,34,12,velocidad);
-        rlutil::setColor(15);
-        x+=1;
+    rlutil::cls();
+    rlutil::setColor(8);
+    boxAnimation(1,1,3,79,44,0);
+    boxAnimation(2,2,1,77,42,0);
+    changoPP(15,7);
+    int x,y;
+    x=30;
+    y=20;
+    textBoxAnimation(x,y,"MENU DE CLIENTES",2,0);
+
+    x=21;
+    y=27;
+    rlutil::setColor(8);
+    boxAnimation(x,y,1,34,12,velocidad);
+    rlutil::setColor(15);
+    x+=1;
+
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
@@ -47,7 +46,6 @@ void menuClientes(){
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
-    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
@@ -62,7 +60,7 @@ void menuClientes(){
 bool agregarCliente(){
     rlutil::cls();
     int x,y;
-    Articulo producto;
+    Producto articulo;
 
     textBoxAnimation(30,4,"AGREGAR CLIENTE");
     textBoxAnimation(11,8,"CLIENTE",1);

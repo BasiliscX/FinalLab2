@@ -8,33 +8,32 @@ void menuProductos(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
-    int x,y;
 
     while(menu){
-    {// Recuadro consola y titulo
-        rlutil::cls();
-        rlutil::setColor(8);
-        boxAnimation(1,1,3,79,44,0);
-        boxAnimation(2,2,1,77,42,0);
-        changoPP(15,7);
-        x=30;
-        y=20;
-        textBoxAnimation(x,y,"MENU DE PRODUCTOS",2,0);
-    }
-    {// recuadro de menu seleccion
-        x=21;
-        y=27;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,35,12,velocidad);
-        rlutil::setColor(15);
-        x+=1;
+    rlutil::cls();
+    rlutil::setColor(8);
+    boxAnimation(1,1,3,79,44,0);
+    boxAnimation(2,2,1,77,42,0);
+    changoPP(15,7);
+    int x,y;
+    x=30;
+    y=20;
+    textBoxAnimation(x,y,"MENU DE PRODUCTOS",2,0);
+
+    x=21;
+    y=27;
+    rlutil::setColor(8);
+    boxAnimation(x,y,1,35,12,velocidad);
+    rlutil::setColor(15);
+    x+=1;
+
         rlutil::hidecursor();
         y=28;
         rlutil::locate(x,y);
         textAnimation("1 - Agregar producto",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Listar producto por nombre",velocidad);
+        textAnimation("2 - Listar producto por codigo",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("3 - Listar todos los productos",velocidad);
@@ -43,11 +42,10 @@ void menuProductos(){
         textAnimation("4 - Modificar datos de un producto",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("0 - volver al menu proncipal",velocidad);
+        textAnimation("0 - volver al menu principal",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
-    }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
@@ -62,7 +60,7 @@ void menuProductos(){
 bool agregarProducto(){
     rlutil::cls();
     int x,y;
-    Articulo producto;
+    Producto producto;
 
     textBoxAnimation(28,4,"AGREGAR PRODUCTOS");
     textBoxAnimation(10,8,"Producto",1);

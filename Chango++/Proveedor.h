@@ -8,17 +8,24 @@ private:
     DatosPersona datosProveedor;
     bool estado;
 public:
+
+    //métodos
     bool Cargar(const char*);
     void Mostrar();
-    int getID(){ return ID; };
+
+    //set
+    void setID(int i){ID=i; }
     void setEstado(bool e){ estado=e; }
+
+    //get
+    int getID(){ return ID; };
     bool getEstado(){ return estado; }
 };
 int Proveedor::contador=0;
 bool Proveedor::Cargar(const char*CUIT){
     datosProveedor.Cargar(CUIT);
     ID=++contador;
-    {// Animacion y recuadro de pregunta si los datos ingresados son correctos, si no lo son entonces salimos pero antes disminuimos el contador de ID
+    {
         char eleccion;
         int x=62;
         int y=22;
@@ -56,6 +63,13 @@ bool Proveedor::Cargar(const char*CUIT){
         rlutil::setColor(15);
     }
     return true;
+}
+
+void Proveedor::Mostrar()
+{
+    cout<<"ID : "<<endl;
+    cout<<ID<<endl;
+    datosProveedor.Mostrar();
 }
 
 #endif // PROVEEDOR_H_INCLUDED

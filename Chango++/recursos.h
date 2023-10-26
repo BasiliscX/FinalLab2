@@ -6,6 +6,7 @@
 void changoPP(int,int);
 int facturacion();
 bool soloDigitos();
+void cargarCadena(char *pal, int tam);
 
 void changoPP(int x,int y){
 rlutil::setColor(14);
@@ -63,6 +64,18 @@ bool soloDigitos(const char*cadena){
         }
     }
     return true;
+}
+
+void cargarCadena(char *pal, int tam)
+{
+    int i;
+    fflush (stdin);
+    for(i=0; i<tam;i++){
+        pal[i]=cin.get();
+        if(pal[i]=='\n')break;
+    }
+    pal[i]='\0';
+    fflush(stdin);
 }
 
 #endif // RECURSOS_H_INCLUDED

@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1698170204 source:c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\main.cpp
+	<iostream>
+	"rlutil.h"
+	"rlutilPlusPlus.h"
+	"recursos.h"
+	"clasesDatos.h"
+	"subMenuProductos.h"
+	"subMenuProveedores.h"
+	"subMenuClientes.h"
+	"subMenuVentas.h"
+	"subMenuPagos.h"
+
+1698170204 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1698170204 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\rlutilplusplus.h
+
+1698191102 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\recursos.h
+	<cctype>
+
+1698198638 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\clasesdatos.h
+	"Fecha.h"
+	"Producto.h"
+	"ArchivoProducto.h"
+	"FuncionesProducto.h"
+	"DatosPersona.h"
+	"Proveedor.h"
+	"ArchivoProveedor.h"
+	"Cliente.h"
+	"ArchivoCliente.h"
+	"Venta.h"
+	"ArchivoVentas.h"
+
+1698170204 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\fecha.h
+	<iostream>
+	<ctime>
+
+1698175680 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\producto.h
+
+1698199398 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\archivoproducto.h
+
+1698192428 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\funcionesproducto.h
+
+1698193984 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\datospersona.h
+
+1698193442 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\proveedor.h
+
+1698198554 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\archivoproveedor.h
+
+1698194354 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\cliente.h
+
+1698197924 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\archivocliente.h
+
+1698194112 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\venta.h
+
+1698198758 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\archivoventas.h
+
+1698199396 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\submenuproductos.h
+
+1698176234 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\submenuproveedores.h
+
+1698176290 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\submenuclientes.h
+
+1698170204 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\submenuventas.h
+
+1698170204 c:\users\mega\desktop\github\utn\utn-tusi\utn\2cuatrimestre\prog2\proyectofinal\chango++mariel\chango++\submenupagos.h
+

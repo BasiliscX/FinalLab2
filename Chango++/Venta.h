@@ -11,6 +11,8 @@ private:
 public:
     Venta();
     Venta(const char*,const char*,int,float);
+
+    //set
     void setCliente(const char*c){ strcpy(cliente,c); }
     void setCodigoArticulo(const char*c){
         if(strlen(c)<=4){ strcpy(codigoArticulo,c); }
@@ -25,6 +27,8 @@ public:
         else{ total=-1; }
     }
     void setEstado(bool e){ estado=e; }
+
+    //get
     const char*getCliente(){ return cliente; }
     const char*getCodigoArticulo(){ return codigoArticulo; }
     int getcantidad(){ return cantidad; }

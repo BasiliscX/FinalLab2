@@ -12,18 +12,25 @@ private:
     bool estado;
 public:
     Cliente();
+
+    //métodos
     bool Cargar(const char*);
     void Mostrar();
+
+    //set
     void setApellido(const char*a){ strcpy(apellido,a); }
     void setContadorCarritos(int c){ contadorCarritos+=c; }
     void setAcumuladorCompras(int c){ acumuadorCompras+=c; }
     void setEstado(bool e){ estado=e; }
+
+    //get
     int getID(){ return ID; };
     const char*getApellido(){ return apellido; }
     int getContadorCarritos(){ return contadorCarritos; }
     int getAcumuladorCompras(){ return acumuadorCompras; }
     bool getEstado(){ return estado; }
 };
+
 Cliente::Cliente(){
     setContadorCarritos(0);
     setAcumuladorCompras(0);
@@ -37,7 +44,7 @@ bool Cliente::Cargar(const char*DNI){
     cin>>a;
     datosCliente.Cargar(DNI);
     ID=++contador;
-    {// Animacion y recuadro de pregunta si los datos ingresados son correctos, si no lo son entonces salimos pero antes disminuimos el contador de ID
+    {
         char eleccion;
         int x=62;
         int y=24;
@@ -78,6 +85,15 @@ bool Cliente::Cargar(const char*DNI){
         rlutil::setColor(15);
     }
     return true;
+}
+
+void Cliente::Mostrar()
+{
+    cout<<"ID : "<<endl;
+    cout<<ID<<endl;
+    cout<<"apellido : "<<endl;
+    cout<<apellido<<endl;
+    datosCliente.Mostrar();
 }
 
 #endif // CLIENTE_H_INCLUDED

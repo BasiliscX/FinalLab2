@@ -15,12 +15,18 @@ private:
     char direccion[30];
 public:
     DatosPersona(const char*,const char*,const char*,const char*);
+
+    //métodos
     bool Cargar(const char*);
     void Mostrar();
+
+    //set
     void setNombre(const char*n){ strcpy(nombre,n); }
     void setDNI_CUIT(const char*n){ strcpy(DNI_CUIT,n); }
     void setTelefono(const char*t){ strcpy(telefono,t); }
     void setDireccion(const char*d){ strcpy(direccion,d); }
+
+    //get
     const char*getNombre(){ return nombre; }
     const char*getDNI_CUIT(){ return DNI_CUIT; }
     const char*getTelefono(){ return telefono; }
@@ -50,6 +56,18 @@ bool DatosPersona::Cargar(const char*num){
     setTelefono(t);
     setDireccion(d);
     return true;
+}
+
+void DatosPersona::Mostrar()
+{
+    cout<<"nombre : "<<endl;
+    cout<<nombre<<endl;
+    cout<<"DNI/CUIT : "<<endl;
+    cout<<DNI_CUIT<<endl;
+    cout<<"telefono : "<<endl;
+    cout<<telefono<<endl;
+    cout<<"direccion : "<<endl;
+    cout<<direccion<<endl;
 }
 
 #endif // DATOSPERSONA_H_INCLUDED
