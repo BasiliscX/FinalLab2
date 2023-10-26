@@ -9,6 +9,7 @@ void menuVentas(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
+    int x,y;
 
     while(menu){
     {// Recuadros y titulo
@@ -17,7 +18,6 @@ void menuVentas(){
         boxAnimation(1,1,3,79,44,0);
         boxAnimation(2,2,1,77,42,0);
         changoPP(15,7);
-        int x,y;
         x=31;
         y=20;
         textBoxAnimation(x,y,"MENU DE VENTAS",2,0);

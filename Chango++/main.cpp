@@ -23,10 +23,22 @@ system("mode con cols=80 lines=45");
         rlutil::setColor(8);
         boxAnimation(1,1,3,79,44,0);
         boxAnimation(2,2,1,77,42,0);
+        /**
+        ▄▄▄▄▄▄▄▄
+        █┌────┐█
+        █│    │█
+        █└────┘█
+        ▀▀▀▀▀▀▀▀
+        */
         changoPP(15,7);
         x=31;
         y=20;
         textBoxAnimation(x,y,"MENU PRINCIPAL",2,0);
+        /**
+        ╔══════════════╗
+        ║MENU PRINCIPAL║
+        ╚══════════════╝
+        */
     }
     {// Menu seleccion
         x=26;
@@ -54,6 +66,23 @@ system("mode con cols=80 lines=45");
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
+        /**
+        ┌─────────────────────────┐
+        │1 - Menu de proveedores  │
+        │                         │
+        │2 - Menu de productos    │
+        │                         │
+        │3 - Menu de clientes     │
+        │                         │
+        │4 - Menu de facturacion  │
+        │                         │
+        │5 - Menu de configuracion│
+        │                         │
+        │0 - Salir                │
+        │                         │
+        │      Eleccion:          │
+        └─────────────────────────┘
+        */
     }
         rlutil::showcursor();
         cin>>eleccion;

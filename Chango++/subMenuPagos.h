@@ -5,6 +5,7 @@ void menuPagos(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
+    int x,y;
 
     while(menu){
     {// Recuadro y titulo
@@ -13,7 +14,6 @@ void menuPagos(){
         boxAnimation(1,1,3,79,44,0);//recuadro grueso
         boxAnimation(2,2,1,77,42,0);//recuadro fino
         changoPP(15,7);//logo
-        int x,y;
         x=30;
         y=20;
         textBoxAnimation(x,y,"MENU DE PAGOS",2,0);

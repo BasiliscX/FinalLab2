@@ -9,6 +9,16 @@ bool soloDigitos();
 void cargarCadena(char *pal, int tam);
 
 void changoPP(int x,int y){
+    /**
+     _____ _
+     /  __ \ |                             _     _
+     | /  \/ |__   __ _ _ __   __ _  ___ _| |_ _| |_
+     | |   | '_ \ / _` | '_ \ / _` |/ _ \_   _|_   _|
+     | \__/\ | | | (_| | | | | (_| | (_) ||_|   |_|
+     \_____/_| |_|\__,_|_| |_|\__, |\___/
+                               __/ |
+                              |___/
+    */
 rlutil::setColor(14);
 gotoxy(x,y);
 cout<<" _____ _";
@@ -29,7 +39,7 @@ cout<<"                         |___/";
 rlutil::setColor(15);
 }
 
-int facturacion(){
+int facturacion(){// cartel recuadrado para entrar a Pagos o Ventas
     int x,y;
     char eleccion;
     x=52;
@@ -47,6 +57,13 @@ int facturacion(){
     textAnimation("\'v\' - Ventas");
     gotoxy(x,++y);
     textAnimation("Eleccion: ");
+    /**
+    ├►┌────────────┐
+    │ │'p' - Pagos │
+    │ │'v' - Ventas│
+    │ │Eleccion:   │
+    │ └────────────┘
+    */
     cin>>eleccion;
     eleccion=tolower(eleccion);
     switch(eleccion){
@@ -57,7 +74,7 @@ int facturacion(){
     return 0;
 }
 
-bool soloDigitos(const char*cadena){
+bool soloDigitos(const char*cadena){// Evalua si los caracteres ingresados son numeros
     for (int i=0;cadena[i]!='\0';i++){
         if (!isdigit(cadena[i])){
             return false;

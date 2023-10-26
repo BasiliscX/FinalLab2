@@ -20,6 +20,11 @@ void menuClientes(){
         x=30;
         y=20;
         textBoxAnimation(x,y,"MENU DE CLIENTES",2,0);
+        /**
+        ╔════════════════╗
+        ║MENU DE CLIENTES║
+        ╚════════════════╝
+        */
     }
     {// Menu seleccion
         x=21;

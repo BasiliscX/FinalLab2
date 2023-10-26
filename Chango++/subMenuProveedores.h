@@ -8,6 +8,7 @@ void menuProveedores(){
     bool menu=true;
     char eleccion;
     int velocidad=0;
+    int x,y;
 
     while(menu){
     {// Recuadros y titulo
@@ -15,17 +16,28 @@ void menuProveedores(){
         rlutil::setColor(8);
         boxAnimation(1,1,3,79,44,0);
         boxAnimation(2,2,1,77,42,0);
+        /**
+        ▄▄▄▄▄▄▄▄
+        █┌────┐█
+        █│    │█
+        █└────┘█
+        ▀▀▀▀▀▀▀▀
+        */
         changoPP(15,7);
-        int x,y;
         x=28;
         y=20;
         textBoxAnimation(x,y,"MENU DE PROVEEDORES",2,0);
+        /**
+        ╔═══════════════════╗
+        ║MENU DE PROVEEDORES║
+        ╚═══════════════════╝
+        */
     }
     {// Menu de seleccion
         x=20;
         y=27;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,36,12,velocidad);
+        boxAnimation(x,y,1,36,14,velocidad);
         rlutil::setColor(15);
         x+=1;
         rlutil::hidecursor();
@@ -43,10 +55,30 @@ void menuProveedores(){
         textAnimation("4 - Modificar datos de un proveedor",velocidad);
         y+=2;
         rlutil::locate(x,y);
+        textAnimation("5 - Eliminar datos de proveedor",velocidad);
+        y+=2;
+        rlutil::locate(x,y);
         textAnimation("0 - volver al menu proncipal",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("\tEleccion: ");
+        /**
+         ┌───────────────────────────────────┐
+         │1 - Agregar proveedor              │
+         │                                   │
+         │2 - Listar proveedor por CUIT      │
+         │                                   │
+         │3 - Listar todos los proveedores   │
+         │                                   │
+         │4 - Modificar datos de un proveedor│
+         │                                   │
+         │5 - Eliminar datos de proveedor    │
+         │                                   │
+         │0 - volver al menu proncipal       │
+         │                                   │
+         │    Eleccion:                      │
+         └───────────────────────────────────┘
+        */
     }
         rlutil::showcursor();
         cin>>eleccion;
@@ -55,6 +87,7 @@ void menuProveedores(){
             case '2' : break;
             case '3' : break;
             case '4' : break;
+            case '5' : break;
             default: menu=false; break;
         }
     }
@@ -65,6 +98,11 @@ bool agregarProveedor(){
     Producto producto;
     {// Recuadros y titulo con flechas
         textBoxAnimation(28,4,"AGREGAR PROVEEDOR");
+        /**
+        ╔═════════════════╗
+        ║AGREGAR PROVEEDOR║
+        ╚═════════════════╝
+        */
         textBoxAnimation(9,8,"PROVEEDOR",1);
         x=19;
         y=10;
@@ -73,6 +111,12 @@ bool agregarProveedor(){
         cout<<(char)180;
         gotoxy(x,++y);
         cout<<(char)192<<(char)196<<(char)196<<(char)196<<(int_fast8_t)16;
+        /**
+        ┌─────────┐
+        │PROVEEDOR│
+        └─────────┤
+                  └───►
+        */
         x=23;
         y=10;
         gotoxy(x,y);
