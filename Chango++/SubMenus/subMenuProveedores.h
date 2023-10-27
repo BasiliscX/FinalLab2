@@ -5,6 +5,7 @@ void menuProveedores();
 bool agregarProveedor();
 
 void menuProveedores(){
+    ArchivoProveedor archivoProveedor("Proveedores.dat");
     bool menu=true;
     char eleccion;
     int velocidad=0;
@@ -95,7 +96,8 @@ void menuProveedores(){
 bool agregarProveedor(){
     rlutil::cls();
     int x,y;
-    Producto producto;
+        ArchivoProveedor archivoProveedor("Proveedores.dat");
+
     {// Recuadros y titulo con flechas
         textBoxAnimation(28,4,"AGREGAR PROVEEDOR");
         /**
@@ -126,56 +128,62 @@ bool agregarProveedor(){
         boxAnimation(x,y,1,38,11,0);
         gotoxy(++x,++y);
     }
-    {/// REEMPLAZAR CON producto.Cargar()!!!!
-        char CUIT[12];
-        rlutil::setColor(15);
-        cout<<"\n\t\t\tNro de CUIT";
-        rlutil::setColor(8);
-        cout<<" (Numerico, sin \'-\')\n\t\t\t\t";
-        rlutil::setColor(15);
-        cout<<"  "<<(int_fast8_t)26<<" ";
-        cin>>CUIT;
-        if(!soloDigitos(CUIT)){
-            cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-            rlutil::anykey();
-            return false;
-        }
-        /**
-            se debe buscar en Proveedores.dat los CUIT de proveedor
-            y verificar que el ingresado sea inexistente.
-            si existe, entonces c=-1
-        if(c==-1){
-            cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-            rlutil::anykey();
-            return false;
-        }
-        */
-        Proveedor proveedor;
-        if(proveedor.Cargar(CUIT)){
+
+    archivoProveedor.agregarProveedor();
+
+    if(false){
+        {/// REEMPLAZAR CON producto.Cargar()!!!!
+            char CUIT[12];
+            rlutil::setColor(15);
+            cout<<"\n\t\t\tNro de CUIT";
+            rlutil::setColor(8);
+            cout<<" (Numerico, sin \'-\')\n\t\t\t\t";
+            rlutil::setColor(15);
+            cout<<"  "<<(int_fast8_t)26<<" ";
+            cin>>CUIT;
+            if(!soloDigitos(CUIT)){
+                cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
+                rlutil::anykey();
+                return false;
+            }
             /**
-                Se graba en Proveedores.dat
+                se debe buscar en Proveedores.dat los CUIT de proveedor
+                y verificar que el ingresado sea inexistente.
+                si existe, entonces c=-1
+            if(c==-1){
+                cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
+                rlutil::anykey();
+                return false;
+            }
             */
-            int x=26;
-            int y=28;
-            rlutil::hidecursor();
-            rlutil::setColor(8);
-            boxAnimation(x,y,1,33,2,1);
-            rlutil::setColor(15);
-            gotoxy(++x,++y);
-            cout<<"ID generado para el proveedor: "<<proveedor.getID();
-            rlutil::setColor(8);
-            gotoxy(--x,++y);
-            cout<<(char)195;
-            gotoxy(x,++y);
-            cout<<(char)179;
-            gotoxy(x,++y);
-            cout<<(char)192<<(int_fast8_t)16;
-            rlutil::setColor(15);
-            rlutil::hidecursor();
-            cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
-            rlutil::anykey();
+            Proveedor proveedor;
+            if(true){
+                /**
+                    Se graba en Proveedores.dat
+                */
+                int x=26;
+                int y=28;
+                rlutil::hidecursor();
+                rlutil::setColor(8);
+                boxAnimation(x,y,1,33,2,1);
+                rlutil::setColor(15);
+                gotoxy(++x,++y);
+                cout<<"ID generado para el proveedor: "<<proveedor.getID();
+                rlutil::setColor(8);
+                gotoxy(--x,++y);
+                cout<<(char)195;
+                gotoxy(x,++y);
+                cout<<(char)179;
+                gotoxy(x,++y);
+                cout<<(char)192<<(int_fast8_t)16;
+                rlutil::setColor(15);
+                rlutil::hidecursor();
+                cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
+                rlutil::anykey();
+            }
         }
     }
+
     return true;
 }
 

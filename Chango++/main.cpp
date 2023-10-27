@@ -4,11 +4,11 @@ using namespace std;
 #include"rlutilPlusPlus.h"
 #include"recursos.h"
 #include"clasesDatos.h"
-#include"subMenuProductos.h"
-#include"subMenuProveedores.h"
-#include"subMenuClientes.h"
-#include"subMenuVentas.h"
-#include"subMenuPagos.h"
+#include"SubMenus/subMenuProveedores.h"
+#include"SubMenus/subMenuProductos.h"
+#include"SubMenus/subMenuClientes.h"
+#include"SubMenus/subMenuVentas.h"
+#include"SubMenus/subMenuPagos.h"
 
 int main(){
 rlutil::setConsoleTitle("Chango++");

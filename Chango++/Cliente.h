@@ -42,7 +42,7 @@ bool Cliente::Cargar(const char*DNI){
     cout<<"\n\t\t\tApellido ";
     cout<<" "<<(int_fast8_t)26<<" ";
     cin>>a;
-    datosCliente.Cargar(DNI);
+//    datosCliente.Cargar(DNI);
     ID=++contador;
     {
         char eleccion;
@@ -93,7 +93,7 @@ void Cliente::Mostrar()
     cout<<ID<<endl;
     cout<<"apellido : "<<endl;
     cout<<apellido<<endl;
-    datosCliente.Mostrar();
+//    datosCliente.Mostrar();
 }
 
 #endif // CLIENTE_H_INCLUDED
