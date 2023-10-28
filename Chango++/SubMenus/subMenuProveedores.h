@@ -60,7 +60,7 @@ void menuProveedores(){
         textAnimation("4 - Modificar datos de un proveedor",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("5 - Eliminar datos de proveedor",velocidad);
+        textAnimation("5 - Eliminar datos de un proveedor",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("0 - volver al menu proncipal",velocidad);
@@ -77,7 +77,7 @@ void menuProveedores(){
          │                                   │
          │4 - Modificar datos de un proveedor│
          │                                   │
-         │5 - Eliminar datos de proveedor    │
+         │5 - Eliminar datos de un proveedor │
          │                                   │
          │0 - volver al menu proncipal       │
          │                                   │
@@ -92,7 +92,7 @@ void menuProveedores(){
             case '2' : listarProveedorPorID(); break;
             case '3' : listarTodosLosProveedores(); break;
             case '4' :
-                switch(modificarDatosProveedor()){
+                switch(modificarDatos()){
                     case -1: MOdificarProveedorPorID("Telefono"); break;
                     case -2: MOdificarProveedorPorID("Direccion"); break;
                     default: break;

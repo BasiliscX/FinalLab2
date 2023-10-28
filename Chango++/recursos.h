@@ -5,7 +5,7 @@
 
 void changoPP(int,int);
 int facturacion();
-int modificarDatosProveedor();
+int modificarDatos();
 bool soloDigitos();
 void cargarCadena(char *pal, int tam);
 
@@ -74,7 +74,7 @@ int facturacion(){// cartel recuadrado para entrar a Pagos o Ventas
     }
     return 0;
 }
-int modificarDatosProveedor(){// cartel recuadrado para entrar a Telefono o Direccion
+int modificarDatos(){// cartel recuadrado para entrar a Telefono o Direccion
     int x,y;
     char eleccion;
     x=56;
@@ -108,7 +108,6 @@ int modificarDatosProveedor(){// cartel recuadrado para entrar a Telefono o Dire
     }
     return 0;
 }
-
 bool soloDigitos(const char*cadena){// Evalua si los caracteres ingresados son numeros
     for (int i=0;cadena[i]!='\0';i++){
         if (!isdigit(cadena[i])){
@@ -117,7 +116,6 @@ bool soloDigitos(const char*cadena){// Evalua si los caracteres ingresados son n
     }
     return true;
 }
-
 void cargarCadena(char *pal, int tam)
 {
     int i;

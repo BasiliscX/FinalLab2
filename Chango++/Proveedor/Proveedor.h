@@ -41,8 +41,7 @@ bool Proveedor::Cargar(){
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cin>>DNI;
-    verifico=verificarDNIproveedor(DNI);
-//    verifico=verificarDNIproveedor(DNI);// verifica que el dni no esté registrado
+    verifico=verificarDNIproveedor(DNI);// verifica que el dni no esté registrado
     while(verifico){
         gotoxy(31,17);
         rlutil::setColor(4);
@@ -54,7 +53,6 @@ bool Proveedor::Cargar(){
         gotoxy(31,y);
         cin>>DNI;
     verifico=verificarDNIproveedor(DNI);
-//        verifico=verificarDNIproveedor(DNI);
         if(strcmp(DNI,"0")==0){ return false; }
         cls(31,17,30);
         cls(28,18,34);
@@ -104,7 +102,6 @@ bool Proveedor::Cargar(){
         cout<<" DATOS INGRESADOS CORRECTAMENTE!\n";
         rlutil::setColor(15);
         rlutil::anykey();
-
     }
     estado=true;
     return true;

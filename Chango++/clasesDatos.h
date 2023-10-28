@@ -10,8 +10,9 @@
 #include"Proveedor/Proveedor.h"
 #include"Proveedor/ArchivoProveedor.h"
 #include"Proveedor/FuncionesProveedores.h"
-#include"Cliente.h"
-#include"ArchivoCliente.h"
+#include"Cliente/Cliente.h"
+#include"Cliente/ArchivoCliente.h"
+#include"Cliente/FuncionesClientes.h"
 #include"Venta.h"
 #include"ArchivoVentas.h"
 

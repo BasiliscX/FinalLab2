@@ -1,23 +1,12 @@
 #ifndef ARCHIVOPROVEEDOR_H_INCLUDED
 #define ARCHIVOPROVEEDOR_H_INCLUDED
 
-int contarRegistros();
-bool agregarProveedor();
-bool modificarProveedor(Proveedor reg, int pos);
-
-class ArchivoProveedor
-{
-
+class ArchivoProveedor{
 private:
-
     char nombre[30];
-
 public:
-
     ArchivoProveedor (const char* n) {strcpy(nombre,n);}
-
-     Proveedor leerRegistro(int pos){
-
+    Proveedor leerRegistro(int pos){
        Proveedor reg;
        FILE *p;
        p=fopen(nombre,"rb");
@@ -27,7 +16,6 @@ public:
        fclose(p);
        return reg;
    }
-
    int contarRegistros(){
         FILE *p;
         p=fopen(nombre, "rb");
@@ -37,45 +25,30 @@ public:
         fclose(p);
         return tam/sizeof(Proveedor);
     }
-
     bool agregarProveedor(){
-
-    Proveedor reg;
-    bool cargo, modifico;
-
-    FILE *p;
-    p=fopen(nombre,"ab");
-    if(p==NULL) return false;
-
-     cargo = reg.Cargar();
-     if(cargo)
-     {
-    modifico = fwrite(&reg, sizeof(Proveedor), 1, p);
-    fclose(p);
-    return modifico;
-
-     }
-
-     else return cargo;
-
-
+        Proveedor reg;
+        bool cargo, modifico;
+        FILE *p;
+        p=fopen(nombre,"ab");
+        if(p==NULL) return false;
+        cargo = reg.Cargar();
+        if(cargo){
+            modifico = fwrite(&reg, sizeof(Proveedor), 1, p);
+            fclose(p);
+            return modifico;
+        }
+        else return cargo;
     }
 
     bool modificarProveedor(Proveedor reg, int pos){
-
-    bool modifico;
-    FILE *p;
-    p=fopen(nombre,"rb+");
-    if(p==NULL) return false;
-
-    fseek(p,sizeof(Proveedor)*pos,0);
-    modifico=fwrite(&reg, sizeof(Proveedor), 1, p);
-
-    fclose(p);
-
-    return modifico;
-
-
+        bool modifico;
+        FILE *p;
+        p=fopen(nombre,"rb+");
+        if(p==NULL) return false;
+        fseek(p,sizeof(Proveedor)*pos,0);
+        modifico=fwrite(&reg, sizeof(Proveedor), 1, p);
+        fclose(p);
+        return modifico;
     }
 };
 
