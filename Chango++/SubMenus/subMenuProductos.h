@@ -187,7 +187,6 @@ bool listarProductoCodigo(){
                     y2++;
                 }
             }
-
         }/**  Fin de ejemplo de prueba   */
 
         x=23;

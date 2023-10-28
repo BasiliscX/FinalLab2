@@ -1,7 +1,6 @@
 #ifndef ARCHIVOPROVEEDOR_H_INCLUDED
 #define ARCHIVOPROVEEDOR_H_INCLUDED
 
-bool verificarDNIproveedor(int dni);
 int contarRegistros();
 bool agregarProveedor();
 bool modificarProveedor(Proveedor reg, int pos);

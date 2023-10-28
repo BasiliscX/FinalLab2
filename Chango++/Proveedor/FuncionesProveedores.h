@@ -5,7 +5,8 @@ int autonumericoID();
 void listarProveedores();
 int verificarIdPos(int ID);
 bool mostrarXid();
-int verificarDniPos(int dni);
+int verificarDniPos(const char*dni);
+int*vectorDeID_proveedores();
 
 int autonumericoID() ///funcion que genera el id autonumerico
 {
@@ -58,6 +59,7 @@ return -1;
 
 }
 
+/** A migrar a submenuproveedores   */
 bool mostrarXid(){///muestra a un proveedor segun ID
 
 Proveedor reg;
@@ -102,7 +104,7 @@ return -1;
 
 
 }
-int verificarDniPos( int dni){ ///verifica la posicion del proveedor segun DNI
+int verificarDniPos( const char*dni){ ///verifica la posicion del proveedor segun DNI
 
 Proveedor reg;
 ArchivoProveedor archiProv("Proveedores.dat");
@@ -111,7 +113,7 @@ int cantRegprov = archiProv.contarRegistros();
 for(int i=0; i<cantRegprov; i++){
 
    reg = archiProv.leerRegistro(i);
-    if(reg.getDNI()==dni&& reg.getEstado()) {
+    if(strcmp(reg.getDNI(),dni)==0 && reg.getEstado()) {
         return i;
     }
 
@@ -120,7 +122,7 @@ return -1;
 
 }
 
-bool verificarDNIproveedor(int dni){///verifica si existe un proveedor con ese DNI
+bool verificarDNIproveedor(const char*dni){///verifica si existe un proveedor con ese DNI
 
 Proveedor reg;
 ArchivoProveedor archiProv("Proveedores.dat");
@@ -130,19 +132,27 @@ int cantRegprov = archiProv.contarRegistros();
 for(int i=0; i<cantRegprov; i++){
 
     reg = archiProv.leerRegistro(i);
-    if(reg.getDNI() == dni && reg.getEstado()) {
+    if(strcmp(reg.getDNI(),dni)==0 && reg.getEstado()) {
         return true;
     }
 
 }
 return false;
-
-
-
 }
-
-
-
+int*vectorDeID_proveedores(){// Devuelve un vector con los numeros de ID con estado true
+    ArchivoProveedor archivo("Proveedores.dat");
+    Proveedor reg;
+    int t=archivo.contarRegistros();
+    int*vectorID=new int[t]{0};
+    int cont=0;
+    for(int i=0;i<t;i++){
+        reg=archivo.leerRegistro(i);
+        if(reg.getEstado()){
+            vectorID[cont++]=reg.getID();
+        }
+    }
+    return vectorID;
+}
 
 
 #endif // FUNCIONESPROVEEDORES_H_INCLUDED
