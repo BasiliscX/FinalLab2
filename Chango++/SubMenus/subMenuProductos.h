@@ -98,7 +98,7 @@ void menuProductos(){
 bool agregarProducto(){
     rlutil::cls();
     int x,y;
-    Producto producto;
+    ArchivoProducto archivo("Productos.dat");
     {// Titulo y recuadros con flechas
         textBoxAnimation(28,4,"AGREGAR PRODUCTOS");
         /**
@@ -121,36 +121,7 @@ bool agregarProducto(){
                  └───►
         */
     }
-    {/// REEMPLAZAR CON producto.Cargar()!!
-        x=23;
-        y=10;
-        gotoxy(x,y);
-        x++;
-        y++;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,38,21,0);
-        gotoxy(++x,++y);
-        char c[4];
-        rlutil::setColor(15);
-        cout<<"\n\t\t\tCodigo";
-        rlutil::setColor(8);
-        cout<<" (4 caracteres)\n\t\t\t\t";
-        rlutil::setColor(15);
-        cout<<" "<<(int_fast8_t)26<<" ";
-        cin>>c;
-        if(strlen(c)>4){
-            cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-            rlutil::anykey();
-            return false;
-        }
-        int vP[10]={0};
-        /**
-            se debe buscar en Proveedores.dat los ID de proveedor
-            y guardar los valores en int vP[10]; para poder cargar
-            porductos deproveedores existentes.
-        */
-        producto.Cargar(c,vP);
-    }
+    archivo.agregarProducto();
     return true;
 }
 bool listarProductoCodigo(){
@@ -425,29 +396,6 @@ bool modificarProductoPorCodigo(){
         boxAnimation(x,y,1,38,21,0);
         gotoxy(++x,++y);
     }
-    {/// REEMPLAZAR CON producto.Cargar()!!
-        char c[4];
-        rlutil::setColor(15);
-        cout<<"\n\t\t\tCodigo";
-        rlutil::setColor(8);
-        cout<<" (4 caracteres)\n\t\t\t\t";
-        rlutil::setColor(15);
-        cout<<" "<<(int_fast8_t)26<<" ";
-        cin>>c;
-        if(strlen(c)>4){
-            cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-            rlutil::anykey();
-            return false;
-        }
-        int vP[10]={0};
-        /**
-            se debe buscar en Proveedores.dat los ID de proveedor
-            y guardar los valores en int vP[10]; para poder cargar
-            porductos deproveedores existentes.
-        */
-        producto.Cargar(c,vP);
-    }
-
     //rlutil::hidecursor();
     rlutil::anykey();
     return true;

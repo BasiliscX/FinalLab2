@@ -69,6 +69,16 @@ int*vectorDeID_proveedores(){// Devuelve un vector con los numeros de ID con est
     }
     return vectorID;
 }
+int validarIDproveedor(int id){ ///revisa que el id del proveedor sea existente
+    Proveedor reg;
+    ArchivoProveedor archiProv("Proveedores.dat");
+    int cantReg = archiProv.contarRegistros();
+    for(int i=0; i<cantReg; i++){
+        reg= archiProv.leerRegistro(i);
+        if (reg.getID() == id && reg.getEstado()) return id;
+    }
+    return -1;
+}
 
 
 #endif // FUNCIONESPROVEEDORES_H_INCLUDED

@@ -1,7 +1,7 @@
 #ifndef PRODUCTO_H_INCLUDED
 #define PRODUCTO_H_INCLUDED
 
-class Producto{
+class Producto{             //MIO
 private:
     char codigo[4];
     int tipo;
