@@ -6,6 +6,7 @@
 void changoPP(int,int);
 int facturacion();
 int modificarDatos();
+int modificarPrecio();
 bool soloDigitos();
 void cargarCadena(char *pal, int tam);
 
@@ -104,6 +105,40 @@ int modificarDatos(){// cartel recuadrado para entrar a Telefono o Direccion
     switch(eleccion){
         case 't': return -1;
         case 'd': return -2;
+        default : break;
+    }
+    return 0;
+}
+int modificarPrecio(){// cartel recuadrado para entrar a Telefono o Direccion
+    int x,y;
+    char eleccion;
+    x=56;
+    y=34;
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)195;
+    gotoxy(++x,y);
+    cout<<(int_fast8_t)16;
+    boxAnimation(++x,y,1,15,4);
+    rlutil::setColor(15);
+    gotoxy(++x,++y);
+    textAnimation("\'P\' - Precio");
+    gotoxy(x,++y);
+    textAnimation("\'C\' - Cantidad");
+    gotoxy(x,++y);
+    textAnimation("Eleccion: ");
+    /**
+    ├►┌──────────────┐
+    │ │'P' - Precio  │
+    │ │'C' - Cantidad│
+    │ │Eleccion:     │
+    │ └──────────────┘
+    */
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    switch(eleccion){
+        case 'p': return -1;
+        case 'c': return -2;
         default : break;
     }
     return 0;

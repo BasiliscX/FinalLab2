@@ -217,25 +217,32 @@ bool Producto::Cargar(){
 }
 
 void Producto::Mostrar(){
-
-    cout<<"codigo : "<<endl;
-    cout<<codigo<<endl;
-
-    cout<<"tipo : "<<endl;
-    cout<<tipo<<endl;
-
-    cout<<"ID proveedor : "<<endl;
-    cout<<ID_proveedor<<endl;
-
-    cout<<"nombre : "<<endl;
-    cout<<nombre<<endl;
-
-    cout<<"precio : "<<endl;
-    cout<<precio<<endl;
-
-    cout<<"cantidad : "<<endl;
-    cout<<cantidad<<endl;
-
+    if(estado){
+        rlutil::setColor(8);
+        cout<<"\n\tCodigo: ";
+        rlutil::setColor(14);
+        cout<<codigo;
+        rlutil::setColor(8);
+        cout<<"   Tipo: ";
+        rlutil::setColor(15);
+        cout<<tipo;
+        rlutil::setColor(8);
+        cout<<" ID de proveedor: ";
+        rlutil::setColor(15);
+        cout<<ID_proveedor;
+        rlutil::setColor(8);
+        cout<<"\n\t\t\tNombre: ";
+        rlutil::setColor(15);
+        cout<<nombre;
+        rlutil::setColor(8);
+        cout<<" Precio: ";
+        rlutil::setColor(15);
+        cout<<precio;
+        rlutil::setColor(8);
+        cout<<" Cantidad: ";
+        rlutil::setColor(15);
+        cout<<cantidad;
+    }
 }
 
 #endif // PRODUCTO_H_INCLUDED

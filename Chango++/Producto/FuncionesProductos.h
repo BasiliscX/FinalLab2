@@ -6,7 +6,7 @@ void listarProductos();
 int verificarCodigoPos(int codigo);
 bool mostrarXcodigo();
 bool modificarPrecioProducto();
-
+int*vectorDeCodigosProductos();
 
 void listarProductos(){ ///muestra todos los productos
 
@@ -109,6 +109,20 @@ return false;
 
 
 
+}
+int*vectorDeCodigosProductos(){// Devuelve un vector con los numeros de ID con estado true
+    ArchivoProducto archivo("Productos.dat");
+    Producto reg;
+    int t=archivo.contarRegistros();
+    int*vectorCodigos=new int[t]{0};
+    int cont=0;
+    for(int i=0;i<t;i++){
+        reg=archivo.leerRegistro(i);
+        if(reg.getEstado()){
+            vectorCodigos[cont++]=reg.getCodigo();
+        }
+    }
+    return vectorCodigos;
 }
 
 

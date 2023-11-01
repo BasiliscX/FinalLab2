@@ -3,9 +3,10 @@
 
 void menuProductos();
 bool agregarProducto();
-bool listarProductoCodigo();
+bool listarProductoPorCodigo();
 bool listarTodosLosProductos();
-bool modificarProductoPorCodigo();
+bool modificarProductoPorCodigo(const char*);
+bool eliminarProductoPorCodigo();
 
 void menuProductos(){
     bool menu=true;
@@ -87,10 +88,16 @@ void menuProductos(){
         cin>>eleccion;
         switch(eleccion){
             case '1' : agregarProducto(); break;
-            case '2' : listarProductoCodigo(); break;
+            case '2' : listarProductoPorCodigo(); break;
             case '3' : listarTodosLosProductos(); break;
-            case '4' : modificarProductoPorCodigo(); break;
-            case '5' : break;
+            case '4' :
+                switch(modificarPrecio()){
+                    case -1: modificarProductoPorCodigo("Precio"); break;
+                    case -2: modificarProductoPorCodigo("Cantidad"); break;
+                    default: break;
+                }
+                break;
+            case '5' : eliminarProductoPorCodigo(); break;
             default: menu=false; break;
         }
     }
@@ -124,12 +131,12 @@ bool agregarProducto(){
     archivo.agregarProducto();
     return true;
 }
-bool listarProductoCodigo(){
+bool listarProductoPorCodigo(){
     rlutil::cls();
-    int x,y;
+    ArchivoProducto archivo("Productos.dat");
+    int t=archivo.contarRegistros();
+    int x,y,y2=0;
     int velocidad=0;
-    char codigo[4];
-    Producto producto;
     {// Titulo y recuadros con flechas
         textBoxAnimation(24,4,"LISTAR PRODUCTO POR CODIGO",2,velocidad);
         /**
@@ -137,268 +144,371 @@ bool listarProductoCodigo(){
         ║LISTAR PRODUCTO POR CODIGO║
         ╚══════════════════════════╝
         */
-        textBoxAnimation(1,8,"Codigos disponibles",1,velocidad);
-        /**┌───────────────────┐
-           │Codigos disponibles│
-           └───────────────────┴──► (Aqui deberia haber una impresion de los codigos separados por '|') aaaa | bbbb | cccc | rrrr |
-                                    Necesito recorrer Articulos.dat e imprimir los codigos existentes.
-        */
-        x=26;
+        textBoxAnimation(4,8,"Disponibles",1,velocidad);
         y=10;
-        int y2=0;
-        {/**  Ejemplo de prueba   */
-            const char*ejemploDeCodigosDisponibles="aaaa | bbbb | cccc | dddd | eeee | ffff | gggg | hhhh | iiii | jjjj | kkkk | llll";
-            gotoxy(x,y);
-            int t=strlen(ejemploDeCodigosDisponibles);
-            for(int i=0;i<t;i++){
-                cout<<ejemploDeCodigosDisponibles[i];
-                if(i%40==0&&i!=0){
-                    cout<<"\n\t\t\t";
-                    y++;
-                    y2++;
-                }
-            }
-        }/**  Fin de ejemplo de prueba   */
-
         x=23;
         gotoxy(x,y);
-        x++;
-        y++;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,35,3,0);
-        x=21;
+        x=16;
         y=10;
         gotoxy(x,y);
         rlutil::setColor(8);
         cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        x=21;
+        /**┌───────────┐
+           │Disponibles│
+           └───────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
+        */
+    }
+    {// Imprimo los ID de proveedor existentes
+        gotoxy((x+5),y);
+        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+            gotoxy((x+10),y);
+            rlutil::setColor(4);
+            rlutil::hidecursor();
+            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+            rlutil::setColor(15);
+            return false;
+        }
+        int*vectorCodigos=new int[t]{0};
+        vectorCodigos=vectorDeCodigosProductos();
+        rlutil::setColor(15);
+        for(int i=0;i<t;i++){
+            cout<<"| ";
+            if(vectorCodigos[i]!=0){
+                cout<<vectorCodigos[i]<<" |";
+                if(i%9==0&&i!=0){
+                    gotoxy(21,++y);
+                    y2++;
+                }
+            }
+        }
+        /**
+        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+           | 11 || 12 || 13 || 14 || 15 || 16 |
+        */
+    }
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    {
+        x=16;
+        y=10;
+        rlutil::setColor(8);
         gotoxy(x,y);
         cout<<(char)197;
-        if(y2==0){// No lo intentes... u_u
-            gotoxy(x,++y);
-            cout<<(char)179;
-        }
-        else{
-            for(int i=0;i<y2;i++){
+        gotoxy(x,++y);
+        cout<<(char)179;
+        if(y2>0){
+            for(int i=0;i<y2;i++){// para agrandar el bracito...
                 gotoxy(x,++y);
                 cout<<(char)179;
             }
         }
         gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-    }
-    {// Ingresar codigo
-        /**
-        │
-        └─►┌──────────────────────────────────┐
-           │Codigo de articulo (4 caracteres) │
-           │    →                             │
-           └──────────────────────────────────┘
-        */
-        x=25;
-        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
         rlutil::setColor(15);
-        cout<<"Codigo de articulo ";
-        rlutil::setColor(8);
-        cout<<"(4 caracteres)";
-        gotoxy((x+4),++y);
-        rlutil::setColor(15);
+        cout<<"Codigo";
+        gotoxy((x+8),++y);
         cout<<(int_fast8_t)26<<" ";
-        cin>>codigo;
     }
-    /**
-        debo validar que el codigo ingresado exista.
-        si no existe debo salir.
-    */
-    if(strcmp(codigo,"null")==0){// por ejemplo:
-        cls(x,y,30);
-        gotoxy(++x,y);
+    int codigo;
+    cin>> codigo;
+    int pos=verificarCodigoPos(codigo);
+    if(pos==-1){
+        gotoxy((x+10),y);
         rlutil::setColor(4);
         rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR NUEVAMENTE.");
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
         return false;
     }
-    /**
-        si existe debo buscarlo de articulos.dat, grabarlo en una variable de articulo y mostrar.
-    */
-    {// Fleca descendiente
-        /**│
-           └►*/
-        rlutil::setColor(8);
-        gotoxy(--x,++y);
-        cout<<(char)195;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(int_fast8_t)16;
-    }
-    // articulo.Mostrar();
-    rlutil::setColor(15);
-    cout<<"Nombre : Tomate";
-    cout<<"\n\t\t\t Tipo   : 1";
-    cout<<"\n\t\t\t Precio : 1.200";
-    cout<<"\n\t\t\t Stock  : 300";
-    cout<<"\n\t\t\t ID Proveedor : 4";
+    Producto producto=archivo.leerRegistro(pos);
+    producto.Mostrar();
+    rlutil::hidecursor();
     rlutil::anykey();
     return true;
 }
 bool listarTodosLosProductos(){
     rlutil::cls();
-    int x,y;
+    ArchivoProducto archivo("Productos.dat");
+    int x,y,t=archivo.contarRegistros();
     int velocidad=0;
-    Producto producto;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(24,4,"LISTAR TODOS LOS PRODUCTOS",2,velocidad);
-        textBoxAnimation(9,8,"Productos",1);
-        x=19;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)180;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(char)196<<(int_fast8_t)16;
-        x=23;
-        y=10;
-        gotoxy(x,y);
-    }
-    /**
-        debo buscar en articulos.dat y traer a memoria todos los articulos activos
-        while(articulo=archivo.getArticulo());
-    */
-    /// ejemplo:
-    int i=0;
-    x++;
-    while(i<4){
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,30,6,0);
-        gotoxy((x+1),++y);
+    x=24;
+    y=4;
+    textBoxAnimation(x,y,"LISTAR TODOS LOS PRODUCTOS",2,velocidad);
+    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+        gotoxy(25,10);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
         rlutil::setColor(15);
-        cout<<"Nombre : Tomate";
-        cout<<"\n\t\t\tTipo   : 1";
-        cout<<"\n\t\t\tPrecio : 1.200";
-        cout<<"\n\t\t\tStock  : 300";
-        cout<<"\n\t\t\tID Proveedor : 4";
-        i++;
-        y+=6;
+        return false;
+    }
+    gotoxy(1,8);
+    for(int i=0;i<t;i++){
+        Producto producto=archivo.leerRegistro(i);
+        producto.Mostrar();
+        cout<<endl;
     }
     rlutil::hidecursor();
     rlutil::anykey();
     return true;
 }
-bool modificarProductoPorCodigo(){
+bool modificarProductoPorCodigo(const char*campo){
     rlutil::cls();
-    int x,y;
+    ArchivoProducto archivo("Productos.dat");
+    int t=archivo.contarRegistros();
+    int x,y,y2=0;
     int velocidad=0;
-    char codigo[4];
-    Producto producto;
     {// Titulo y recuadros con flechas
-        textBoxAnimation(24,4,"MODIFICAR PRODUCTO POR CODIGO",2,velocidad);
-        textBoxAnimation(2,8,"Productos",1);
-        x=12;
+        textBoxAnimation(22,4,"MODIFICAR PRODUCTO POR CODIGO",2,velocidad);
+        /**
+        ╔═════════════════════════════╗
+        ║MODIFICAR PRODUCTO POR CODIGO║
+        ╚═════════════════════════════╝
+        */
+        textBoxAnimation(8,8,"Codigos",1,velocidad);
+        y=10;
+        x=23;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        x=16;
         y=10;
         gotoxy(x,y);
         rlutil::setColor(8);
-        cout<<(char)180;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        x=15;
-        y=10;
-        gotoxy(x,++y);
+        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
+        /**┌───────┐
+           │Codigos│
+           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
+        */
     }
-    /**
-        debo buscar en articulos.dat y traer a memoria todos los articulos activos
-        while(articulo=archivo.getArticulo());
-    */
-    /// ejemplo:
-    boxAnimation(x,y,1,55,7/**esto seria cantidad de registros+2*/,0);
-    gotoxy(++x,++y);
-    rlutil::setColor(15);
-    cout<<"Codigo | Nombre | Tipo | Precio | Stock | ID proveedor";
-    gotoxy(x,++y);
-    cout<<" aaaa  | Tomate |  01  | 1.200  |  300  |    1";
-    gotoxy(x,++y);
-    cout<<" bbbb  | zapallo|  01  |  600   |  400  |    4";
-    gotoxy(x,++y);
-    cout<<" cccc  | cebolla|  01  | 1.400  |  100  |    2";
-    gotoxy(x,++y);
-    cout<<" dddd  | lechuga|  01  | 1.600  |  100  |    1";
-    gotoxy(x,++y);
-    cout<<" dddd  | lechuga|  01  | 1.600  |  100  |    1";
-    /**
-    Hasta aqui:
-     ┌─────────┐
-     │Productos│
-     └─────────┤
-               └─►┌──────────────────────────────────────────────────────┐
-                  │Codigo | Nombre | Tipo | Precio | Stock | ID proveedor│
-                  │ aaaa  | Tomate |  01  | 1.200  |  300  |    1        │
-                  │ bbbb  | zapallo|  01  |  600   |  400  |    4        │
-                  │ cccc  | cebolla|  01  | 1.400  |  100  |    2        │
-                  │ dddd  | lechuga|  01  | 1.600  |  100  |    1        │
-                  │ dddd  | lechuga|  01  | 1.600  |  100  |    1        │
-                  └──────────────────────────────────────────────────────┘
-    */
-    {// Flecha descendiente
-        /**│
-           └►*/
+    {// Imprimo los ID de proveedor existentes
+        gotoxy((x+5),y);
+        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+            gotoxy((x+10),y);
+            rlutil::setColor(4);
+            rlutil::hidecursor();
+            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+            rlutil::setColor(15);
+            return false;
+        }
+        int*vectorCodigos=new int[t]{0};
+        vectorCodigos=vectorDeCodigosProductos();
+        rlutil::setColor(15);
+        for(int i=0;i<t;i++){
+            cout<<"| ";
+            if(vectorCodigos[i]!=0){
+                cout<<vectorCodigos[i]<<" |";
+                if(i%9==0&&i!=0){
+                    gotoxy(21,++y);
+                    y2++;
+                }
+            }
+        }
+        /**
+        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+           | 11 || 12 || 13 || 14 || 15 || 16 |
+        */
+    }
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    {
+        x=16;
+        y=10;
         rlutil::setColor(8);
-        gotoxy(--x,++y);
-        cout<<(char)195;
+        gotoxy(x,y);
+        cout<<(char)197;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        if(y2>0){
+            for(int i=0;i<y2;i++){// para agrandar el bracito...
+                gotoxy(x,++y);
+                cout<<(char)179;
+            }
+        }
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<"Codigo";
+        gotoxy((x+8),++y);
+        cout<<(int_fast8_t)26<<" ";
+    }
+    int codigo;
+    cin>> codigo;
+    int pos=verificarCodigoPos(codigo);
+    if(pos==-1){
+        gotoxy((x+10),y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    Producto producto=archivo.leerRegistro(pos);
+    producto.Mostrar();
+    {// Pregunta si los datos son correctos
+        char eleccion;
+        y+=4;
+        rlutil::setColor(8);
+        gotoxy(--x,y);
+        cout<<(char)218;
+        for(int i=0;i<55;i++){ cout<<(char)196; }
         gotoxy(x,++y);
         cout<<(char)179;
         gotoxy(x,++y);
-        cout<<(char)192<<(int_fast8_t)16;
-    }
-    {// recuadro de seleccion de codigo
-        x+=2;
-        boxAnimation(x,y,1,40,2,0);
-        x=18;
-        y=21;
-        gotoxy(x,y);
+        cout<<(char)192<<(char)196<<(int_fast8_t)16;
         rlutil::setColor(15);
-        cout<<"Codigo del producto a modificar: ";
-        cin>>codigo;
+        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
+        cin>>eleccion;
+        eleccion=tolower(eleccion);
+        if(eleccion!='s'){ return false; }
     }
-    /**
-        Tengo que validar el codigo ingresado con los de productos.dat, si no existe salgo:
-    */
-    if(strcmp(codigo,"null")==0){// por ejemplo:
-        x=18;
-        y=21;
-        gotoxy(x,y);
-        cls(x,y,39);
-        gotoxy((x+3),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR NUEVAMENTE.");
-        return false;
+    if(strcmp(campo,"Precio")==0){// Modifico el precio del producto
+        gotoxy((x+4),(y+2));
+        int precioNuevo;
+        cout<<"Nuevo precio: ";
+        cin>>precioNuevo;
+        producto.setPrecio(precioNuevo);
+        archivo.modificarProducto(producto,pos);
+        producto=archivo.leerRegistro(pos);
+        gotoxy((x+4),(y+2));
+        rlutil::setColor(14);
+        cout<<"DATOS MODIFICADOS EXITOSAMENTE!           \n";
+        rlutil::setColor(15);
+        producto.Mostrar();
     }
-    /**
-        Si existe entonces debo abrir editarlo con la interfaz de agregar producto
-    */
-    rlutil::cls();
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(28,4,"MODIFICAR PRODUCTO");
-        textBoxAnimation(10,8,"Producto",1);
-        x=19;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)180;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(char)196<<(int_fast8_t)16;
-        x=23;
-        y=10;
-        gotoxy(x,y);
-        x++;
-        y++;
-        rlutil::setColor(8);
-        boxAnimation(x,y,1,38,21,0);
-        gotoxy(++x,++y);
+    if(strcmp(campo,"Cantidad")==0){// Modifico el precio del producto
+        gotoxy((x+4),(y+2));
+        int cantidadNuevo;
+        cout<<"Nuevo cantidad: ";
+        cin>>cantidadNuevo;
+        producto.setCantidad(cantidadNuevo);
+        archivo.modificarProducto(producto,pos);
+        producto=archivo.leerRegistro(pos);
+        gotoxy((x+4),(y+2));
+        rlutil::setColor(14);
+        cout<<"DATOS MODIFICADOS EXITOSAMENTE!           \n";
+        rlutil::setColor(15);
+        producto.Mostrar();
     }
-    //rlutil::hidecursor();
+    rlutil::hidecursor();
     rlutil::anykey();
     return true;
 }
+bool eliminarProductoPorCodigo(){
+    rlutil::cls();
+    ArchivoProducto archivo("Productos.dat");
+    int t=archivo.contarRegistros();
+    int x,y,y2=0;
+    int velocidad=0;
+    {// Titulo y recuadros con flechas
+        textBoxAnimation(22,4,"ELIMINAR PRODUCTOS POR CODIGO",2,velocidad);
+        /**
+        ╔═════════════════════════════╗
+        ║ELIMINAR PRODUCTOS POR CODIGO║
+        ╚═════════════════════════════╝
+        */
+        textBoxAnimation(8,8,"Codigos",1,velocidad);
+        y=10;
+        x=23;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        x=16;
+        y=10;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
+        /**┌───────┐
+           │Codigos│
+           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
+        */
+    }
+    {// Imprimo los ID de proveedor existentes
+        gotoxy((x+5),y);
+        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+            gotoxy((x+10),y);
+            rlutil::setColor(4);
+            rlutil::hidecursor();
+            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+            rlutil::setColor(15);
+            return false;
+        }
+        int*vectorCodigos=new int[t]{0};
+        vectorCodigos=vectorDeCodigosProductos();
+        rlutil::setColor(15);
+        for(int i=0;i<t;i++){
+            cout<<"| ";
+            if(vectorCodigos[i]!=0){
+                cout<<vectorCodigos[i]<<" |";
+                if(i%9==0&&i!=0){
+                    gotoxy(21,++y);
+                    y2++;
+                }
+            }
+        }
+        /**
+        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+           | 11 || 12 || 13 || 14 || 15 || 16 |
+        */
+    }
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    {
+        x=16;
+        y=10;
+        rlutil::setColor(8);
+        gotoxy(x,y);
+        cout<<(char)197;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        if(y2>0){
+            for(int i=0;i<y2;i++){// para agrandar el bracito...
+                gotoxy(x,++y);
+                cout<<(char)179;
+            }
+        }
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<"Codigo";
+        gotoxy((x+8),++y);
+        cout<<(int_fast8_t)26<<" ";
+    }
+    int codigo;
+    cin>> codigo;
+    int pos=verificarCodigoPos(codigo);
+    if(pos==-1){
+        gotoxy((x+10),y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    Producto producto=archivo.leerRegistro(pos);
+    producto.Mostrar();
+    {// Pregunta si los datos son correctos
+        char eleccion;
+        y+=4;
+        rlutil::setColor(8);
+        gotoxy(--x,y);
+        cout<<(char)218;
+        for(int i=0;i<55;i++){ cout<<(char)196; }
+        gotoxy(x,++y);
+        cout<<(char)179;
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
+        cin>>eleccion;
+        eleccion=tolower(eleccion);
+        if(eleccion!='s'){ return false; }
+    }
+    producto.setEstado(false);
+    archivo.modificarProducto(producto,pos);
+    gotoxy((x+4),y);
+    rlutil::setColor(14);
+    cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
+    rlutil::hidecursor();
+    rlutil::anykey();
+    return true;
+}
+
 
 #endif // SUBMENUPRODUCTOS_H_INCLUDED
