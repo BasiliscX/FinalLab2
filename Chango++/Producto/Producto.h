@@ -31,6 +31,7 @@ public:
     void setNombre(const char*n){ strcpy(nombre,n); }
     void setPrecio(float pre){precio=pre;}
     void setCantidad(int cant){cantidad= cant;}
+    void setCantidadMenosIgual(int cant){cantidad-=cant;}
     void setEstado(bool e){ estado=e; }
 
     //get
@@ -241,7 +242,7 @@ void Producto::Mostrar(){
         rlutil::setColor(8);
         cout<<" Cantidad: ";
         rlutil::setColor(15);
-        cout<<cantidad;
+        cout<<cantidad<<"    ";
     }
 }
 

@@ -3,6 +3,7 @@
 
 int verificarCodigoPos(int codigo);
 int*vectorDeCodigosProductos();
+bool setCantidadEnDisco(Producto);
 
 int verificarCodigoPos(int codigo){ ///verifica la posicion de un producto por codigo
     Producto reg;
@@ -15,6 +16,18 @@ int verificarCodigoPos(int codigo){ ///verifica la posicion de un producto por c
         }
     }
     return -1;
+}
+Producto obtenerProducto(int codigo){
+    Producto reg;
+    ArchivoProducto archivo("Productos.dat");
+    int t=archivo.contarRegistros();
+    for(int i=0;i<t;i++){
+        reg=archivo.leerRegistro(i);
+        if(reg.getCodigo() == codigo && reg.getEstado()) {
+            return reg;
+        }
+    }
+    return reg;
 }
 bool verificarCodigoProducto(int codigo){///verifica si existe un producto con ese codigo
     Producto reg;
@@ -42,6 +55,9 @@ int*vectorDeCodigosProductos(){// Devuelve un vector con los numeros de ID con e
     }
     return vectorCodigos;
 }
-
+bool setCantidadEnDisco(Producto producto){
+    ArchivoProducto archivo("Productos.dat");
+    return archivo.modificarProducto(producto,verificarCodigoPos(producto.getCodigo()));
+}
 
 #endif // FUNCIONESPRODUCTOS_H_INCLUDED

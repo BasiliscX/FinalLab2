@@ -4,7 +4,9 @@
 void menuVentas();
 void carteInicio(int);
 bool agregarVenta();
-bool cargarArticulos(int,int,float&);
+bool listarVentaPorID();
+bool listarTodasLasVentas();
+
 void menuVentas(){
     bool menu=true;
     char eleccion;
@@ -53,8 +55,8 @@ void menuVentas(){
         cin>>eleccion;
         switch(eleccion){
             case '1' : agregarVenta(); break;
-            case '2' : break;
-            case '3' : break;
+            case '2' : listarVentaPorID(); break;
+            case '3' : listarTodasLasVentas(); break;
             case '4' : break;
             default: menu=false; break;
         }
@@ -85,154 +87,171 @@ bool agregarVenta(){
         x++;
         y++;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,38,5,0);
+        boxAnimation(x,y,1,38,4,0);
         gotoxy(++x,++y);
     }
-    {/// REEMPLAZAR CON ventas.Cargar()!!
-        char eleccion;
-        Cliente cliente;
-        char DNI[8];
+    char eleccion;
+    char DNI[30];
+    x=25;
+    y=12;
+    rlutil::setColor(15);
+    cout<<"Es cliente? (S/N): ";
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    if(eleccion=='s'){
+        gotoxy(x,++y);
+        cout<<"DNI ";
+        rlutil::setColor(8);
+        cout<<"(Numerico, sin \'.\')";
+        gotoxy((x+4),++y);
         rlutil::setColor(15);
-        cout<<"Es cliente? (S/N): ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion=='s'){
-            cout<<"\n\t\t\t\tDNI ";
-            rlutil::setColor(8);
-            cout<<"(Numerico, sin \'.\')\n\t\t\t\t\t";
+        cout<<(int_fast8_t)26<<" ";
+        cin>>DNI;
+        while(verificarDniClientePos(DNI)==-1){
+            gotoxy(35,18);
+            rlutil::setColor(4);
+            cout<<"DNI incorrecto";
+            gotoxy(27,19);
+            cout<<"ingrese nuevamente (0 para salir)";
             rlutil::setColor(15);
-            cout<<(int_fast8_t)26<<" ";
+            cls(31,y,25);
+            gotoxy(31,y);
             cin>>DNI;
-            if(!soloDigitos(DNI)){
-                cout<<"\n\t\t\t\tINCORRECTO\n\t\t\t\tINTENTAR NUEVAMENTE";
-                rlutil::anykey();
-                return false;
-            }
-            /**
-                Necesito buscar en Clientes.dat si el ingreso en DNI matchea con los DNI cargados.
-                - Si no existe entonces return false.
-                - Si existe entonces guardo en objeto cliente.
-            */
-        }
-        else{
-            gotoxy((x+10),(y+2));
-            cout<<"Cliente = -1";
-        }
-        y+=4;
-        x=62;
-        float total=0;
-        while(cargarArticulos(x,y,total)){
-        /**
-            Aqui grabamos en Ventas.dat
-        */
+            if(strcmp(DNI,"0")==0){ return false; }
+            cls(31,18,25);// Borra "DNI incorrecto"
+            cls(25,19,35);// Borra ingrese nuevamente (0 para salir)"
         }
     }
+    else{
+        gotoxy(35,14);
+        strcpy(DNI,"-1");
+        cout<<"Cliente = "<<DNI;
+    }
+    ArchivoVenta archivo("Ventas.dat");
+    while(archivo.agregarVenta(DNI));
     return true;
 }
-bool cargarArticulos(int x,int y,float&total){/// REEMPLAZAR CON ventas.Cargar()!!!
-    {// Bloque de flecha apuntando cargar ventas
-        rlutil::setColor(8);
+bool listarVentaPorID(){
+    rlutil::cls();
+    ArchivoVenta archivo("Ventas.dat");
+    int t=archivo.contarRegistros();
+    int x,y,y2=0;
+    int velocidad=0;
+    {// Titulo y recuadros con flechas
+        textBoxAnimation(27,4,"LISTAR VENTA POR ID",2,velocidad);
+        /**
+        ╔═══════════════════╗
+        ║LISTAR VENTA POR ID║
+        ╚═══════════════════╝
+        */
+        textBoxAnimation(4,8,"Disponibles",1,velocidad);
+        y=10;
+        x=23;
         gotoxy(x,y);
-        cout<<(char)180;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)217;
-        gotoxy(--x,y);
-        cout<<(char)196;
-        gotoxy(--x,y);
-        cout<<(int_fast8_t)17;
-        x-=36;
-    }
-    {// Bloque de recuadro carga de articulo
         rlutil::setColor(8);
-        boxAnimation(x,y,1,35,14,0);
+        x=16;
+        y=10;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
+        /**┌───────────┐
+           │Disponibles│
+           └───────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
+        */
+    }
+    {// Imprimo los ID de proveedor existentes
+        gotoxy((x+5),y);
+        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+            gotoxy((x+10),y);
+            rlutil::setColor(4);
+            rlutil::hidecursor();
+            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+            rlutil::setColor(15);
+            return false;
+        }
+        int*vectorID=new int[t]{0};
+        vectorID=vectorDeID_Ventas();
         rlutil::setColor(15);
-        gotoxy(++x,++y);
-    }
-    char codigo[5];
-    int cantidad;
-    cout<<"\n\t\t\tCodigo de articulo";
-    rlutil::setColor(8);
-    cout<<" (4 caracteres)\n\t\t\t\t";
-    rlutil::setColor(15);
-    cout<<" "<<(int_fast8_t)26<<" ";
-    cin>>codigo;
-/**
-        Tengo que consultar en Articulos.dat si el codigo existe.
-
-            - Si existe, traigo a memoria:
-
-                    Codigo | Nombre | Precio | Cantidad
-                     aaaa    tomate    1200      300
-
-            - Sino salgo.
-*/
-    cout<<"\n\t\t\tArticulo\n\t\t\t\t";
-    cout<<" "<<(int_fast8_t)26<<" "<</**articulo.getNombre();*/"Tomate";
-    cout<<"\n\t\t\tPrecio\n\t\t\t\t";
-    cout<<" "<<(int_fast8_t)26<<" "<</**articulo.getPrecio();*/"1.200";
-
-    cout<<"\n\n\t\t\tCantidad de articulo\t\t\t\t";
-    rlutil::setColor(8);
-    cout<<"\n\t\t\t - disponibles: "<</**articulo.getCantidad()*/300<<"\n\t\t\t\t";
-    rlutil::setColor(15);
-    cout<<" "<<(int_fast8_t)26<<" ";
-    cin>>cantidad;
-
-    /**
-        Tengo que verificar que la cantidad ingresada no exceda la existente
-
-            - Si excede entonces
-    */
-
-
-    /**
-        Tengo que tener un ciclo en el que cargue los Codigos y la cantidad
-        y que corte cuando presiono la tecla Esc
-    */
-
+        for(int i=0;i<t;i++){
+            cout<<"| ";
+            if(vectorID[i]!=0){
+                cout<<vectorID[i]<<" |";
+                if(i%9==0&&i!=0){
+                    gotoxy(21,++y);
+                    y2++;
+                }
+            }
+        }
         /**
-            Grabo en Ventas.dat las ventas que voy cargando.
-            Salgo de venta.Cargar(cliente) con la tecla Esc.
+        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+           | 11 || 12 || 13 || 14 || 15 || 16 |
         */
-
-    y+=13;
-    {// Bloque de flecha apuntando cargar ventas
-        x+=34;
+    }
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    {
+        x=16;
+        y=10;
         rlutil::setColor(8);
         gotoxy(x,y);
-        cout<<(char)180;
+        cout<<(char)197;
         gotoxy(x,++y);
         cout<<(char)179;
+        if(y2>0){
+            for(int i=0;i<y2;i++){// para agrandar el bracito...
+                gotoxy(x,++y);
+                cout<<(char)179;
+            }
+        }
         gotoxy(x,++y);
-        cout<<(char)217;
-        gotoxy(--x,y);
-        cout<<(char)196;
-        gotoxy(--x,y);
-        cout<<(int_fast8_t)17;
-        x-=33;
-        boxAnimation(x,y,2,32,4,0);
-        boxAnimation((x+2),++y,1,28,2,0);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<"ID de venta";
+        gotoxy((x+8),++y);
+        cout<<(int_fast8_t)26<<" ";
     }
-    rlutil::setColor(15);
-    gotoxy((x+10),++y);
-
-    total+=/**  articulo.getPrecio()*cantidad;    */10;
-    cout<<"Total = "<<total;
+    int ID;
+    cin>> ID;
+    int pos=verificarIDPos(ID);
+    if(pos==-1){
+        gotoxy((x+10),y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    Venta venta=archivo.leerRegistro(pos);
+    venta.Mostrar();
     rlutil::hidecursor();
-    gotoxy(x,(y+4));
-    cout<<"Presione \'+\' para continuar";
-    if(getch()!='+'){ return false; }
-    {// borra partes de pantalla
-        cls(x,(y+4),27);
-        cls((x+11),(y-6),20);
-        cls((x),(y-7),30);
-        cls((x+11),(y-10),20);
-        cls((x+11),(y-12),20);
-        cls((x+11),(y-15),20);
-    }
+    rlutil::anykey();
     return true;
 }
+bool listarTodasLasVentas(){
+    rlutil::cls();
+    ArchivoVenta archivo("Ventas.dat");
+    int x,y,t=archivo.contarRegistros();
+    int velocidad=0;
+    x=24;
+    y=4;
+    textBoxAnimation(x,y,"LISTAR TODAS LAS VENTAS",2,velocidad);
+    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
+        gotoxy(25,10);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    gotoxy(1,8);
+    for(int i=0;i<t;i++){
+        Venta venta=archivo.leerRegistro(i);
+        venta.Mostrar();
+        cout<<endl;
+    }
+    rlutil::hidecursor();
+    rlutil::anykey();
+    return true;
+}
+
 
 #endif // SUBMENUVENTAS_H_INCLUDED
