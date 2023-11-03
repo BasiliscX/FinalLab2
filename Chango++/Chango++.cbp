@@ -42,6 +42,7 @@
 		<Unit filename="Producto.h" />
 		<Unit filename="Proveedor.h" />
 		<Unit filename="Venta.h" />
+		<Unit filename="Venta/FuncionesVentas.h" />
 		<Unit filename="clasesDatos.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="recursos.h" />

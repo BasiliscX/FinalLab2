@@ -59,7 +59,7 @@ system("mode con cols=80 lines=45");
         rlutil::locate(x,y);
         textAnimation("3 - Menu de clientes",velocidad);
         y+=2;        rlutil::locate(x,y);
-        textAnimation("4 - Menu de facturacion",velocidad);
+        textAnimation("4 - Menu de ventas",velocidad);
         y+=2;
         rlutil::locate(x,y);        textAnimation("5 - Menu de configuracion",velocidad);
         y+=2;        rlutil::locate(x,y);
@@ -75,7 +75,7 @@ system("mode con cols=80 lines=45");
         │                         │
         │3 - Menu de clientes     │
         │                         │
-        │4 - Menu de facturacion  │
+        │4 - Menu de ventas       │
         │                         │
         │5 - Menu de configuracion│
         │                         │
@@ -91,13 +91,7 @@ system("mode con cols=80 lines=45");
             case '1' : menuProveedores(); break;
             case '2' : menuProductos(); break;
             case '3' : menuClientes(); break;
-            case '4' :
-                switch(facturacion()){
-                    case -1: menuPagos();break;
-                    case -2: menuVentas(); break;
-                    default: break;
-                }
-                break;
+            case '4' : menuVentas(); break;
             case '5' : break;
             default: menu=false; break;
         }

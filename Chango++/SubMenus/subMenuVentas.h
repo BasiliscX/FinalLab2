@@ -6,6 +6,7 @@ void carteInicio(int);
 bool agregarVenta();
 bool listarVentaPorID();
 bool listarTodasLasVentas();
+bool eliminarVentaPorID();
 
 void menuVentas(){
     bool menu=true;
@@ -57,7 +58,7 @@ void menuVentas(){
             case '1' : agregarVenta(); break;
             case '2' : listarVentaPorID(); break;
             case '3' : listarTodasLasVentas(); break;
-            case '4' : break;
+            case '4' : eliminarVentaPorID(); break;
             default: menu=false; break;
         }
     }
@@ -252,6 +253,128 @@ bool listarTodasLasVentas(){
     rlutil::anykey();
     return true;
 }
-
+bool eliminarVentaPorID(){
+    rlutil::cls();
+    ArchivoVenta archivo("Ventas.dat");
+    int t=archivo.contarRegistros();
+    int x,y,y2=0;
+    int velocidad=0;
+    {// Titulo y recuadros con flechas
+        textBoxAnimation(26,4,"ELIMINAR VENTAS POR ID",2,velocidad);
+        /**
+        ╔══════════════════════╗
+        ║ELIMINAR VENTAS POR ID║
+        ╚══════════════════════╝
+        */
+        textBoxAnimation(13,8,"ID",1,velocidad);
+        y=10;
+        x=23;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        x=16;
+        y=10;
+        gotoxy(x,y);
+        rlutil::setColor(8);
+        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
+        /**┌───────┐
+           │Codigos│
+           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
+        */
+    }
+    {// Imprimo los ID de ventas existentes
+        gotoxy((x+5),y);
+        if(archivo.contarRegistros()==0){// Si aun no hay cargadas ventas
+            gotoxy((x+10),y);
+            rlutil::setColor(4);
+            rlutil::hidecursor();
+            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+            rlutil::setColor(15);
+            return false;
+        }
+        int*vectorID=new int[t]{0};
+        vectorID=vectorDeID_Ventas();
+        rlutil::setColor(15);
+        for(int i=0;i<t;i++){
+            cout<<"| ";
+            if(vectorID[i]!=0){
+                cout<<vectorID[i]<<" |";
+                if(i%9==0&&i!=0){
+                    gotoxy(21,++y);
+                    y2++;
+                }
+            }
+        }
+        /**
+        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+           | 11 || 12 || 13 || 14 || 15 || 16 |
+        */
+    }
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    {
+        x=16;
+        y=10;
+        rlutil::setColor(8);
+        gotoxy(x,y);
+        cout<<(char)197;
+        gotoxy(x,++y);
+        cout<<(char)179;
+        if(y2>0){
+            for(int i=0;i<y2;i++){// para agrandar el bracito...
+                gotoxy(x,++y);
+                cout<<(char)179;
+            }
+        }
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<"Codigo";
+        gotoxy((x+8),++y);
+        cout<<(int_fast8_t)26<<" ";
+    }
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<"ID de venta";
+        gotoxy((x+8),++y);
+        cout<<(int_fast8_t)26<<" ";
+    int ID;
+    cin>> ID;
+    int pos=verificarIDPos(ID);
+    if(pos==-1){
+        gotoxy((x+10),y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    Venta venta=archivo.leerRegistro(pos);
+    venta.Mostrar();
+    {// Pregunta si los datos son correctos
+        char eleccion;
+        y+=4;
+        rlutil::setColor(8);
+        gotoxy(--x,y);
+        cout<<(char)218;
+        for(int i=0;i<55;i++){ cout<<(char)196; }
+        gotoxy(x,++y);
+        cout<<(char)179;
+        gotoxy(x,++y);
+        cout<<(char)192<<(char)196<<(int_fast8_t)16;
+        rlutil::setColor(15);
+        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
+        cin>>eleccion;
+        eleccion=tolower(eleccion);
+        if(eleccion!='s'){ return false; }
+    }
+    venta.setEstado(false);
+    archivo.modificarVenta(venta,pos);
+    gotoxy((x+4),y);
+    rlutil::setColor(14);
+    cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
+    rlutil::hidecursor();
+    rlutil::anykey();
+    return true;
+}
 
 #endif // SUBMENUVENTAS_H_INCLUDED

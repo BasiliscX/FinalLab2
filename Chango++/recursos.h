@@ -4,7 +4,6 @@
 #include <cctype>
 
 void changoPP(int,int);
-int facturacion();
 int modificarDatos();
 int modificarPrecio();
 bool soloDigitos();
@@ -41,40 +40,6 @@ cout<<"                         |___/";
 rlutil::setColor(15);
 }
 
-int facturacion(){// cartel recuadrado para entrar a Pagos o Ventas
-    int x,y;
-    char eleccion;
-    x=52;
-    y=32;
-    rlutil::setColor(8);
-    gotoxy(x,y);
-    cout<<(char)195;
-    gotoxy(++x,y);
-    cout<<(int_fast8_t)16;
-    boxAnimation(++x,y,1,13,4);
-    rlutil::setColor(15);
-    gotoxy(++x,++y);
-    textAnimation("\'p\' - Pagos");
-    gotoxy(x,++y);
-    textAnimation("\'v\' - Ventas");
-    gotoxy(x,++y);
-    textAnimation("Eleccion: ");
-    /**
-    ├►┌────────────┐
-    │ │'p' - Pagos │
-    │ │'v' - Ventas│
-    │ │Eleccion:   │
-    │ └────────────┘
-    */
-    cin>>eleccion;
-    eleccion=tolower(eleccion);
-    switch(eleccion){
-        case 'p': return -1;
-        case 'v': return -2;
-        default : break;
-    }
-    return 0;
-}
 int modificarDatos(){// cartel recuadrado para entrar a Telefono o Direccion
     int x,y;
     char eleccion;
