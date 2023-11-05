@@ -6,7 +6,7 @@ int verificarIdPos(int ID);
 int*vectorDeID_proveedores();
 
 int autonumericoID(){ ///funcion que genera el id autonumerico
-  ArchivoProveedor archiProv("Proveedores.dat");
+  ArchivoProveedor archiProv("dat\\Proveedores.dat");
   int cantReg=0;
 
   cantReg = archiProv.contarRegistros();
@@ -24,7 +24,7 @@ int autonumericoID(){ ///funcion que genera el id autonumerico
 int verificarIdPos(int id){ ///verifica la posicion de un proveedor por ID
 
 Proveedor reg;
-ArchivoProveedor archiProv("Proveedores.dat");
+ArchivoProveedor archiProv("dat\\Proveedores.dat");
 int cantReg = archiProv.contarRegistros();
 
 for(int i=0; i<cantReg; i++){
@@ -41,7 +41,7 @@ return -1;
 bool verificarDNIproveedor(const char*dni){///verifica si existe un proveedor con ese DNI
 
 Proveedor reg;
-ArchivoProveedor archiProv("Proveedores.dat");
+ArchivoProveedor archiProv("dat\\Proveedores.dat");
 
 int cantRegprov = archiProv.contarRegistros();
 
@@ -56,7 +56,7 @@ for(int i=0; i<cantRegprov; i++){
 return false;
 }
 int*vectorDeID_proveedores(){// Devuelve un vector con los numeros de ID con estado true
-    ArchivoProveedor archivo("Proveedores.dat");
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
     Proveedor reg;
     int t=archivo.contarRegistros();
     int*vectorID=new int[t]{0};
@@ -71,7 +71,7 @@ int*vectorDeID_proveedores(){// Devuelve un vector con los numeros de ID con est
 }
 int validarIDproveedor(int id){ ///revisa que el id del proveedor sea existente
     Proveedor reg;
-    ArchivoProveedor archiProv("Proveedores.dat");
+    ArchivoProveedor archiProv("dat\\Proveedores.dat");
     int cantReg = archiProv.contarRegistros();
     for(int i=0; i<cantReg; i++){
         reg= archiProv.leerRegistro(i);

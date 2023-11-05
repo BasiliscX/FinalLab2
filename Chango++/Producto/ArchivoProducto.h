@@ -60,6 +60,14 @@ public:
 
 
     }
+    bool agregarProducto(Producto reg){
+        FILE*p;
+        p=fopen(nombre,"ab");
+        if(p==NULL) return false;
+        bool modifico=fwrite(&reg,sizeof(Producto),1,p);
+        fclose(p);
+        return modifico;
+    }
 
     bool modificarProducto(Producto reg, int pos){
 
@@ -77,6 +85,14 @@ public:
 
 
     }
+
+    bool borrarDatos(){
+        FILE*p=fopen(nombre,"wb");
+        if(p==NULL){ return false; }
+        fclose(p);
+        return true;
+    }
+
 };
 
 

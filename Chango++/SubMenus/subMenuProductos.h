@@ -105,7 +105,7 @@ void menuProductos(){
 bool agregarProducto(){
     rlutil::cls();
     int x,y;
-    ArchivoProducto archivo("Productos.dat");
+    ArchivoProducto archivo("dat\\Productos.dat");
     {// Titulo y recuadros con flechas
         textBoxAnimation(28,4,"AGREGAR PRODUCTOS");
         /**
@@ -133,7 +133,7 @@ bool agregarProducto(){
 }
 bool listarProductoPorCodigo(){
     rlutil::cls();
-    ArchivoProducto archivo("Productos.dat");
+    ArchivoProducto archivo("dat\\Productos.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -228,7 +228,7 @@ bool listarProductoPorCodigo(){
 }
 bool listarTodosLosProductos(){
     rlutil::cls();
-    ArchivoProducto archivo("Productos.dat");
+    ArchivoProducto archivo("dat\\Productos.dat");
     int x,y,t=archivo.contarRegistros();
     int velocidad=0;
     x=24;
@@ -254,7 +254,7 @@ bool listarTodosLosProductos(){
 }
 bool modificarProductoPorCodigo(const char*campo){
     rlutil::cls();
-    ArchivoProducto archivo("Productos.dat");
+    ArchivoProducto archivo("dat\\Productos.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -394,7 +394,7 @@ bool modificarProductoPorCodigo(const char*campo){
 }
 bool eliminarProductoPorCodigo(){
     rlutil::cls();
-    ArchivoProducto archivo("Productos.dat");
+    ArchivoProducto archivo("dat\\Productos.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;

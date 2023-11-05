@@ -37,14 +37,28 @@ public:
         fclose(p);
         return cargo;
     }
+    bool agregarVenta(Venta reg){
+        FILE*p;
+        p=fopen(nombre,"ab");
+        if(p==NULL) return false;
+        bool modifico=fwrite(&reg,sizeof(Venta),1,p);
+        fclose(p);
+        return modifico;
+    }
     bool modificarVenta(Venta reg,int pos){
         FILE *p;
         p=fopen(nombre,"rb+");
         if(p==NULL) return false;
-        fseek(p,sizeof(Producto)*pos,0);
-        bool modifico=fwrite(&reg, sizeof(Producto), 1, p);
+        fseek(p,sizeof(Venta)*pos,0);
+        bool modifico=fwrite(&reg, sizeof(Venta), 1, p);
         fclose(p);
         return modifico;
+    }
+    bool borrarDatos(){
+        FILE*p=fopen(nombre,"wb");
+        if(p==NULL){ return false; }
+        fclose(p);
+        return true;
     }
 };
 

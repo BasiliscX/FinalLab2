@@ -14,7 +14,7 @@ public:
     }
     //métodos
     bool Cargar();
-    void Mostrar();
+    void Mostrar(bool);
     //set
     void setApellido(const char*a){ strcpy(apellido,a); }
     void setEstado(bool e){ estado=e; }
@@ -115,8 +115,36 @@ bool Cliente::Cargar(){
     return true;
 }
 
-void Cliente::Mostrar(){
-    if(estado){
+void Cliente::Mostrar(bool soloActivos=true){
+    if(soloActivos){
+        if(estado){
+            rlutil::setColor(8);
+            cout<<"\n\tID: ";
+            rlutil::setColor(15);
+            cout<<ID;
+            rlutil::setColor(8);
+            cout<<"   DNI: ";
+            rlutil::setColor(15);
+            cout<<DNI;
+            rlutil::setColor(8);
+            cout<<" NOMBRE: ";
+            rlutil::setColor(15);
+            cout<<nombre;
+            rlutil::setColor(8);
+            cout<<" APELLIDO: ";
+            rlutil::setColor(15);
+            cout<<apellido;
+            rlutil::setColor(8);
+            cout<<"\n\t\tTELEFONO: ";
+            rlutil::setColor(15);
+            cout<<telefono;
+            rlutil::setColor(8);
+            cout<<" DIRECCION: ";
+            rlutil::setColor(15);
+            cout<<direccion;
+        }
+    }
+    else{
         rlutil::setColor(8);
         cout<<"\n\tID: ";
         rlutil::setColor(15);

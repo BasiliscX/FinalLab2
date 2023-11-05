@@ -14,7 +14,7 @@ public:
     Venta();
     Venta(const char*,int,int,float);
     int Cargar(const char*);
-    void Mostrar();
+    void Mostrar(bool);
     //set
     void setDNI_cliente(const char*c){ strcpy(DNI_cliente,c); }
     void setTotal(float t){
@@ -114,8 +114,31 @@ int Venta::Cargar(const char*DNI){
     }
     return true;
 }
-void Venta::Mostrar(){
-    if(estado){
+void Venta::Mostrar(bool soloActivos=true){
+    if(soloActivos){
+        if(estado){
+            rlutil::setColor(8);
+            cout<<"\n\tID de venta: ";
+            rlutil::setColor(14);
+            cout<<ID;
+            rlutil::setColor(8);
+            cout<<"  DNI Cliente: ";
+            rlutil::setColor(15);
+            cout<<DNI_cliente;
+    /**
+        Deberia buscar de un archivo de itemCarrito
+            for(int i=0;i<tam;i++){
+                items=archivo.getregistro....
+                items.Mostrar();
+            }
+    */
+            rlutil::setColor(8);
+            cout<<" Total: ";
+            rlutil::setColor(15);
+            cout<<total;
+        }
+    }
+    else{
         rlutil::setColor(8);
         cout<<"\n\tID de venta: ";
         rlutil::setColor(14);
@@ -124,13 +147,6 @@ void Venta::Mostrar(){
         cout<<"  DNI Cliente: ";
         rlutil::setColor(15);
         cout<<DNI_cliente;
-/**
-    Deberia buscar de un archivo de itemCarrito
-        for(int i=0;i<tam;i++){
-            items=archivo.getregistro....
-            items.Mostrar();
-        }
-*/
         rlutil::setColor(8);
         cout<<" Total: ";
         rlutil::setColor(15);

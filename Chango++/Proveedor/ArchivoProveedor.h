@@ -39,7 +39,14 @@ public:
         }
         else return cargo;
     }
-
+    bool agregarProveedor(Proveedor reg){
+        FILE*p;
+        p=fopen(nombre,"ab");
+        if(p==NULL) return false;
+        bool modifico=fwrite(&reg,sizeof(Proveedor),1,p);
+        fclose(p);
+        return modifico;
+    }
     bool modificarProveedor(Proveedor reg, int pos){
         bool modifico;
         FILE *p;
@@ -49,6 +56,12 @@ public:
         modifico=fwrite(&reg, sizeof(Proveedor), 1, p);
         fclose(p);
         return modifico;
+    }
+    bool borrarDatos(){
+        FILE*p=fopen(nombre,"wb");
+        if(p==NULL){ return false; }
+        fclose(p);
+        return true;
     }
 };
 

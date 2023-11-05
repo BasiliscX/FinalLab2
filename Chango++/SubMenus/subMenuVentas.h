@@ -108,19 +108,32 @@ bool agregarVenta(){
         rlutil::setColor(15);
         cout<<(int_fast8_t)26<<" ";
         cin>>DNI;
-        while(verificarDniClientePos(DNI)==-1){
+        while(verificarDniClientePos(DNI)==-1 ||
+              !verificarDNIcliente(DNI)){
             gotoxy(35,18);
             rlutil::setColor(4);
             cout<<"DNI incorrecto";
             gotoxy(27,19);
             cout<<"ingrese nuevamente (0 para salir)";
+            gotoxy(30,20);
+            cout<<"ingrese -1 si no es cliente";
             rlutil::setColor(15);
             cls(31,y,25);
             gotoxy(31,y);
             cin>>DNI;
             if(strcmp(DNI,"0")==0){ return false; }
+            if(strcmp(DNI,"-1")==0){
+                gotoxy(35,14);
+                strcpy(DNI,"-1");
+                cls(31,18,25);// Borra "DNI incorrecto"
+                cls(25,19,35);// Borra ingrese nuevamente (0 para salir)"
+                cls(25,20,35);// Borra ingrese -1 si no es cliente"
+                break;
+            }
+            verificarDniClientePos(DNI);
             cls(31,18,25);// Borra "DNI incorrecto"
             cls(25,19,35);// Borra ingrese nuevamente (0 para salir)"
+            cls(25,20,35);// Borra ingrese -1 si no es cliente"
         }
     }
     else{
@@ -128,13 +141,13 @@ bool agregarVenta(){
         strcpy(DNI,"-1");
         cout<<"Cliente = "<<DNI;
     }
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     archivo.agregarVenta(DNI);
     return true;
 }
 bool listarVentaPorID(){
     rlutil::cls();
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -232,7 +245,7 @@ bool listarVentaPorID(){
 }
 bool listarTodasLasVentas(){
     rlutil::cls();
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     int x,y,t=archivo.contarRegistros();
     int velocidad=0;
     x=24;
@@ -258,7 +271,7 @@ bool listarTodasLasVentas(){
 }
 bool eliminarVentaPorID(){
     rlutil::cls();
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -330,16 +343,10 @@ bool eliminarVentaPorID(){
         gotoxy(x,++y);
         cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
         rlutil::setColor(15);
-        cout<<"Codigo";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-    }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
         cout<<"ID de venta";
         gotoxy((x+8),++y);
         cout<<(int_fast8_t)26<<" ";
+    }
     int ID;
     cin>> ID;
     int pos=verificarIDPos(ID);
@@ -359,7 +366,7 @@ bool eliminarVentaPorID(){
         rlutil::setColor(8);
         gotoxy(--x,y);
         cout<<(char)218;
-        for(int i=0;i<55;i++){ cout<<(char)196; }
+        for(int i=0;i<40;i++){ cout<<(char)196; }
         gotoxy(x,++y);
         cout<<(char)179;
         gotoxy(x,++y);

@@ -8,6 +8,7 @@ int modificarDatos();
 int modificarPrecio();
 bool soloDigitos();
 void cargarCadena(char *pal, int tam);
+int configuracionEleccion(const char*);
 
 void changoPP(int x,int y){
     /**
@@ -104,6 +105,49 @@ int modificarPrecio(){// cartel recuadrado para entrar a Telefono o Direccion
     switch(eleccion){
         case 'p': return -1;
         case 'c': return -2;
+        default : break;
+    }
+    return 0;
+}
+int configuracionEleccion(const char*menu){// cartel recuadrado para copiar datos
+    int x,y;
+    char eleccion;
+    x=54;
+    if(strcmp(menu,"COPIA")==0){ y=28; }
+    if(strcmp(menu,"RESTAURAR")==0){ y=30; }
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)195;
+    gotoxy(++x,y);
+    cout<<(int_fast8_t)16;
+    boxAnimation(++x,y,1,17,6);
+    rlutil::setColor(15);
+    gotoxy(++x,++y);
+    textAnimation(" 1 - Proveedores");
+    gotoxy(x,++y);
+    textAnimation(" 2 - Productos");
+    gotoxy(x,++y);
+    textAnimation(" 3 - Clientes");
+    gotoxy(x,++y);
+    textAnimation(" 4 - Ventas");
+    gotoxy(x,++y);
+    textAnimation("Eleccion: ");
+    /**
+    ├►┌────────────────┐
+    │ │ 1 - Proveedores│
+    │ │ 2 - Productos  │
+    │ │ 3 - Clientes   │
+    │ │ 4 - Ventas     │
+    │ │Eleccion:       │
+    │ └────────────────┘
+    */
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    switch(eleccion){
+        case '1': return 1;
+        case '2': return 2;
+        case '3': return 3;
+        case '4': return 4;
         default : break;
     }
     return 0;

@@ -4,7 +4,7 @@ int*vectorDeCodigosProductos();
 int verificarIDPos(int);
 
 int autonumericoVentaID(){ //funcion que genera id autonumerico
-  ArchivoVenta archivo("Ventas.dat");
+  ArchivoVenta archivo("dat\\Ventas.dat");
   int t=archivo.contarRegistros();
     if (t==0) return 1;
     else{
@@ -13,7 +13,7 @@ int autonumericoVentaID(){ //funcion que genera id autonumerico
     }
 }
 int*vectorDeID_Ventas(){// Devuelve un vector con los numeros de ID con estado true
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     Venta reg;
     int t=archivo.contarRegistros();
     int*vectorID=new int[t]{0};
@@ -28,7 +28,7 @@ int*vectorDeID_Ventas(){// Devuelve un vector con los numeros de ID con estado t
 }
 int verificarIDPos(int ID){//verifica la posicion de una venta por ID
     Venta reg;
-    ArchivoVenta archivo("Ventas.dat");
+    ArchivoVenta archivo("dat\\Ventas.dat");
     int t=archivo.contarRegistros();
     for(int i=0;i<t;i++){
        reg=archivo.leerRegistro(i);
@@ -39,7 +39,7 @@ int verificarIDPos(int ID){//verifica la posicion de una venta por ID
     return -1;
 }
 float ImporteTotal(int cantidad){
-  ArchivoVenta archivo("Ventas.dat");
+  ArchivoVenta archivo("dat\\Ventas.dat");
   Venta reg;
   float total=0;
   int t=archivo.contarRegistros();

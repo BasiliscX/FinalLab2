@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../../../Lab2/parcial1POSTA/navarro_guillermo_TP_Parcial1/MenuConfiguracion.h" />
 		<Unit filename="ArchivoCliente.h" />
 		<Unit filename="ArchivoProducto.h" />
 		<Unit filename="ArchivoProveedor.h" />
@@ -39,8 +40,15 @@
 		<Unit filename="Cliente.h" />
 		<Unit filename="DatosPersona.h" />
 		<Unit filename="FuncionesProducto.h" />
+		<Unit filename="MenuConfiguracion.h" />
 		<Unit filename="Producto.h" />
 		<Unit filename="Proveedor.h" />
+		<Unit filename="Proveedor/Proveedor.h" />
+		<Unit filename="Recursos/DatosPersona.h" />
+		<Unit filename="Recursos/Fecha.h" />
+		<Unit filename="Recursos/recursos.h" />
+		<Unit filename="Recursos/rlutil.h" />
+		<Unit filename="Recursos/rlutilPlusPlus.h" />
 		<Unit filename="Venta.h" />
 		<Unit filename="Venta/FuncionesVentas.h" />
 		<Unit filename="Venta/ItemCarrito.h" />

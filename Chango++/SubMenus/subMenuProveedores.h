@@ -106,7 +106,7 @@ void menuProveedores(){
 bool agregarProveedor(){
     rlutil::cls();
     int x,y;
-    ArchivoProveedor archivoProveedor("Proveedores.dat");
+    ArchivoProveedor archivoProveedor("dat\\Proveedores.dat");
     {// Recuadros y titulo con flechas
         textBoxAnimation(28,4,"AGREGAR PROVEEDOR");
         /**
@@ -142,7 +142,7 @@ bool agregarProveedor(){
 }
 bool listarProveedorPorID(){
     rlutil::cls();
-    ArchivoProveedor archivo("Proveedores.dat");
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -243,7 +243,7 @@ bool listarProveedorPorID(){
 }
 bool listarTodosLosProveedores(){
     rlutil::cls();
-    ArchivoProveedor archivo("Proveedores.dat");
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
     int x,y,t=archivo.contarRegistros();
     int velocidad=0;
     x=24;
@@ -269,7 +269,7 @@ bool listarTodosLosProveedores(){
 }
 bool MOdificarProveedorPorID(const char*campo){
     rlutil::cls();
-    ArchivoProveedor archivo("Proveedores.dat");
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
@@ -413,7 +413,7 @@ bool MOdificarProveedorPorID(const char*campo){
 }
 bool eliminarProveedorPorID(){
     rlutil::cls();
-    ArchivoProveedor archivo("Proveedores.dat");
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;

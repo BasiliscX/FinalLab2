@@ -5,11 +5,11 @@ using namespace std;
 #include"rlutilPlusPlus.h"
 #include"recursos.h"
 #include"clasesDatos.h"
+#include"SubMenus/menuConfiguracion.h"
 #include"SubMenus/subMenuProveedores.h"
 #include"SubMenus/subMenuProductos.h"
 #include"SubMenus/subMenuClientes.h"
 #include"SubMenus/subMenuVentas.h"
-#include"SubMenus/subMenuPagos.h"
 
 int main(){
 rlutil::setConsoleTitle("Chango++");
@@ -45,7 +45,7 @@ system("mode con cols=80 lines=45");
         x=26;
         y=25;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,28,14,velocidad);
+        boxAnimation(x,y,1,26,16,velocidad);
         rlutil::setColor(15);
         x+=1;
         rlutil::hidecursor();
@@ -97,7 +97,7 @@ system("mode con cols=80 lines=45");
             case '3' : menuClientes(); break;
             case '4' : menuVentas(); break;
             case '5' : break;
-            case '6' : break;
+            case '6' : MenuConfiguracion(); break;
             default: menu=false; break;
         }
     }

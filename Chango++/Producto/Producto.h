@@ -23,7 +23,7 @@ public:
     }
     //métodos
     bool Cargar();
-    void Mostrar();
+    void Mostrar(bool);
     //set
     void setCodigo(int cd){codigo=cd;}
     void setTipo(int tip){tipo=tip;}
@@ -217,8 +217,36 @@ bool Producto::Cargar(){
     return true;
 }
 
-void Producto::Mostrar(){
-    if(estado){
+void Producto::Mostrar(bool soloActivos=true){
+    if(soloActivos){
+        if(estado){
+            rlutil::setColor(8);
+            cout<<"\n\tCodigo: ";
+            rlutil::setColor(14);
+            cout<<codigo;
+            rlutil::setColor(8);
+            cout<<"   Tipo: ";
+            rlutil::setColor(15);
+            cout<<tipo;
+            rlutil::setColor(8);
+            cout<<" ID de proveedor: ";
+            rlutil::setColor(15);
+            cout<<ID_proveedor;
+            rlutil::setColor(8);
+            cout<<"\n\t\t\tNombre: ";
+            rlutil::setColor(15);
+            cout<<nombre;
+            rlutil::setColor(8);
+            cout<<" Precio: ";
+            rlutil::setColor(15);
+            cout<<precio;
+            rlutil::setColor(8);
+            cout<<" Cantidad: ";
+            rlutil::setColor(15);
+            cout<<cantidad<<"    ";
+        }
+    }
+    else{
         rlutil::setColor(8);
         cout<<"\n\tCodigo: ";
         rlutil::setColor(14);

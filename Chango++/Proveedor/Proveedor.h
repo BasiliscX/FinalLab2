@@ -13,7 +13,7 @@ public:
     }
     //métodos
     bool Cargar();
-    void Mostrar();
+    void Mostrar(bool);
     //set
     void setID(int i){ID=i; }
     void setEstado(bool e){ estado=e; }
@@ -107,13 +107,37 @@ bool Proveedor::Cargar(){
     return true;
 }
 
-void Proveedor::Mostrar(){
-    if(estado){
+void Proveedor::Mostrar(bool soloActivos=true){
+    if(soloActivos){
+        if(estado){
+            rlutil::setColor(8);
+            cout<<"\n\tID: ";
+            rlutil::setColor(15);
+            cout<<ID;
+            rlutil::setColor(8);            cout<<"   DNI: ";
+            rlutil::setColor(15);
+            cout<<DNI;
+            rlutil::setColor(8);
+            cout<<" NOMBRE: ";
+            rlutil::setColor(15);
+            cout<<nombre;
+            rlutil::setColor(8);
+            cout<<"\n\t\tTELEFONO: ";
+            rlutil::setColor(15);
+            cout<<telefono;
+            rlutil::setColor(8);
+            cout<<" DIRECCION: ";
+            rlutil::setColor(15);
+            cout<<direccion;
+        }
+    }
+    else{
         rlutil::setColor(8);
         cout<<"\n\tID: ";
         rlutil::setColor(15);
         cout<<ID;
-        rlutil::setColor(8);        cout<<"   DNI: ";
+        rlutil::setColor(8);
+        cout<<"   DNI: ";
         rlutil::setColor(15);
         cout<<DNI;
         rlutil::setColor(8);

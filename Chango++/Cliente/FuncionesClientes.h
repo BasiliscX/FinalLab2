@@ -12,7 +12,7 @@ int*vectorDeID_clientes();
 
 int autonumericoClienteID() ///funcion que genera id autonumerico
 {
-  ArchivoCliente archiCli("Clientes.dat");
+  ArchivoCliente archiCli("dat\\Clientes.dat");
   int cantReg=0;
 
   cantReg = archiCli.contarRegistros();
@@ -31,7 +31,7 @@ int autonumericoClienteID() ///funcion que genera id autonumerico
 void listarClientes(){ ///muestra todos los clientes
 
 Cliente reg;
-ArchivoCliente archiCli("Clientes.dat");
+ArchivoCliente archiCli("dat\\Clientes.dat");
 int cantReg= archiCli.contarRegistros();
 
 for(int i=0; i<cantReg; i++){
@@ -46,7 +46,7 @@ for(int i=0; i<cantReg; i++){
 int verificarIdClientePos(int id){/// revisa la posicion del cliente segun ID
 
 Cliente reg;
-ArchivoCliente archiCli("Clientes.dat");
+ArchivoCliente archiCli("dat\\Clientes.dat");
 int cantReg = archiCli.contarRegistros();
 
 for(int i=0; i<cantReg; i++){
@@ -64,7 +64,7 @@ return -1;
 bool mostrarClienteXid(){///muestra cliente segun ID
 
 Cliente reg;
-ArchivoCliente archiCli("Clientes.dat");
+ArchivoCliente archiCli("dat\\Clientes.dat");
 int id,pos;
 
 cout<<"Ingrese el id del cliente a mostrar: "<<endl;
@@ -83,7 +83,7 @@ return true;
 }
 int verificarDniClientePos(const char*dni){///verifica la posicion del cliente segun DNI
     Cliente reg;
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     int cantReg = archivo.contarRegistros();
     for(int i=0; i<cantReg; i++){
        reg = archivo.leerRegistro(i);
@@ -97,7 +97,7 @@ int verificarDniClientePos(const char*dni){///verifica la posicion del cliente s
 bool verificarDNIcliente(const char*dni){///verifica si existe cliente con ese DNI
 
 Cliente reg;
-ArchivoCliente archiCli("Clientes.dat");
+ArchivoCliente archiCli("dat\\Clientes.dat");
 
 int cantReg = archiCli.contarRegistros();
 
@@ -110,12 +110,9 @@ for(int i=0; i<cantReg; i++){
 
 }
 return false;
-
-
-
 }
 int*vectorDeID_clientes(){// Devuelve un vector con los numeros de ID con estado true
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     Cliente reg;
     int t=archivo.contarRegistros();
     int*vectorID=new int[t]{0};

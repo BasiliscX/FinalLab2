@@ -38,6 +38,15 @@ public:
         return tam/sizeof(Cliente);
     }
 
+    bool agregarCliente(Cliente reg){
+        FILE*p;
+        p=fopen(nombre,"ab");
+        if(p==NULL) return false;
+        bool modifico=fwrite(&reg,sizeof(Cliente),1,p);
+        fclose(p);
+        return modifico;
+    }
+
     bool agregarCliente(){
 
     Cliente reg;
@@ -77,6 +86,15 @@ public:
 
 
     }
+    bool borrarDatos(){
+        FILE*p=fopen(nombre,"wb");
+        if(p==NULL){ return false; }
+        fclose(p);
+        return true;
+    }
+
+
+
 };
 
 #endif // ARCHIVOCLIENTE_H_INCLUDED
