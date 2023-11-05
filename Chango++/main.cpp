@@ -45,7 +45,7 @@ system("mode con cols=80 lines=45");
         x=26;
         y=25;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,26,14,velocidad);
+        boxAnimation(x,y,1,28,14,velocidad);
         rlutil::setColor(15);
         x+=1;
         rlutil::hidecursor();
@@ -60,8 +60,10 @@ system("mode con cols=80 lines=45");
         textAnimation("3 - Menu de clientes",velocidad);
         y+=2;        rlutil::locate(x,y);
         textAnimation("4 - Menu de ventas",velocidad);
+        y+=2;        rlutil::locate(x,y);
+        textAnimation("5 - Reportes",velocidad);
         y+=2;
-        rlutil::locate(x,y);        textAnimation("5 - Menu de configuracion",velocidad);
+        rlutil::locate(x,y);        textAnimation("6 - Menu de configuracion",velocidad);
         y+=2;        rlutil::locate(x,y);
         textAnimation("0 - Salir",velocidad);
         y+=2;
@@ -77,7 +79,9 @@ system("mode con cols=80 lines=45");
         │                         │
         │4 - Menu de ventas       │
         │                         │
-        │5 - Menu de configuracion│
+        │5 - Reportes             │
+        │                         │
+        │6 - Menu de configuracion│
         │                         │
         │0 - Salir                │
         │                         │
@@ -93,6 +97,7 @@ system("mode con cols=80 lines=45");
             case '3' : menuClientes(); break;
             case '4' : menuVentas(); break;
             case '5' : break;
+            case '6' : break;
             default: menu=false; break;
         }
     }
