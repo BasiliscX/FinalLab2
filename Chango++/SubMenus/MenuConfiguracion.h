@@ -511,6 +511,8 @@ bool DatosInicio(){
     cout<<"\t\t";    system("copy DatosInicio\\Clientes.dat dat\\Clientes.dat");
     cout<<"\t\t";
     system("copy DatosInicio\\Ventas.dat dat\\Ventas.dat");
+    cout<<"\t\t";
+    system("copy DatosInicio\\Usuarios.dat dat\\Usuarios.dat");
     rlutil::setColor(14);
     cout<<"\n\t\t\t\tCopia exitosa!\n";
     rlutil::setColor(15);

@@ -11,6 +11,10 @@ using namespace std;
 #include"SubMenus/subMenuClientes.h"
 #include"SubMenus/subMenuVentas.h"
 #include"SubMenus/MenuReportes.h"
+#include"SubMenus/MenuEmpleado.h"
+#include"SubMenus/MenuAdmin.h"
+#include"SubMenus/subMenuUsuarios.h"
+bool evaluarUsuario(int);
 
 int main(){
 rlutil::setConsoleTitle("Chango++");
@@ -33,74 +37,99 @@ system("mode con cols=80 lines=45");
         ▀▀▀▀▀▀▀▀
         */
         changoPP(15,7);
-        x=31;
+        x=34;
         y=20;
-        textBoxAnimation(x,y,"MENU PRINCIPAL",2,0);
+        textBoxAnimation(x,y,"INGRESAR",2,0);
         /**
-        ╔══════════════╗
-        ║MENU PRINCIPAL║
-        ╚══════════════╝
+        ╔════════╗
+        ║INGRESAR║
+        ╚════════╝
         */
     }
     {// Menu seleccion
-        x=26;
+        x=27;
         y=25;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,26,16,velocidad);
+        boxAnimation(x,y,1,22,8,velocidad);
         rlutil::setColor(15);
-        x+=1;
+        x+=2;
         rlutil::hidecursor();
         y=26;
         rlutil::locate(x,y);
-        textAnimation("1 - Menu de proveedores",velocidad);
+        textAnimation("1 - ADMINISTRADOR",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Menu de productos",velocidad);
-        y+=2;
-        rlutil::locate(x,y);
-        textAnimation("3 - Menu de clientes",velocidad);
-        y+=2;        rlutil::locate(x,y);
-        textAnimation("4 - Menu de ventas",velocidad);
-        y+=2;        rlutil::locate(x,y);
-        textAnimation("5 - Reportes",velocidad);
-        y+=2;
-        rlutil::locate(x,y);        textAnimation("6 - Menu de configuracion",velocidad);
+        textAnimation("2 - EMPLEADO",velocidad);
         y+=2;        rlutil::locate(x,y);
         textAnimation("0 - Salir",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("\tEleccion: ");
+        textAnimation("Eleccion: ");
         /**
-        ┌─────────────────────────┐
-        │1 - Menu de proveedores  │
-        │                         │
-        │2 - Menu de productos    │
-        │                         │
-        │3 - Menu de clientes     │
-        │                         │
-        │4 - Menu de ventas       │
-        │                         │
-        │5 - Reportes             │
-        │                         │
-        │6 - Menu de configuracion│
-        │                         │
-        │0 - Salir                │
-        │                         │
-        │      Eleccion:          │
-        └─────────────────────────┘
+        ┌───────────────────┐
+        │1 - ADMINISTRADOR  │
+        │                   │
+        │2 - EMPLEADO       │
+        │                   │
+        │0 - Salir          │
+        │                   │
+        │Eleccion:          │
+        └───────────────────┘
         */
     }
         rlutil::showcursor();
         cin>>eleccion;
         switch(eleccion){
-            case '1' : menuProveedores(); break;
-            case '2' : menuProductos(); break;
-            case '3' : menuClientes(); break;
-            case '4' : menuVentas(); break;
-            case '5' : MenuReportes(); break;
-            case '6' : MenuConfiguracion(); break;
+            case '1' : menuAdmin(); break;
+            case '2' : menuEmpleado(); break;
             default: menu=false; break;
         }
     }
 return 0;
+}
+bool evaluarUsuario(int tipo){// Evaluo si el usuario/contrasenia es correcto
+    ArchivoUsuario archivo("dat\\Usuarios.dat");
+    int t=archivo.contarRegistros();
+    Usuario usuario;
+    char nombre[20];
+    char contrasenia[10];
+    gotoxy(28,35);
+    cout<<"Usuario: ";
+    cargarCadena(nombre,20);
+    bool correcto=false;
+    for(int i=0;i<t;i++){
+        usuario=archivo.leerRegistro(i);
+        if(usuario.getEstado() && usuario.getTipo()==tipo
+           && strcmp(usuario.getUsuario(),nombre)==0){
+            correcto=true;
+            break;
+        }
+    }
+    if(!correcto){
+        rlutil::setColor(4);
+        gotoxy(37,35);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO");
+        return false;
+    }
+    correcto=false;
+    gotoxy(28,36);
+    cout<<"Contrasenia: ";
+    cargarCadena(contrasenia,10);
+    for(int i=0;i<t;i++){
+        usuario=archivo.leerRegistro(i);
+        if(usuario.getEstado() && usuario.getTipo()==tipo
+           && strcmp(usuario.getContrasenia(),contrasenia)==0){
+            correcto=true;
+            break;
+        }
+    }
+    if(!correcto){
+        rlutil::setColor(4);
+        gotoxy(41,36);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO");
+        return false;
+    }
+    return correcto;
 }

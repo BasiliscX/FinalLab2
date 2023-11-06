@@ -41,6 +41,74 @@ cout<<"                         |___/";
 rlutil::setColor(15);
 }
 
+int ingresoUsuario(){
+    int x,y;
+    char eleccion;
+    x=56;
+    y=34;
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)195;
+    gotoxy(++x,y);
+    cout<<(int_fast8_t)16;
+    boxAnimation(++x,y,1,16,4);
+    rlutil::setColor(15);
+    gotoxy(++x,++y);
+    textAnimation("\'T\' - Telefono");
+    gotoxy(x,++y);
+    textAnimation("\'D\' - Direccion");
+    gotoxy(x,++y);
+    textAnimation("Eleccion: ");
+    /**
+    ├►┌───────────────┐
+    │ │'T' - Telefono │
+    │ │'D' - Direccion│
+    │ │Eleccion:      │
+    │ └───────────────┘
+    */
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    switch(eleccion){
+        case 't': return -1;
+        case 'd': return -2;
+        default : break;
+    }
+    return 0;
+}
+int agrergarUsuario(){
+    int x,y;
+    char eleccion;
+    x=56;
+    y=28;
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)195;
+    gotoxy(++x,y);
+    cout<<(int_fast8_t)16;
+    boxAnimation(++x,y,1,20,4);
+    rlutil::setColor(15);
+    gotoxy(++x,++y);
+    textAnimation("\'A\' - Administrador");
+    gotoxy(x,++y);
+    textAnimation("\'E\' - Empleado");
+    gotoxy(x,++y);
+    textAnimation("Eleccion: ");
+    /**
+    ├►┌───────────────────┐
+    │ │'A' - Administrador│
+    │ │'E' - Empleado     │
+    │ │Eleccion:          │
+    │ └───────────────────┘
+    */
+    cin>>eleccion;
+    eleccion=tolower(eleccion);
+    switch(eleccion){
+        case 'a': return 1;
+        case 'e': return 2;
+        default : break;
+    }
+    return 0;
+}
 int modificarDatos(){// cartel recuadrado para entrar a Telefono o Direccion
     int x,y;
     char eleccion;
