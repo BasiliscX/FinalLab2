@@ -8,7 +8,7 @@ int modificarDatos();
 int modificarPrecio();
 bool soloDigitos();
 void cargarCadena(char *pal, int tam);
-int configuracionEleccion(const char*);
+int objetosEleccion(const char*);
 
 void changoPP(int x,int y){
     /**
@@ -109,12 +109,16 @@ int modificarPrecio(){// cartel recuadrado para entrar a Telefono o Direccion
     }
     return 0;
 }
-int configuracionEleccion(const char*menu){// cartel recuadrado para copiar datos
+int objetosEleccion(const char*menu){// cartel recuadrado para copiar datos
     int x,y;
     char eleccion;
     x=54;
     if(strcmp(menu,"COPIA")==0){ y=28; }
     if(strcmp(menu,"RESTAURAR")==0){ y=30; }
+    if(strcmp(menu,"ELEMENTOS ELIMINADOS")==0){
+        x=56;
+        y=28;
+    }
     rlutil::setColor(8);
     gotoxy(x,y);
     cout<<(char)195;

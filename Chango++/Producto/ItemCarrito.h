@@ -1,17 +1,25 @@
 #ifndef ITEMCARRITO_H_INCLUDED
 #define ITEMCARRITO_H_INCLUDED
 
+Producto obtenerProducto(int);
+bool setCantidadEnDisco(Producto);
+
 class itemCarrito{
 private:
     int codigoArticulo;
     int cantidad;
+    bool estado;
 public:
-    itemCarrito(int cod=0,int cant=0){
+    itemCarrito(){
+        estado=false;
+    }
+    itemCarrito(int cod,int cant){
         codigoArticulo=cod;
         cantidad=cant;
+        estado=true;
     }
     bool Cargar(float&);
-    void Mostrar();
+    void Mostrar(bool);
     void setCodigoArticulo(int c){
         if(c>=1 && c<=9999){ codigoArticulo=c; }
         else{ codigoArticulo=-1; }
@@ -20,8 +28,10 @@ public:
         if(c>0){ cantidad=c; }
         else{ cantidad=-1; }
     }
+    void setEstado(bool e){ estado=e; }
     int getCodigoArticulo(){ return codigoArticulo; }
     int getcantidad(){ return cantidad; }
+    bool getEstado(){ return estado; }
 };
 bool itemCarrito::Cargar(float&total){
     int x=28;
@@ -75,12 +85,29 @@ bool itemCarrito::Cargar(float&total){
     }
     producto.setCantidadMenosIgual(cantidad);
     setCantidadEnDisco(producto);
+    /**
+        deberia guardar en un itemCarrito.dat las cantidades y el codigo
+    */
     gotoxy(10,24);
     producto.Mostrar();
     total+=producto.getPrecio()*cantidad;
+    estado=true;
     return true;
 }
-void itemCarrito::Mostrar(){
+void itemCarrito::Mostrar(bool soloActivos=true){
+    if(soloActivos){
+        if(estado){
+            rlutil::setColor(8);
+            cout<<" Codigo de producto: ";
+            rlutil::setColor(15);
+            cout<<codigoArticulo;
+            rlutil::setColor(8);
+            cout<<" Cantidad: ";
+            rlutil::setColor(15);
+            cout<<cantidad;
+        }
+    }
+    else{
         rlutil::setColor(8);
         cout<<" Codigo de producto: ";
         rlutil::setColor(15);
@@ -89,6 +116,7 @@ void itemCarrito::Mostrar(){
         cout<<" Cantidad: ";
         rlutil::setColor(15);
         cout<<cantidad;
+    }
 }
 
 #endif // ITEMCARRITO_H_INCLUDED

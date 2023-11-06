@@ -40,6 +40,7 @@ public:
     int getID_porveedor(){ return ID_proveedor; }
     const char*getNombre(){return nombre;}
     float getPrecio(){return precio;}
+    int getCantidad(){ return cantidad; }
     bool getEstado(){return estado;}
 };
 
@@ -243,7 +244,7 @@ void Producto::Mostrar(bool soloActivos=true){
             rlutil::setColor(8);
             cout<<" Cantidad: ";
             rlutil::setColor(15);
-            cout<<cantidad<<"    ";
+            cout<<cantidad<<"              ";
         }
     }
     else{

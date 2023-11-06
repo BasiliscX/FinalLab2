@@ -66,12 +66,7 @@ int Venta::Cargar(const char*DNI){
 
     int nuevaLinea=28;
     while(items.Cargar(total)){
-        /**
-            deberiamos considerar grabar en ProductosVendidos.dat
-            los items, para despues hacer reportes sobre los
-            productos, no?
-        */
-
+        guardarItems(items);
         gotoxy(10,24);
 
         estado=true;

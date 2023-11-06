@@ -3,6 +3,7 @@
 
 int autonumericoID();
 int verificarIdPos(int ID);
+int verificarNombreProveedorPos(const char*nombre);
 int*vectorDeID_proveedores();
 
 int autonumericoID(){ ///funcion que genera el id autonumerico
@@ -37,6 +38,18 @@ for(int i=0; i<cantReg; i++){
 }
 return -1;
 
+}
+int verificarNombreProveedorPos(const char*nombre){ ///verifica la posicion de un proveedor por nombre
+    Proveedor reg;
+    ArchivoProveedor archivo("dat\\Proveedores.dat");
+    int t=archivo.contarRegistros();
+    for(int i=0; i<t; i++){
+       reg=archivo.leerRegistro(i);
+        if(strcmp(reg.getNombre(),nombre)==0 && reg.getEstado()) {
+            return i;
+        }
+    }
+    return -1;
 }
 bool verificarDNIproveedor(const char*dni){///verifica si existe un proveedor con ese DNI
 

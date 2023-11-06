@@ -10,6 +10,7 @@ using namespace std;
 #include"SubMenus/subMenuProductos.h"
 #include"SubMenus/subMenuClientes.h"
 #include"SubMenus/subMenuVentas.h"
+#include"SubMenus/MenuReportes.h"
 
 int main(){
 rlutil::setConsoleTitle("Chango++");
@@ -96,7 +97,7 @@ system("mode con cols=80 lines=45");
             case '2' : menuProductos(); break;
             case '3' : menuClientes(); break;
             case '4' : menuVentas(); break;
-            case '5' : break;
+            case '5' : MenuReportes(); break;
             case '6' : MenuConfiguracion(); break;
             default: menu=false; break;
         }

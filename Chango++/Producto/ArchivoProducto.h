@@ -16,17 +16,16 @@ public:
 
     ArchivoProducto (const char* n) {strcpy(nombre,n);}
 
-     Producto leerRegistro(int pos){
-
-       Producto reg;
-       FILE *p;
-       p=fopen(nombre,"rb");
-       if(p==NULL) return reg;
-       fseek(p,sizeof(Producto)*pos,0);
-       fread(&reg, sizeof(reg),1,p);
-       fclose(p);
-       return reg;
-   }
+    Producto leerRegistro(int pos){
+        Producto reg;
+        FILE *p;
+        p=fopen(nombre,"rb");
+        if(p==NULL) return reg;
+        fseek(p,sizeof(Producto)*pos,0);
+        fread(&reg, sizeof(reg),1,p);
+        fclose(p);
+        return reg;
+    }
 
    int contarRegistros(){
         FILE *p;

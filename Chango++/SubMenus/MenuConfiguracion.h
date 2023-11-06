@@ -61,7 +61,7 @@ void MenuConfiguracion(){
         cin>>eleccion;
         switch(eleccion){
             case'1':
-                switch(configuracionEleccion("COPIA")){
+                switch(objetosEleccion("COPIA")){
                     case 1 : copiarProveedores(); break;
                     case 2 : copiarProductos(); break;
                     case 3 : copiarClientes(); break;
@@ -70,7 +70,7 @@ void MenuConfiguracion(){
                 }
             break;
             case'2':
-                switch(configuracionEleccion("RESTAURAR")){
+                switch(objetosEleccion("RESTAURAR")){
                     case 1 : restaurarProveedores(); break;
                     case 2 : restaurarProductos(); break;
                     case 3 : restaurarClientes(); break;
@@ -376,6 +376,7 @@ bool restaurarProductos(){
         cout<<"\n\t\t\t";
         system("copy bak\\Producto.bak dat\\Producto.dat");
     }
+
     rlutil::setColor(14);
     cout<<"\n\n\t\t\tRestauracion exitosa!";
     rlutil::setColor(15);
