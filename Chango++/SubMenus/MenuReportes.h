@@ -68,6 +68,8 @@ void MenuReportes(){
             break;
             case'2': MenuReportesProveedores(); break;
             case'3': MenuReportesProducto(); break;
+            case'4': MenuReportesClientes(); break;
+            case'5': MenuReportesVenta(); break;
             default: menu=false; break;
         }
     }

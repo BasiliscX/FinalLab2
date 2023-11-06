@@ -17,8 +17,10 @@
 #include"Cliente/Cliente.h"
 #include"Cliente/ArchivoCliente.h"
 #include"Cliente/FuncionesClientes.h"
+#include"Cliente/ReportesClientes.h"
 #include"Venta/Venta.h"
 #include"Venta/ArchivoVentas.h"
 #include"Venta/FuncionesVentas.h"
+#include"Venta/ReportesVenta.h"
 
 #endif // CLASESDATOS_H_INCLUDED

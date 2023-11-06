@@ -125,5 +125,17 @@ int*vectorDeID_clientes(){// Devuelve un vector con los numeros de ID con estado
     }
     return vectorID;
 }
+Cliente obtenerCliente(const char*dni){
+    Cliente reg;
+    ArchivoCliente archivo("dat\\Clientes.dat");
+    int t=archivo.contarRegistros();
+    for(int i=0;i<t;i++){
+        reg=archivo.leerRegistro(i);
+        if(strcmp(reg.getDNI(),dni)==0 && reg.getEstado()) {
+            return reg;
+        }
+    }
+    return reg;
+}
 
 #endif // FUNCIONESCLIENTES_H_INCLUDED
