@@ -5,7 +5,7 @@ bool evaluarUsuario(int);
 void menuUsuario();
 
 bool menuAdmin(){
-    if(!evaluarUsuario(1)){ return false; }
+    //if(!evaluarUsuario(1)){ return false; }
     int x,y, velocidad=0;
     bool menu=true;
     char eleccion;

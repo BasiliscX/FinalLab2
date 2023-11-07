@@ -1,7 +1,6 @@
 #ifndef CLASESDATOS_H_INCLUDED
 #define CLASESDATOS_H_INCLUDED
 
-#include"Fecha.h"
 #include"usuario/usuario.h"
 #include"usuario/ArchivoUsuario.h"
 #include"usuario/FuncionesUsuario.h"

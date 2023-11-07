@@ -82,14 +82,7 @@ bool listarTodosLosProveedoresEliminados(){
     x=19;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS PROVEEDORES ELIMINADOS",2,velocidad);
-    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(15,8,t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Proveedor proveedor=archivo.leerRegistro(i);
@@ -110,14 +103,7 @@ bool listarTodosLosProductosEliminados(){
     x=19;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS PRODUCTOS ELIMINADOS",2,velocidad);
-    if(archivo.contarRegistros()==0){
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(15,8,t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Producto producto=archivo.leerRegistro(i);
@@ -138,14 +124,7 @@ bool listarTodosLosClientesEliminados(){
     x=20;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS CLIENTES ELIMINADOS",2,velocidad);
-    if(archivo.contarRegistros()==0){
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(15,8,t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Cliente cliente=archivo.leerRegistro(i);
@@ -166,14 +145,7 @@ bool listarTodosLasVentasEliminadas(){
     x=20;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODAS LAS VENTAS ELIMINADAS",2,velocidad);
-    if(archivo.contarRegistros()==0){
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(15,8,t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Venta venta=archivo.leerRegistro(i);

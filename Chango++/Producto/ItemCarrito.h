@@ -68,20 +68,20 @@ bool itemCarrito::Cargar(float&total){
     cls((x+4),++y,10);
     gotoxy((x+4),y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>cantidad;// Si ingreso una cantidad <1 entonces:
-    while(cantidad<1){
-        gotoxy(36,21);
+    cin>>cantidad;// Si ingreso una cantidad <1 o mayor a stock entonces:
+    while(cantidad<1 || cantidad>producto.getCantidad()){
+        gotoxy(36,22);
         rlutil::setColor(4);
         cout<< "Valor invalido";
-        gotoxy(28,22);
+        gotoxy(28,23);
         cout<<"ingrese nuevamente (0 para salir)";
         rlutil::setColor(15);
         cls(34,y,25);
         gotoxy(34,y);
         cin>>cantidad;
-        if(cantidad==0){ return -1; }
-        cls(36,21,25);// Borra "Valor invalido"
-        cls(28,22,33);// Borra ingrese nuevamente (0 para salir)"
+        if(cantidad==0){ return false; }
+        cls(36,22,25);// Borra "Valor invalido"
+        cls(28,23,33);// Borra ingrese nuevamente (0 para salir)"
     }
     producto.setCantidadMenosIgual(cantidad);
     setCantidadEnDisco(producto);

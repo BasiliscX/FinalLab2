@@ -8,6 +8,8 @@ bool listarTodosClientes();
 bool MOdificarClientePorID(const char*);
 bool eliminarClientePorID();
 
+bool ID_Clientes(int&x,int&y,int&y2,int t);
+
 void menuClientes(){
     bool menu=true;
     char eleccion;
@@ -34,7 +36,7 @@ void menuClientes(){
         x=21;
         y=27;
         rlutil::setColor(8);
-        boxAnimation(x,y,1,34,12,velocidad);
+        boxAnimation(x,y,1,34,14,velocidad);
         rlutil::setColor(15);
         x+=1;
         rlutil::hidecursor();
@@ -81,7 +83,7 @@ void menuClientes(){
 bool agregarCliente(){
     rlutil::cls();
     int x,y;
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     {// Recuadros y titulo con flechas
         textBoxAnimation(29,4,"AGREGAR CLIENTE");
         /**
@@ -117,99 +119,21 @@ bool agregarCliente(){
 }
 bool listarClientePorID(){
     rlutil::cls();
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(26,4,"LISTAR CLIENTES POR ID",2,velocidad);
-        /**
-        ╔══════════════════════╗
-        ║LISTAR CLIENTES POR ID║
-        ╚══════════════════════╝
-        */
-        textBoxAnimation(1,8,"ID disponibles",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌──────────────┐
-           │ID disponibles│
-           └──────────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorID=new int[t]{0};
-        vectorID=vectorDeID_clientes();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorID[i]!=0){
-                cout<<vectorID[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    x=26;
+    y=4;
+    tituloPrincipal(x,y,"LISTAR CLIENTES POR ID",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"ID del cliente";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-        /**
-            │
-            └──►ID del proveedor
-                    →
-        */
-    }
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-    Cliente cliente=archivo.leerRegistro((id-1));
+    if(!posicionObjeto(x,y,pos)){ return false; }
+    Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
     rlutil::hidecursor();
     rlutil::anykey();
@@ -217,7 +141,7 @@ bool listarClientePorID(){
 }
 bool listarTodosClientes(){
     rlutil::cls();
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     int x,y,t=archivo.contarRegistros();
     int velocidad=0;
     x=24;
@@ -243,125 +167,31 @@ bool listarTodosClientes(){
 }
 bool MOdificarClientePorID(const char*campo){
     rlutil::cls();
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(25,4,"MODIFICAR CLIENTE POR ID",2,velocidad);
-        /**
-        ╔════════════════════════╗
-        ║MODIFICAR CLIENTE POR ID║
-        ╚════════════════════════╝
-        */
-        textBoxAnimation(1,8,"ID disponibles",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌──────────────┐
-           │ID disponibles│
-           └──────────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorID=new int[t]{0};
-        vectorID=vectorDeID_clientes();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorID[i]!=0){
-                cout<<vectorID[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    x=25;
+    y=4;
+    tituloPrincipal(x,y,"MODIFICAR CLIENTE POR ID",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"ID del cliente";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-        /**
-            │
-            └──►ID del cliente
-                    →
-        */
-    }
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-    Cliente cliente=archivo.leerRegistro((id-1));
+    if(!posicionObjeto(x,y,pos)){ return false; }
+    Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
-    {// Pregunta si los datos son correctos
-        char eleccion;
-        y+=4;
-        rlutil::setColor(8);
-        gotoxy(--x,y);
-        cout<<(char)218;
-        for(int i=0;i<35;i++){ cout<<(char)196; }
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion!='s'){ return false; }
-    }
+    if(!losDatosSonCorrectos(x,y)){ return false; }
     if(strcmp(campo,"Telefono")==0){// Modifico el telefono del cliente
         gotoxy((x+4),(y+2));
         char telefonoClienteNuevo[30];
         cout<<"Nuevo telefono: ";
         cargarCadena(telefonoClienteNuevo,29);
         cliente.setTelefono(telefonoClienteNuevo);
-        archivo.modificarCliente(cliente,(id-1));
-        cliente=archivo.leerRegistro((id-1));
+        archivo.modificarCliente(cliente,pos);
+        cliente=archivo.leerRegistro(pos);
         gotoxy((x+4),(y+2));
         rlutil::setColor(14);
         cout<<"DATOS MODIFICADOS EXITOSAMENTE!           \n";
@@ -374,8 +204,8 @@ bool MOdificarClientePorID(const char*campo){
         cout<<"Nueva direccion: ";
         cargarCadena(direccionClienteNuevo,29);
         cliente.setDireccion(direccionClienteNuevo);
-        archivo.modificarCliente(cliente,(id-1));
-        cliente=archivo.leerRegistro((id-1));
+        archivo.modificarCliente(cliente,pos);
+        cliente=archivo.leerRegistro(pos);
         gotoxy((x+4),(y+2));
         rlutil::setColor(14);
         cout<<"DATOS MODIFICADOS EXITOSAMENTE!           \n";
@@ -388,124 +218,72 @@ bool MOdificarClientePorID(const char*campo){
 }
 bool eliminarClientePorID(){
     rlutil::cls();
-    ArchivoCliente archivo("Clientes.dat");
+    ArchivoCliente archivo("dat\\Clientes.dat");
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(25,4,"ELIMINAR CLIENTE POR ID",2,velocidad);
-        /**
-        ╔═══════════════════════╗
-        ║ELIMINAR CLIENTE POR ID║
-        ╚═══════════════════════╝
-        */
-        textBoxAnimation(1,8,"ID disponibles",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌──────────────┐
-           │ID disponibles│
-           └──────────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorID=new int[t]{0};
-        vectorID=vectorDeID_clientes();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorID[i]!=0){
-                cout<<vectorID[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    x=25;
+    y=4;
+    tituloPrincipal(x,y,"ELIMINAR CLIENTE POR ID",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"ID del cliente";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-        /**
-            │
-            └──►ID del cliente
-                    →
-        */
-    }
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-    Cliente cliente=archivo.leerRegistro((id-1));
+    if(!posicionObjeto(x,y,pos)){ return false; }
+    Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
-    {// Pregunta si los datos son correctos
-        char eleccion;
-        y+=4;
-        rlutil::setColor(8);
-        gotoxy(--x,y);
-        cout<<(char)218;
-        for(int i=0;i<35;i++){ cout<<(char)196; }
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion!='s'){ return false; }
-    }
+    if(!losDatosSonCorrectos(x,y)){ return false; }
     cliente.setEstado(false);
-    archivo.modificarCliente(cliente,(id-1));
+    archivo.modificarCliente(cliente,pos);
     gotoxy((x+4),y);
     rlutil::setColor(14);
     cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
     rlutil::hidecursor();
     rlutil::anykey();
+    return true;
+}
+bool ID_Clientes(int&x,int&y,int&y2,int t){
+    int*vectorID=new int[t]{0};
+    if(vectorID==NULL){ return false; }
+    vectorID=vectorDeID_clientes();
+    rlutil::setColor(15);
+    for(int i=0;i<t;i++){
+        cout<<"| ";
+        if(vectorID[i]!=0){
+            cout<<vectorID[i]<<" |";
+            if(i%9==0&&i!=0){
+                gotoxy(21,++y);
+                y2++;
+            }
+        }
+    }
+    delete vectorID;
+    /**
+    ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+       | 11 || 12 || 13 || 14 || 15 || 16 |
+    */
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    x=16;
+    y=10;
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)197;
+    gotoxy(x,++y);
+    cout<<(char)179;
+    if(y2>0){
+        for(int i=0;i<y2;i++){// para agrandar el bracito...
+            gotoxy(x,++y);
+            cout<<(char)179;
+        }
+    }
+    gotoxy(x,++y);
+    cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+    rlutil::setColor(15);
+    cout<<"ID del cliente";
+    gotoxy((x+8),++y);
+    cout<<(int_fast8_t)26<<" ";
     return true;
 }
 

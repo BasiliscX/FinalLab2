@@ -8,6 +8,8 @@ bool listarTodosLosProductos();
 bool modificarProductoPorCodigo(const char*);
 bool eliminarProductoPorCodigo();
 
+bool codigosProductos(int&x,int&y,int&y2,int&t);
+
 void menuProductos(){
     bool menu=true;
     char eleccion;
@@ -137,89 +139,16 @@ bool listarProductoPorCodigo(){
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(24,4,"LISTAR PRODUCTO POR CODIGO",2,velocidad);
-        /**
-        ╔══════════════════════════╗
-        ║LISTAR PRODUCTO POR CODIGO║
-        ╚══════════════════════════╝
-        */
-        textBoxAnimation(4,8,"Disponibles",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌───────────┐
-           │Disponibles│
-           └───────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorCodigos=new int[t]{0};
-        vectorCodigos=vectorDeCodigosProductos();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorCodigos[i]!=0){
-                cout<<vectorCodigos[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"Codigo";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-    }
+    x=24;
+    y=4;
+    tituloPrincipal(x,y,"LISTAR PRODUCTO POR CODIGO",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!codigosProductos(x,y,y2,t)){ return false; }
     int codigo;
     cin>> codigo;
     int pos=verificarCodigoPos(codigo);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!posicionObjeto(x,y,pos)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
     rlutil::hidecursor();
@@ -234,14 +163,9 @@ bool listarTodosLosProductos(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS PRODUCTOS",2,velocidad);
-    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    x=16;
+    y=8;
+    if(!objetosRegitrados(x,y,t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Producto producto=archivo.leerRegistro(i);
@@ -258,108 +182,19 @@ bool modificarProductoPorCodigo(const char*campo){
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(22,4,"MODIFICAR PRODUCTO POR CODIGO",2,velocidad);
-        /**
-        ╔═════════════════════════════╗
-        ║MODIFICAR PRODUCTO POR CODIGO║
-        ╚═════════════════════════════╝
-        */
-        textBoxAnimation(8,8,"Codigos",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌───────┐
-           │Codigos│
-           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorCodigos=new int[t]{0};
-        vectorCodigos=vectorDeCodigosProductos();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorCodigos[i]!=0){
-                cout<<vectorCodigos[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"Codigo";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-    }
+    x=22;
+    y=4;
+    tituloPrincipal(x,y,"MODIFICAR PRODUCTO POR CODIGO",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!codigosProductos(x,y,y2,t)){ return false; }
     int codigo;
     cin>> codigo;
     int pos=verificarCodigoPos(codigo);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!posicionObjeto(x,y,pos)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
-    {// Pregunta si los datos son correctos
-        char eleccion;
-        y+=4;
-        rlutil::setColor(8);
-        gotoxy(--x,y);
-        cout<<(char)218;
-        for(int i=0;i<55;i++){ cout<<(char)196; }
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion!='s'){ return false; }
-    }
+    if(!losDatosSonCorrectos(x,y)){ return false; }
     if(strcmp(campo,"Precio")==0){// Modifico el precio del producto
         gotoxy((x+4),(y+2));
         int precioNuevo;
@@ -398,56 +233,48 @@ bool eliminarProductoPorCodigo(){
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(22,4,"ELIMINAR PRODUCTOS POR CODIGO",2,velocidad);
-        /**
-        ╔═════════════════════════════╗
-        ║ELIMINAR PRODUCTOS POR CODIGO║
-        ╚═════════════════════════════╝
-        */
-        textBoxAnimation(8,8,"Codigos",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌───────┐
-           │Codigos│
-           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorCodigos=new int[t]{0};
-        vectorCodigos=vectorDeCodigosProductos();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorCodigos[i]!=0){
-                cout<<vectorCodigos[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
+    x=22;
+    y=4;
+    tituloPrincipal(x,y,"ELIMINAR PRODUCTOS POR CODIGO",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!codigosProductos(x,y,y2,t)){ return false; }
+    int codigo;
+    cin>> codigo;
+    int pos=verificarCodigoPos(codigo);
+    if(!posicionObjeto(x,y,pos)){ return false; }
+    Producto producto=archivo.leerRegistro(pos);
+    producto.Mostrar();
+    if(!losDatosSonCorrectos(x,y)){ return false; }
+    producto.setEstado(false);
+    archivo.modificarProducto(producto,pos);
+    gotoxy((x+4),y);
+    rlutil::setColor(14);
+    cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
+    rlutil::hidecursor();
+    rlutil::anykey();
+    return true;
+}
+bool codigosProductos(int&x,int&y,int&y2,int&t){
+    int*vectorCodigos=new int[t]{0};
+    if(vectorCodigos==NULL){ return false; }
+    vectorCodigos=vectorDeCodigosProductos();
+    rlutil::setColor(15);
+    for(int i=0;i<t;i++){
+        cout<<"| ";
+        if(vectorCodigos[i]!=0){
+            cout<<vectorCodigos[i]<<" |";
+            if(i%9==0&&i!=0){
+                gotoxy(21,++y);
+                y2++;
             }
         }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
     }
+    delete vectorCodigos;
+    /**
+    ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+       | 11 || 12 || 13 || 14 || 15 || 16 |
+    */
     y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
     {
         x=16;
@@ -470,43 +297,6 @@ bool eliminarProductoPorCodigo(){
         gotoxy((x+8),++y);
         cout<<(int_fast8_t)26<<" ";
     }
-    int codigo;
-    cin>> codigo;
-    int pos=verificarCodigoPos(codigo);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-    Producto producto=archivo.leerRegistro(pos);
-    producto.Mostrar();
-    {// Pregunta si los datos son correctos
-        char eleccion;
-        y+=4;
-        rlutil::setColor(8);
-        gotoxy(--x,y);
-        cout<<(char)218;
-        for(int i=0;i<55;i++){ cout<<(char)196; }
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion!='s'){ return false; }
-    }
-    producto.setEstado(false);
-    archivo.modificarProducto(producto,pos);
-    gotoxy((x+4),y);
-    rlutil::setColor(14);
-    cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
-    rlutil::hidecursor();
-    rlutil::anykey();
     return true;
 }
 

@@ -8,6 +8,8 @@ bool listarVentaPorID();
 bool listarTodasLasVentas();
 bool eliminarVentaPorID();
 
+bool ID_Ventas(int&x,int&y,int&y2,int t);
+
 void menuVentas(){
     bool menu=true;
     char eleccion;
@@ -108,8 +110,7 @@ bool agregarVenta(){
         rlutil::setColor(15);
         cout<<(int_fast8_t)26<<" ";
         cin>>DNI;
-        while(verificarDniClientePos(DNI)==-1 ||
-              !verificarDNIcliente(DNI)){
+        while(verificarDniClientePos(DNI)==-1 || !verificarDNIcliente(DNI)){
             gotoxy(35,18);
             rlutil::setColor(4);
             cout<<"DNI incorrecto";
@@ -151,93 +152,17 @@ bool listarVentaPorID(){
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(27,4,"LISTAR VENTA POR ID",2,velocidad);
-        /**
-        ╔═══════════════════╗
-        ║LISTAR VENTA POR ID║
-        ╚═══════════════════╝
-        */
-        textBoxAnimation(4,8,"Disponibles",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌───────────┐
-           │Disponibles│
-           └───────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de proveedor existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorID=new int[t]{0};
-        vectorID=vectorDeID_Ventas();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorID[i]!=0){
-                cout<<vectorID[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"ID de venta";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-    }
+    x=27;
+    y=4;
+    tituloPrincipal(x,y,"LISTAR VENTA POR ID",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!ID_Ventas(x,y,y2,t)){ return false; }
     int ID;
     cin>> ID;
     int pos=verificarIDPos(ID);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-
-
+    if(!posicionObjeto(x,y,pos)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
-
     venta.Mostrar();
     rlutil::hidecursor();
     rlutil::anykey();
@@ -275,108 +200,19 @@ bool eliminarVentaPorID(){
     int t=archivo.contarRegistros();
     int x,y,y2=0;
     int velocidad=0;
-    {// Titulo y recuadros con flechas
-        textBoxAnimation(26,4,"ELIMINAR VENTAS POR ID",2,velocidad);
-        /**
-        ╔══════════════════════╗
-        ║ELIMINAR VENTAS POR ID║
-        ╚══════════════════════╝
-        */
-        textBoxAnimation(13,8,"ID",1,velocidad);
-        y=10;
-        x=23;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        x=16;
-        y=10;
-        gotoxy(x,y);
-        rlutil::setColor(8);
-        cout<<(char)193<<(char)196<<(char)196<<(int_fast8_t)16;// flecha de "codigos disponibles"
-        /**┌───────┐
-           │Codigos│
-           └───────┴──► | 1 | 2 | 3 | 4 | 5 | ...
-        */
-    }
-    {// Imprimo los ID de ventas existentes
-        gotoxy((x+5),y);
-        if(archivo.contarRegistros()==0){// Si aun no hay cargadas ventas
-            gotoxy((x+10),y);
-            rlutil::setColor(4);
-            rlutil::hidecursor();
-            rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-            rlutil::setColor(15);
-            return false;
-        }
-        int*vectorID=new int[t]{0};
-        vectorID=vectorDeID_Ventas();
-        rlutil::setColor(15);
-        for(int i=0;i<t;i++){
-            cout<<"| ";
-            if(vectorID[i]!=0){
-                cout<<vectorID[i]<<" |";
-                if(i%9==0&&i!=0){
-                    gotoxy(21,++y);
-                    y2++;
-                }
-            }
-        }
-        /**
-        ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
-           | 11 || 12 || 13 || 14 || 15 || 16 |
-        */
-    }
-    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
-    {
-        x=16;
-        y=10;
-        rlutil::setColor(8);
-        gotoxy(x,y);
-        cout<<(char)197;
-        gotoxy(x,++y);
-        cout<<(char)179;
-        if(y2>0){
-            for(int i=0;i<y2;i++){// para agrandar el bracito...
-                gotoxy(x,++y);
-                cout<<(char)179;
-            }
-        }
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<"ID de venta";
-        gotoxy((x+8),++y);
-        cout<<(int_fast8_t)26<<" ";
-    }
+    x=26;
+    y=4;
+    tituloPrincipal(x,y,"ELIMINAR VENTAS POR ID",velocidad);
+    gotoxy((x+5),y);
+    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!ID_Ventas(x,y,y2,t)){ return false; }
     int ID;
     cin>> ID;
     int pos=verificarIDPos(ID);
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!posicionObjeto(x,y,pos)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
     venta.Mostrar();
-    {// Pregunta si los datos son correctos
-        char eleccion;
-        y+=4;
-        rlutil::setColor(8);
-        gotoxy(--x,y);
-        cout<<(char)218;
-        for(int i=0;i<40;i++){ cout<<(char)196; }
-        gotoxy(x,++y);
-        cout<<(char)179;
-        gotoxy(x,++y);
-        cout<<(char)192<<(char)196<<(int_fast8_t)16;
-        rlutil::setColor(15);
-        cout<<" LOS DATOS SON CORRECTOS? S/N: ";
-        cin>>eleccion;
-        eleccion=tolower(eleccion);
-        if(eleccion!='s'){ return false; }
-    }
+    if(!losDatosSonCorrectos(x,y)){ return false; }
     venta.setEstado(false);
     archivo.modificarVenta(venta,pos);
     gotoxy((x+4),y);
@@ -384,6 +220,48 @@ bool eliminarVentaPorID(){
     cout<<"DATOS ELIMINADOS EXITOSAMENTE!           \n";
     rlutil::hidecursor();
     rlutil::anykey();
+    return true;
+}
+bool ID_Ventas(int&x,int&y,int&y2,int t){
+    int*vectorID=new int[t]{0};
+    vectorID=vectorDeID_Ventas();
+    if(vectorID==NULL){ return false; }
+    rlutil::setColor(15);
+    for(int i=0;i<t;i++){
+        cout<<"| ";
+        if(vectorID[i]!=0){
+            cout<<vectorID[i]<<" |";
+            if(i%9==0&&i!=0){
+                gotoxy(21,++y);
+                y2++;
+            }
+        }
+    }
+    delete vectorID;
+    /**
+    ─► | 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 |
+       | 11 || 12 || 13 || 14 || 15 || 16 |
+    */
+    y+=y2;//Si incremente una fila, entonces la sumo al posicionador de filas
+    x=16;
+    y=10;
+    rlutil::setColor(8);
+    gotoxy(x,y);
+    cout<<(char)197;
+    gotoxy(x,++y);
+    cout<<(char)179;
+    if(y2>0){
+        for(int i=0;i<y2;i++){// para agrandar el bracito...
+            gotoxy(x,++y);
+            cout<<(char)179;
+        }
+    }
+    gotoxy(x,++y);
+    cout<<(char)192<<(char)196<<(char)196<<(int_fast8_t)16;
+    rlutil::setColor(15);
+    cout<<"ID de venta";
+    gotoxy((x+8),++y);
+    cout<<(int_fast8_t)26<<" ";
     return true;
 }
 

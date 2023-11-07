@@ -32,22 +32,6 @@ public:
 Venta::Venta(){
     setEstado(false);
 }
-
-/**
-    Cada venta se carga desde el constructor
-    en Ventas.dat quedaria asi:
-
-        ID  cliente   | codigo | cantidad | total |    fecha
-         1  34096106     aaaa       12      4.000   11/10/2023
-         2  34096106     bbbb       07      1.000   11/10/2023
-         3     -1        cccc       01      12.000  11/10/2023
-Venta::Venta(const char*DNI,int codigo,int cantidad,float total){
-    setDNI_cliente(DNI);
-    setTotal(total);
-    Fecha fechaCompra();//Constructor que establece la fecha de sistema
-    setEstado(true);
-}
-*/
 int Venta::Cargar(const char*DNI){
     ID=autonumericoVentaID();
     int x,y;
@@ -120,13 +104,6 @@ void Venta::Mostrar(bool soloActivos=true){
             cout<<"  DNI Cliente: ";
             rlutil::setColor(15);
             cout<<DNI_cliente;
-    /**
-        Deberia buscar de un archivo de itemCarrito
-            for(int i=0;i<tam;i++){
-                items=archivo.getregistro....
-                items.Mostrar();
-            }
-    */
             rlutil::setColor(8);
             cout<<" Total: ";
             rlutil::setColor(15);

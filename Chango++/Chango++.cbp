@@ -38,6 +38,7 @@
 		<Unit filename="ArchivoProveedor.h" />
 		<Unit filename="ArchivoVentas.h" />
 		<Unit filename="Cliente.h" />
+		<Unit filename="Cliente/ReportesClientes.h" />
 		<Unit filename="DatosPersona.h" />
 		<Unit filename="FuncionesProducto.h" />
 		<Unit filename="MenuConfiguracion.h" />
@@ -54,11 +55,15 @@
 		<Unit filename="Recursos/recursos.h" />
 		<Unit filename="Recursos/rlutil.h" />
 		<Unit filename="Recursos/rlutilPlusPlus.h" />
+		<Unit filename="SubMenus/MenuAdmin.h" />
+		<Unit filename="SubMenus/MenuEmpleado.h" />
 		<Unit filename="SubMenus/MenuReportes.h" />
+		<Unit filename="SubMenus/subMenuUsuarios.h" />
 		<Unit filename="Venta.h" />
 		<Unit filename="Venta/ArchivoItemCarrito.h" />
 		<Unit filename="Venta/FuncionesVentas.h" />
 		<Unit filename="Venta/ItemCarrito.h" />
+		<Unit filename="Venta/ReportesVenta.h" />
 		<Unit filename="clasesDatos.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="recursos.h" />
@@ -69,6 +74,10 @@
 		<Unit filename="subMenuProductos.h" />
 		<Unit filename="subMenuProveedores.h" />
 		<Unit filename="subMenuVentas.h" />
+		<Unit filename="usuario.h" />
+		<Unit filename="usuario/ArchivoUsuario.h" />
+		<Unit filename="usuario/FuncionesUsuario.h" />
+		<Unit filename="usuario/usuario.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
