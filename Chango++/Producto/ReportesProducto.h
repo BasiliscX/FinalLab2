@@ -72,12 +72,14 @@ bool buscarProductosPorValor(){
         */
     if(!objetosRegitrados(t)){ return false; }
     float precio;
+    char numero[10];
     x=9;
     y=8;
     gotoxy(x,y);
     textAnimation("Productos con precio mayor o igual a (ingrese un valor): ");
     rlutil::setColor(14);
-    cin>>precio;
+    cin>>numero;
+    precio=parseFloat(numero);
     rlutil::setColor(15);
     /**
         averiguar si es un precio valido

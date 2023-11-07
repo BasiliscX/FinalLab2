@@ -7,6 +7,7 @@ void changoPP(int,int);
 int modificarDatos();
 int modificarPrecio();
 bool soloDigitos();
+int parseInt(const char*);
 void cargarCadena(char *pal, int tam);
 int objetosEleccion(const char*);
 bool posicionObjeto(int pos,int x,int y);
@@ -227,12 +228,46 @@ int objetosEleccion(const char*menu){// cartel recuadrado para copiar datos
     return 0;
 }
 bool soloDigitos(const char*cadena){// Evalua si los caracteres ingresados son numeros
-    for (int i=0;cadena[i]!='\0';i++){
-        if (!isdigit(cadena[i])){
+    for(int i=0;cadena[i]!='\0';i++){
+        if(!isdigit(cadena[i])){
             return false;
         }
     }
     return true;
+}
+bool soloDigitosFloat(const char*cadena){// Evalua si los caracteres ingresados son numeros
+    bool punto=false;
+    bool coma=false;
+    bool dobleCaracter=false;
+    if(strlen(cadena)>5){
+        dobleCaracter=true;
+    }
+    for(int i=0;cadena[i]!='\0';i++){
+        if((!punto || !coma) && (cadena[i]=='.' || cadena[i]==',')){
+            punto=true;
+            coma=true;
+            if(dobleCaracter){
+                punto=false;
+                coma=false;
+                dobleCaracter=false;
+            }
+            continue;
+        }
+        if(!isdigit(cadena[i])){
+            return false;
+        }
+    }
+    return true;
+}
+int parseInt(const char*cadena){
+    if(!soloDigitos(cadena)){ return -1; }
+    int entero=atoi(cadena);
+    return entero;
+}
+float parseFloat(const char*cadena){
+    if(!soloDigitosFloat(cadena)){ return -1; }
+    float flotante=stof(cadena);
+    return flotante;
 }
 void cargarCadena(char *pal, int tam)
 {

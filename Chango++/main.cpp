@@ -17,6 +17,7 @@ using namespace std;
 bool evaluarUsuario(int);
 
 int main(){
+
 rlutil::setConsoleTitle("Chango++");
 system("mode con cols=80 lines=45");
     int x,y, velocidad=0;

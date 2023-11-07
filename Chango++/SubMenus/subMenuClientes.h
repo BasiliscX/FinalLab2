@@ -129,9 +129,9 @@ bool listarClientePorID(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdClientePos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdClientePos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
@@ -170,9 +170,9 @@ bool MOdificarClientePorID(const char*campo){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdClientePos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdClientePos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
@@ -221,9 +221,9 @@ bool eliminarClientePorID(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdClientePos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdClientePos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();

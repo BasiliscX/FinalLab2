@@ -158,9 +158,9 @@ bool listarVentaPorID(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Ventas(x,y,y2,t)){ return false; }
-    int ID;
-    cin>> ID;
-    int pos=verificarIDPos(ID);
+    char id[4];
+    cin>>id;
+    int pos=verificarIDPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
     venta.Mostrar();
@@ -199,9 +199,9 @@ bool eliminarVentaPorID(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Ventas(x,y,y2,t)){ return false; }
-    int ID;
-    cin>> ID;
-    int pos=verificarIDPos(ID);
+    char id[4];
+    cin>>id;
+    int pos=verificarIDPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
     venta.Mostrar();

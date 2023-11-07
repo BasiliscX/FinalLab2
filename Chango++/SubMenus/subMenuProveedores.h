@@ -159,9 +159,9 @@ bool listarProveedorPorID(){
     tituloPrincipal(x,y,"LISTAR PROVEEDOR POR ID",velocidad);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdPos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();
@@ -201,9 +201,9 @@ bool MOdificarProveedorPorID(const char*campo){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdPos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();
@@ -251,9 +251,9 @@ bool eliminarProveedorPorID(){
     x=24;
     y=4;
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
-    int id,pos;
-    cin>> id;
-    pos=verificarIdPos(id);
+    char id[4];
+    cin>>id;
+    int pos=verificarIdPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Proveedor proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();

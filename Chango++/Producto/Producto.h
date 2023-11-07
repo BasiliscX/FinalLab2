@@ -59,7 +59,9 @@ bool Producto::Cargar(){
     rlutil::setColor(15);
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>codigo;
+    char numero[10];
+    cin>>numero;
+    codigo=parseInt(numero);
     while(codigo<1 || codigo>9999){
         gotoxy(31,14);
         rlutil::setColor(4);
@@ -69,7 +71,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>> codigo;
+        cin>>numero;
+        codigo=parseInt(numero);
         if(codigo==0){ return false; }
         cls(31,14,25);// Borra "Codigo incorrecto"
         cls(25,15,33);// Borra ingrese nuevamente (0 para salir)"
@@ -85,7 +88,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>>codigo;
+        cin>>numero;
+        codigo=parseInt(numero);
         if(codigo==0){ return false; }
         cls(31,14,25);// Borra "Codigo ya registrado"
         cls(25,15,33);// Borra ingrese nuevamente (0 para salir)"
@@ -104,7 +108,8 @@ bool Producto::Cargar(){
     rlutil::setColor(15);
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>tipo;
+    cin>>numero;
+    tipo=parseInt(numero);
     while(tipo<1 || tipo>6){
         gotoxy(31,18);
         rlutil::setColor(4);
@@ -114,7 +119,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>> tipo;
+        cin>>numero;
+        tipo=parseInt(numero);
         if(tipo==0){ return false; }
         cls(31,18,25);// Borra "Tipo incorrecto"
         cls(25,19,33);// Borra ingrese nuevamente (0 para salir)"
@@ -125,7 +131,8 @@ bool Producto::Cargar(){
     cout<<"ID de proveedor"; //falta validar
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>ID_proveedor;
+    cin>>numero;
+    ID_proveedor=parseInt(numero);
     validoID=validarIDproveedor(ID_proveedor);
     while(validoID == -1){
         gotoxy(31,20);
@@ -136,7 +143,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>> ID_proveedor;
+        cin>>numero;
+        ID_proveedor=parseInt(numero);
         if(ID_proveedor==0){ return false; }
         cls(31,20,25);// Borra "Proveedor inexistente"
         cls(25,21,33);// Borra ingrese nuevamente (0 para salir)"
@@ -154,7 +162,8 @@ bool Producto::Cargar(){
     cout<<"Precio";
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>precio;
+    cin>>numero;
+    precio=parseFloat(numero);
     while(precio<1){
         gotoxy(31,24);
         rlutil::setColor(4);
@@ -164,7 +173,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>> precio;
+        cin>>numero;
+        precio=parseFloat(numero);
         if(precio==0){ return false; }
         cls(31,24,25);// Borra "Valor invalido"
         cls(25,25,33);// Borra ingrese nuevamente (0 para salir)"
@@ -174,7 +184,8 @@ bool Producto::Cargar(){
     cout<<"Cantidad";
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>cantidad;
+    cin>>numero;
+    cantidad=parseInt(numero);
     while(cantidad<1){
         gotoxy(31,26);
         rlutil::setColor(4);
@@ -184,7 +195,8 @@ bool Producto::Cargar(){
         rlutil::setColor(15);
         cls(31,y,25);
         gotoxy(31,y);
-        cin>> cantidad;
+        cin>>numero;
+        cantidad=parseInt(numero);
         if(cantidad==0){ return false; }
         cls(31,26,25);// Borra "Valor invalido"
         cls(25,27,33);// Borra ingrese nuevamente (0 para salir)"

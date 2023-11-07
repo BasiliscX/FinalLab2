@@ -145,9 +145,9 @@ bool listarProductoPorCodigo(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
-    int codigo;
-    cin>> codigo;
-    int pos=verificarCodigoPos(codigo);
+    char id[4];
+    cin>>id;
+    int pos=verificarCodigoPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
@@ -188,9 +188,9 @@ bool modificarProductoPorCodigo(const char*campo){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
-    int codigo;
-    cin>> codigo;
-    int pos=verificarCodigoPos(codigo);
+    char id[4];
+    cin>>id;
+    int pos=verificarCodigoPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
@@ -239,9 +239,9 @@ bool eliminarProductoPorCodigo(){
     gotoxy((x+5),y);
     if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
-    int codigo;
-    cin>> codigo;
-    int pos=verificarCodigoPos(codigo);
+    char id[4];
+    cin>>id;
+    int pos=verificarCodigoPos(parseInt(id));
     if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();

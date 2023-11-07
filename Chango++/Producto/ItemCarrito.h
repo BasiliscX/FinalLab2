@@ -45,6 +45,9 @@ bool itemCarrito::Cargar(float&total){
     cls((x+4),++y,10);
     gotoxy((x+4),y);
     cout<<(int_fast8_t)26<<" ";
+    char numero[10];
+    cin>>numero;
+    codigoArticulo=parseInt(numero);
     cin>>codigoArticulo;// Si el codigo no cumple con el rango o no existe, entonces:
     while((codigoArticulo<1 || codigoArticulo>9999) || !verificarCodigoProducto(codigoArticulo)){
         gotoxy(35,19);
@@ -55,7 +58,8 @@ bool itemCarrito::Cargar(float&total){
         rlutil::setColor(15);
         cls(33,y,25);
         gotoxy(34,y);
-        cin>> codigoArticulo;
+        cin>>numero;
+        codigoArticulo=parseInt(numero);
         if(codigoArticulo==0){ return -1; }
         cls(35,19,25);// Borra "Codigo incorrecto"
         cls(28,20,33);// Borra ingrese nuevamente (0 para salir)"
@@ -68,7 +72,8 @@ bool itemCarrito::Cargar(float&total){
     cls((x+4),++y,10);
     gotoxy((x+4),y);
     cout<<(int_fast8_t)26<<" ";
-    cin>>cantidad;// Si ingreso una cantidad <1 o mayor a stock entonces:
+    cin>>numero;
+    cantidad=parseInt(numero);
     while(cantidad<1 || cantidad>producto.getCantidad()){
         gotoxy(36,22);
         rlutil::setColor(4);
@@ -78,7 +83,8 @@ bool itemCarrito::Cargar(float&total){
         rlutil::setColor(15);
         cls(34,y,25);
         gotoxy(34,y);
-        cin>>cantidad;
+        cin>>numero;
+        cantidad=parseInt(numero);
         if(cantidad==0){ return false; }
         cls(36,22,25);// Borra "Valor invalido"
         cls(28,23,33);// Borra ingrese nuevamente (0 para salir)"
