@@ -25,7 +25,6 @@ bool Proveedor::Cargar(){
     int x,y;
     bool verifico;
     ID=autonumericoID();// genera el ID autonumérico
-
     x=25;
     y=12;
     gotoxy(x,y);
@@ -41,7 +40,7 @@ bool Proveedor::Cargar(){
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cin>>DNI;
-    verifico=verificarDNIproveedor(DNI);// verifica que el dni no esté registrado
+    verifico=verificarDNIproveedor(DNI);//verifica que el dni no esté registrado
     while(verifico){
         gotoxy(31,17);
         rlutil::setColor(4);
@@ -52,23 +51,21 @@ bool Proveedor::Cargar(){
         cls(31,y,30);
         gotoxy(31,y);
         cin>>DNI;
-    verifico=verificarDNIproveedor(DNI);
-        if(strcmp(DNI,"0")==0){ return false; }
-        cls(31,17,30);
-        cls(28,18,34);
+        verifico=verificarDNIproveedor(DNI);
+        if(strcmp(DNI,"0")==0){ return false; }// Si ingresa 0 entonces salgo
+        cls(31,17,30);// borra de pantalla "El DNI ya esta registrado"
+        cls(28,18,34);// borra de pantalla "ingrese nuevamente (0 para salir)"
     }
     gotoxy(x,++y);
     cout<<"Nombre";
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cargarCadena(nombre,29);
-
     gotoxy(x,++y);
     cout<<"Telefono";
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cargarCadena(telefono,29);
-
     gotoxy(x,++y);
     cout<<"Direccion";
     gotoxy((x+4),++y);

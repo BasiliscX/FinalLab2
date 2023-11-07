@@ -85,9 +85,6 @@ bool itemCarrito::Cargar(float&total){
     }
     producto.setCantidadMenosIgual(cantidad);
     setCantidadEnDisco(producto);
-    /**
-        deberia guardar en un itemCarrito.dat las cantidades y el codigo
-    */
     gotoxy(10,24);
     producto.Mostrar();
     total+=producto.getPrecio()*cantidad;

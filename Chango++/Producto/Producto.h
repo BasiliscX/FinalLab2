@@ -13,7 +13,7 @@ private:
     int cantidad;
     bool estado;
 public:
-    Producto(int cd=0,int tip=0 ,int idp=0, const char* n="0" ,float pre=0 ,int cant=0 ){
+    Producto(int cd=0,int tip=0 ,int idp=0, const char* n="0",float pre=0,int cant=0){
         codigo=cd;
         tipo=tip;
         ID_proveedor=idp;
@@ -75,8 +75,8 @@ bool Producto::Cargar(){
         cls(25,15,33);// Borra ingrese nuevamente (0 para salir)"
         gotoxy(25,14);
     }
-    codigoRepetido= verificarCodigoProducto(codigo); /// verifica que el codigo no esté ingresado
-     while(codigoRepetido){
+    codigoRepetido=verificarCodigoProducto(codigo);// verifica que el codigo no esté ingresado
+    while(codigoRepetido){
         gotoxy(31,14);
         rlutil::setColor(4);
         cout<< "Codigo ya registrado";
@@ -89,7 +89,7 @@ bool Producto::Cargar(){
         if(codigo==0){ return false; }
         cls(31,14,25);// Borra "Codigo ya registrado"
         cls(25,15,33);// Borra ingrese nuevamente (0 para salir)"
-        codigoRepetido = verificarCodigoProducto(codigo);
+        codigoRepetido=verificarCodigoProducto(codigo);
     }
     x=25;
     y=14;

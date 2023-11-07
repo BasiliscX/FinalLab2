@@ -70,6 +70,7 @@ bool buscarVentasPorValor(){
         ║BUSCAR VENTAS POR VALOR║
         ╚═══════════════════════╝
         */
+    if(!objetosRegitrados(t)){ return false; }
     float valor;
     x=9;
     y=8;
@@ -114,6 +115,7 @@ bool clienteConMayorCompra(){
         ║CLIENTE CON MAYOR COMPRA║
         ╚════════════════════════╝
         */
+    if(!objetosRegitrados(t)){ return false; }
     x=9;
     y=8;
     gotoxy(x,y);
@@ -169,6 +171,7 @@ bool clienteMenosUnoConMayorCompra(){
         ║CLIENTE (-1) CON MAYOR COMPRA║
         ╚═════════════════════════════╝
         */
+    if(!objetosRegitrados(t)){ return false; }
     x=9;
     y=8;
     gotoxy(x,y);

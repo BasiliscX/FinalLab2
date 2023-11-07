@@ -143,12 +143,12 @@ bool listarProductoPorCodigo(){
     y=4;
     tituloPrincipal(x,y,"LISTAR PRODUCTO POR CODIGO",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
     int codigo;
     cin>> codigo;
     int pos=verificarCodigoPos(codigo);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
     rlutil::hidecursor();
@@ -165,7 +165,7 @@ bool listarTodosLosProductos(){
     textBoxAnimation(x,y,"LISTAR TODOS LOS PRODUCTOS",2,velocidad);
     x=16;
     y=8;
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Producto producto=archivo.leerRegistro(i);
@@ -186,12 +186,12 @@ bool modificarProductoPorCodigo(const char*campo){
     y=4;
     tituloPrincipal(x,y,"MODIFICAR PRODUCTO POR CODIGO",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
     int codigo;
     cin>> codigo;
     int pos=verificarCodigoPos(codigo);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }
@@ -237,12 +237,12 @@ bool eliminarProductoPorCodigo(){
     y=4;
     tituloPrincipal(x,y,"ELIMINAR PRODUCTOS POR CODIGO",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!codigosProductos(x,y,y2,t)){ return false; }
     int codigo;
     cin>> codigo;
     int pos=verificarCodigoPos(codigo);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Producto producto=archivo.leerRegistro(pos);
     producto.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }

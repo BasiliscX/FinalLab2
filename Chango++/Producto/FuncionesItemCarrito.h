@@ -6,16 +6,8 @@ int verificarCodigoItemCarritoPos(int);
 itemCarrito obtenerItemCarrito(int);
 
 bool guardarItems(itemCarrito itemCarrito){
-    /**
-        deberia poder guardar en un ItemCarritos.dat las cantidades y el codigo
-        para despues generar reportes de productos vendidos.
-
-        Ademas, deberia acumular las cantidades vendidas
-        si el codigo es el mismo.
-    */
     ArchivoItemCarrito archivo("dat\\ItemCarritos.dat");
     int pos=verificarCodigoItemCarritoPos(itemCarrito.getCodigoArticulo());
-
     if(pos!=-1){// Si el producto ya registro venta:
         int aux=itemCarrito.getcantidad(), aux2;// guardo la cantidad actual
         itemCarrito=obtenerItemCarrito(itemCarrito.getCodigoArticulo());//traigo el item de .dat
@@ -39,7 +31,6 @@ int verificarCodigoItemCarritoPos(int codigo){
     }
     return -1;
 }
-
 itemCarrito obtenerItemCarrito(int codigo){
     itemCarrito reg;
     ArchivoItemCarrito archivo("dat\\ItemCarritos.dat");
@@ -52,6 +43,5 @@ itemCarrito obtenerItemCarrito(int codigo){
     }
     return reg;
 }
-
 
 #endif // FUNCIONESITEMCARRITO_H_INCLUDED

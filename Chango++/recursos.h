@@ -9,6 +9,8 @@ int modificarPrecio();
 bool soloDigitos();
 void cargarCadena(char *pal, int tam);
 int objetosEleccion(const char*);
+bool posicionObjeto(int pos,int x,int y);
+bool objetosRegitrados(int t,int x,int y);
 
 void changoPP(int x,int y){
     /**
@@ -242,6 +244,30 @@ void cargarCadena(char *pal, int tam)
     }
     pal[i]='\0';
     fflush(stdin);
+}
+bool posicionObjeto(int pos,int x,int y){
+//if(!posicionObjeto(pos)){ return false; }
+    if(pos==-1){
+        gotoxy(x,y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    return true;
+}
+bool objetosRegitrados(int t,int x=15,int y=8){
+//if(!objetosRegitrados(t)){ return false; }
+    if(t==0){
+        gotoxy(x,y);
+        rlutil::setColor(4);
+        rlutil::hidecursor();
+        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
+        rlutil::setColor(15);
+        return false;
+    }
+    return true;
 }
 
 #endif // RECURSOS_H_INCLUDED

@@ -7,16 +7,15 @@ int autonumericoVentaID(){ //funcion que genera id autonumerico
   ArchivoVenta archivo("dat\\Ventas.dat");
   int t=archivo.contarRegistros();
     if (t==0) return 1;
-    else{
-        Venta reg=archivo.leerRegistro(t-1);
-        return reg.getID()+1;
-    }
+    Venta reg=archivo.leerRegistro(t-1);
+    return reg.getID()+1;
 }
 int*vectorDeID_Ventas(){// Devuelve un vector con los numeros de ID con estado true
     ArchivoVenta archivo("dat\\Ventas.dat");
     Venta reg;
     int t=archivo.contarRegistros();
     int*vectorID=new int[t]{0};
+    if(vectorID==NULL){ exit(1); }
     int cont=0;
     for(int i=0;i<t;i++){
         reg=archivo.leerRegistro(i);

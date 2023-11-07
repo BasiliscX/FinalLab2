@@ -5,13 +5,13 @@ int verificarCodigoPos(int codigo);
 int*vectorDeCodigosProductos();
 bool setCantidadEnDisco(Producto);
 
-int verificarCodigoPos(int codigo){ ///verifica la posicion de un producto por codigo
+int verificarCodigoPos(int codigo){//verifica la posicion de un producto por codigo
     Producto reg;
-    ArchivoProducto archiProd("dat\\Productos.dat");
-    int cantReg = archiProd.contarRegistros();
-    for(int i=0; i<cantReg; i++){
-       reg = archiProd.leerRegistro(i);
-        if(reg.getCodigo() == codigo && reg.getEstado()) {
+    ArchivoProducto archivo("dat\\Productos.dat");
+    int t=archivo.contarRegistros();
+    for(int i=0;i<t;i++){
+       reg = archivo.leerRegistro(i);
+        if(reg.getCodigo() == codigo && reg.getEstado()){
             return i;
         }
     }
@@ -23,23 +23,23 @@ Producto obtenerProducto(int codigo){
     int t=archivo.contarRegistros();
     for(int i=0;i<t;i++){
         reg=archivo.leerRegistro(i);
-        if(reg.getCodigo() == codigo && reg.getEstado()) {
+        if(reg.getCodigo()==codigo && reg.getEstado()){
             return reg;
         }
     }
     return reg;
 }
-bool verificarCodigoProducto(int codigo){///verifica si existe un producto con ese codigo
+bool verificarCodigoProducto(int codigo){//verifica si existe un producto con ese codigo
     Producto reg;
-    ArchivoProducto archiProd("dat\\Productos.dat");
-    int cantRegprod = archiProd.contarRegistros();
-    for(int i=0; i<cantRegprod; i++){
-        reg = archiProd.leerRegistro(i);
-        if(reg.getCodigo() == codigo && reg.getEstado()) {
+    ArchivoProducto archivo("dat\\Productos.dat");
+    int t=archivo.contarRegistros();
+    for(int i=0;i<t;i++){
+        reg = archivo.leerRegistro(i);
+        if(reg.getCodigo()==codigo && reg.getEstado()){
             return true;
         }
     }
-return false;
+    return false;
 }
 int*vectorDeCodigosProductos(){// Devuelve un vector con los numeros de ID con estado true
     ArchivoProducto archivo("dat\\Productos.dat");

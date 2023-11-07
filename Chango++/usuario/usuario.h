@@ -42,7 +42,7 @@ bool Usuario::Cargar(int tipo){
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cargarCadena(us,20);
-    if(indiceDatosUsuario(us,'u')!=-1){cout<<indiceDatosUsuario(us,'u');
+    if(indiceDatosUsuario(us,'u')!=-1){
         gotoxy((x+17),++y);
         rlutil::setColor(4);
         rlutil::hidecursor();

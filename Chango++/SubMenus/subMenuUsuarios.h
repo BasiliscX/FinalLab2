@@ -103,7 +103,7 @@ bool listarAdministradores(){
     x=22;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS ADMINISTRADORES",2,velocidad);
-    if(!objetosRegitrados(15,8,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Usuario usuario=archivo.leerRegistro(i);
@@ -124,7 +124,7 @@ bool listarEmpleados(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS EMPLEADOS",2,velocidad);
-    if(!objetosRegitrados(15,8,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Usuario usuario=archivo.leerRegistro(i);
@@ -145,7 +145,7 @@ bool listarUsuarios(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS USUARIOS",2,velocidad);
-    if(!objetosRegitrados(15,8,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Usuario usuario=archivo.leerRegistro(i);
@@ -171,7 +171,7 @@ bool eliminarDatosUsuario(){
         ╚═════════════════════════╝
         */
     }
-    if(!objetosRegitrados(15,8,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     Usuario usuario;
     gotoxy(9,8);
     for(int i=0;i<t;i++){

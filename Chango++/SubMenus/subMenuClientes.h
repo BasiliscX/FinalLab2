@@ -127,12 +127,12 @@ bool listarClientePorID(){
     y=4;
     tituloPrincipal(x,y,"LISTAR CLIENTES POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
     rlutil::hidecursor();
@@ -147,14 +147,7 @@ bool listarTodosClientes(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS CLIENTES",2,velocidad);
-    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Cliente cliente=archivo.leerRegistro(i);
@@ -175,12 +168,12 @@ bool MOdificarClientePorID(const char*campo){
     y=4;
     tituloPrincipal(x,y,"MODIFICAR CLIENTE POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }
@@ -226,12 +219,12 @@ bool eliminarClientePorID(){
     y=4;
     tituloPrincipal(x,y,"ELIMINAR CLIENTE POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Clientes(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdClientePos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Cliente cliente=archivo.leerRegistro(pos);
     cliente.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }

@@ -1,7 +1,7 @@
 #ifndef DATOSPERSONA_H_INCLUDED
 #define DATOSPERSONA_H_INCLUDED
 
-class DatosPersona{
+class DatosPersona{// super clase de Proveedor y Cliente
 protected:
     char DNI[30];
     char nombre[30];

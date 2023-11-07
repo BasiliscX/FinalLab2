@@ -40,7 +40,7 @@ void menuVentas(){
         textAnimation("1 - Cargar venta",velocidad);
         y+=2;
         rlutil::locate(x,y);
-        textAnimation("2 - Listar Venta",velocidad);
+        textAnimation("2 - Listar Venta POR ID",velocidad);
         y+=2;
         rlutil::locate(x,y);
         textAnimation("3 - Listar todas las ventas",velocidad);
@@ -156,12 +156,12 @@ bool listarVentaPorID(){
     y=4;
     tituloPrincipal(x,y,"LISTAR VENTA POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Ventas(x,y,y2,t)){ return false; }
     int ID;
     cin>> ID;
     int pos=verificarIDPos(ID);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
     venta.Mostrar();
     rlutil::hidecursor();
@@ -176,14 +176,7 @@ bool listarTodasLasVentas(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODAS LAS VENTAS",2,velocidad);
-    if(archivo.contarRegistros()==0){// Si aun no hay cargados proveedores
-        gotoxy(25,10);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Venta venta=archivo.leerRegistro(i);
@@ -204,12 +197,12 @@ bool eliminarVentaPorID(){
     y=4;
     tituloPrincipal(x,y,"ELIMINAR VENTAS POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Ventas(x,y,y2,t)){ return false; }
     int ID;
     cin>> ID;
     int pos=verificarIDPos(ID);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Venta venta=archivo.leerRegistro(pos);
     venta.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }

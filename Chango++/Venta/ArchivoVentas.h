@@ -62,6 +62,4 @@ public:
     }
 };
 
-
-
 #endif // ARCHIVOVENTAS_H_INCLUDED

@@ -1,5 +1,6 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
+
 int autonumericoClienteID();
 bool verificarDNIcliente(const char*dni);
 
@@ -27,7 +28,6 @@ bool Cliente::Cargar(){
     int x,y;
     bool verifico;
     ID=autonumericoClienteID();// genera el ID autonumérico
-
     x=25;
     y=12;
     gotoxy(x,y);
@@ -43,7 +43,7 @@ bool Cliente::Cargar(){
     gotoxy((x+4),++y);
     cout<<(int_fast8_t)26<<" ";
     cin>>DNI;
-    verifico=verificarDNIcliente(DNI);// verifica que el dni no esté registrado
+    verifico=verificarDNIcliente(DNI);
     while(verifico){
         gotoxy(31,17);
         rlutil::setColor(4);

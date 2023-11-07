@@ -70,6 +70,7 @@ bool buscarProductosPorValor(){
         ║BUSCAR PRODUCTOS POR PRECIO║
         ╚═══════════════════════════╝
         */
+    if(!objetosRegitrados(t)){ return false; }
     float precio;
     x=9;
     y=8;
@@ -117,14 +118,7 @@ bool productosMasMenosVendidos(){
     x=9;
     y=8;
     gotoxy(x,y);
-    if(t==0){
-        gotoxy((x+17),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(t)){ return false; }
     int mas=0,menos;
     itemCarrito itemCarrito,itemCarritoMas,itemCarritoMenos;
     Producto producto;
@@ -186,14 +180,7 @@ bool productosMasMenosStock(){
     x=9;
     y=8;
     gotoxy(x,y);
-    if(t==0){
-        gotoxy((x+17),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
+    if(!objetosRegitrados(t)){ return false; }
     int mas=0,menos;
     Producto producto,productoMas,productoMenos;
     for(int i=0;i<t;i++){

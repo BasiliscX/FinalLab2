@@ -155,14 +155,14 @@ bool listarProveedorPorID(){
     Proveedor proveedor;
     x=26;
     y=4;
-    tituloPrincipal(x,y,"LISTAR PROVEEDOR POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    tituloPrincipal(x,y,"LISTAR PROVEEDOR POR ID",velocidad);
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdPos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();
     rlutil::hidecursor();
@@ -177,9 +177,7 @@ bool listarTodosLosProveedores(){
     x=24;
     y=4;
     textBoxAnimation(x,y,"LISTAR TODOS LOS PROVEEDORES",2,velocidad);
-    x=16;
-    y=8;
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     gotoxy(1,8);
     for(int i=0;i<t;i++){
         Proveedor proveedor=archivo.leerRegistro(i);
@@ -201,12 +199,12 @@ bool MOdificarProveedorPorID(const char*campo){
     y=4;
     tituloPrincipal(x,y,"MODIFICAR PROVEEDOR POR ID",velocidad);
     gotoxy((x+5),y);
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdPos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }
@@ -249,16 +247,14 @@ bool eliminarProveedorPorID(){
     x=24;
     y=4;
     tituloPrincipal(x,y,"ELIMINAR PROVEEDOR POR ID",velocidad);
-    x=14;
-    y=10;
-    if(!objetosRegitrados(x,y,t)){ return false; }
+    if(!objetosRegitrados(t)){ return false; }
     x=24;
     y=4;
     if(!ID_Proveedores(x,y,y2,t)){ return false; }
     int id,pos;
     cin>> id;
     pos=verificarIdPos(id);
-    if(!posicionObjeto(x,y,pos)){ return false; }
+    if(!posicionObjeto(pos,(x+10),y)){ return false; }
     Proveedor proveedor=archivo.leerRegistro(pos);
     proveedor.Mostrar();
     if(!losDatosSonCorrectos(x,y)){ return false; }
@@ -294,17 +290,6 @@ void tituloPrincipal(int&x,int&y,const char*titulo,int velocidad){
            └───────────┴──► | 1 | 2 | 3 | 4 | 5 | ...
         */
     }
-}
-bool objetosRegitrados(int x,int y,int t){
-    if(t==0){// Si aun no hay cargados proveedores
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
-    }
-    return true;
 }
 bool ID_Proveedores(int&x,int&y,int&y2,int&t){
     {// Imprimo los ID de proveedor existentes
@@ -354,17 +339,6 @@ bool ID_Proveedores(int&x,int&y,int&y2,int&t){
             └──►ID del proveedor
                     →
         */
-    }
-    return true;
-}
-bool posicionObjeto(int x,int y,int pos){
-    if(pos==-1){
-        gotoxy((x+10),y);
-        rlutil::setColor(4);
-        rlutil::hidecursor();
-        rlutil::anykey("INCORRECTO, INTENTAR LUEGO");
-        rlutil::setColor(15);
-        return false;
     }
     return true;
 }

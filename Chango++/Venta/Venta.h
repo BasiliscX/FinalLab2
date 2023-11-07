@@ -28,7 +28,6 @@ public:
     float getTotal(){ return total; }
     bool getEstado(){ return estado; }
 };
-
 Venta::Venta(){
     setEstado(false);
 }
@@ -47,14 +46,11 @@ int Venta::Cargar(const char*DNI){
         cout<<(char)192<<(char)196<<(int_fast8_t)16;
         boxAnimation(27,16,1,35,5,0);
     }
-
     int nuevaLinea=28;
     while(items.Cargar(total)){
         guardarItems(items);
         gotoxy(10,24);
-
         estado=true;
-
         {// Valor total
             gotoxy(30,37);
             rlutil::setColor(5);
@@ -64,7 +60,6 @@ int Venta::Cargar(const char*DNI){
             rlutil::setColor(15);
             cout<<total<<endl;
         }
-
         rlutil::setColor(8);
         x=9;
         y=28;
