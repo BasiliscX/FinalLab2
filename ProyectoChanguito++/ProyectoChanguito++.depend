@@ -1,0 +1,126 @@
+# depslib dependency file v1.0
+1699909056 source:c:\users\mega\desktop\finallab2\proyectochanguito++\main.cpp
+	<iostream>
+	<cstdlib>
+	"Recursos/rlutil.h"
+	"Recursos/rlutilPlusPlus.h"
+	"Recursos/recursos.h"
+	"claseDatos.h"
+	"Menus/MenuConfiguracion.h"
+	"Menus/subMenuProveedores.h"
+	"Menus/subMenuProductos.h"
+	"Menus/subMenuClientes.h"
+	"Menus/subMenuVentas.h"
+	"Menus/MenuReportes.h"
+	"Menus/MenuEmpleado.h"
+	"Menus/MenuAdmin.h"
+	"Menus/subMenuUsuarios.h"
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\recursos\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\recursos\rlutilplusplus.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\recursos\recursos.h
+	<cctype>
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\clasedatos.h
+	"Usuario/Usuario.h"
+	"Usuario/ArchivoUsuario.h"
+	"Usuario/FuncionesUsuario.h"
+	"DatosPersona.h"
+	"Proveedor/Proveedor.h"
+	"Proveedor/ArchivoProveedor.h"
+	"Proveedor/FuncionesProveedores.h"
+	"Proveedor/ReportesProveedores.h"
+	"Producto/Producto.h"
+	"Producto/ArchivoProducto.h"
+	"Producto/FuncionesProductos.h"
+	"Carrito/ItemCarrito.h"
+	"Carrito/ArchivoItemCarrito.h"
+	"Producto/ReportesProducto.h"
+	"Carrito/FuncionesItemCarrito.h"
+	"Cliente/Cliente.h"
+	"Cliente/ArchivoCliente.h"
+	"Cliente/FuncionesClientes.h"
+	"Cliente/ReportesClientes.h"
+	"Venta/Venta.h"
+	"Venta/ArchivoVentas.h"
+	"Venta/FuncionesVentas.h"
+	"Venta/ReportesVenta.h"
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\usuario\usuario.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\usuario\archivousuario.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\usuario\funcionesusuario.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\datospersona.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\proveedor\proveedor.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\proveedor\archivoproveedor.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\proveedor\funcionesproveedores.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\proveedor\reportesproveedores.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\producto\producto.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\producto\archivoproducto.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\producto\funcionesproductos.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\carrito\itemcarrito.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\carrito\archivoitemcarrito.h
+
+1699909506 c:\users\mega\desktop\finallab2\proyectochanguito++\producto\reportesproducto.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\carrito\funcionesitemcarrito.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\cliente\cliente.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\cliente\archivocliente.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\cliente\funcionesclientes.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\cliente\reportesclientes.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\venta\venta.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\venta\archivoventas.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\venta\funcionesventas.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\venta\reportesventa.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\menuconfiguracion.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\submenuproveedores.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\submenuproductos.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\submenuclientes.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\submenuventas.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\menureportes.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\menuempleado.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\menuadmin.h
+
+1699909056 c:\users\mega\desktop\finallab2\proyectochanguito++\menus\submenuusuarios.h
+
