@@ -1,10 +1,8 @@
-Aquí tienes un resumen de los detalles del proyecto y el README que podrías utilizar para describir el proyecto "ProyectoChanguito++" en GitHub. Puedes adaptarlo a tus necesidades específicas.
-
-# ProyectoChanguito++
+# Changuito++
 
 ## Descripción
 
-Este proyecto es un sistema de gestión de inventarios y ventas llamado "ProyectoChanguito++" desarrollado en C++. El objetivo principal del proyecto es proporcionar una interfaz sencilla y eficaz para administrar y manipular una lista de productos, clientes, proveedores, y ventas.
+Este proyecto es un sistema de gestión de inventarios y ventas llamado "Changuito++" desarrollado en C++. El objetivo principal del proyecto es proporcionar una interfaz sencilla y eficaz para administrar y manipular una lista de productos, clientes, proveedores, y ventas.
 
 ## Características
 
