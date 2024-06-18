@@ -1,8 +1,8 @@
-# Changuito++
+# Chango++
 
 ## Descripción
 
-Este proyecto es un sistema de gestión de inventarios y ventas llamado "Changuito++" desarrollado en C++. El objetivo principal del proyecto es proporcionar una interfaz sencilla y eficaz para administrar y manipular una lista de productos, clientes, proveedores, y ventas.
+Este proyecto es un sistema de gestión de inventarios y ventas llamado "Chango++" desarrollado en C++. El objetivo principal del proyecto es proporcionar una interfaz sencilla y eficaz para administrar y manipular una lista de productos, clientes, proveedores, y ventas.
 
 ## Características
 
@@ -91,5 +91,5 @@ Si tiene algún problema durante la compilación o ejecución del proyecto, aseg
 
 Este proyecto fue desarrollado En la Universidad Tecnologica Nacional durante el curso de Laboratorio II. Los principales contribuidores son:
 
-- [Guillermo Navarro.](https://github.com/BasiliscX)
-- Mariel De Biase.
+- [Guillermo Navarro](https://github.com/BasiliscX)
+- [Mariel De Biase](https://github.com/Mcanita)
